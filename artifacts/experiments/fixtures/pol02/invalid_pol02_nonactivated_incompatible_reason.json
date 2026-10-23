@@ -1,0 +1,47 @@
+{
+  "scenario_id": "SCN-DEV-POL02-01",
+  "policy_id": "POL-02_GRADED_SCAFFOLD",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-24T18:00:00Z",
+  "system_response": "Risposta non attiva ma con motivo di transizione attivo.",
+  "decision_trace": [
+    {
+      "source": "POL-02",
+      "event": "INVALID",
+      "details": "INVALID: non_activation with USER_REQUESTED_MORE_STRUCTURE transition_reason"
+    }
+  ],
+  "policy_activated": false,
+  "non_activation_reason": "USER_ALREADY_AUTONOMOUS_WITH_CLEAR_PLAN",
+  "level_before": null,
+  "level_after": 0,
+  "transition": "NOT_APPLICABLE",
+  "transition_reason": "USER_REQUESTED_MORE_STRUCTURE",
+  "user_signal": "NO_ASSISTANCE_REQUESTED",
+  "support_move": "NONE",
+  "orientation_question": null,
+  "declared_options_used": [],
+  "process_structure": null,
+  "grounded_facts_used": [
+    "Sistemi Operativi"
+  ],
+  "pol03_delegation_requested": false,
+  "scaffold_state": {
+    "scaffold_version": 1,
+    "current_level": 0,
+    "previous_level": null,
+    "transition": "NOT_APPLICABLE",
+    "transition_reason": "USER_REQUESTED_MORE_STRUCTURE",
+    "user_signal": "NO_ASSISTANCE_REQUESTED",
+    "support_move": "NONE",
+    "grounded_facts": [
+      "Sistemi Operativi"
+    ],
+    "pol03_delegation_requested": false,
+    "stop_status": "ACTIVE",
+    "created_at_turn": 1,
+    "updated_at_turn": 1
+  },
+  "turn_status": "NOT_APPLICABLE",
+  "safety_violations": []
+}

@@ -1,0 +1,1367 @@
+{
+  "record_type": "METHOD_FREEZE",
+  "version": "1.0.6",
+  "status": "METHOD_FROZEN_PREFLIGHT_VERIFIED",
+  "execution_readiness": "PREFLIGHT_COMPLETE_EXTERNAL_GATES_REQUIRED",
+  "preflight_verified_at": "2026-09-27",
+  "remediation_amendments": [
+    {
+      "date": "2026-09-30",
+      "previous_version": "1.0.5",
+      "reason": "Candidate removed independent scenario review and authorized producer-only preparation before D07. No runtime, prompt, rubric, sample size or retry changes.",
+      "previous_snapshot": "artifacts/archive/governance/METHOD_FREEZE_V1_1.0.5_PRE_AUTHOR_SEAL.json"
+    },
+    {
+      "date": "2026-09-27",
+      "previous_version": "1.0.4",
+      "reason": "Closed the qualified WP10.0 software/document findings with a synthetic 1,184-slot producer-to-final-report workflow and regression. Bound natural verification to retained development sources, training/challenge presentations and correction history; retained failed/unknown outcomes, separate prose-safety coverage and resource accounting. Completion receipts retain safe diagnostics; judge reconciliation fingerprints complete result receipts, including telemetry. The conservative inventory contains 288 dependencies. N/R, models, policies, rubric and scientific estimands are unchanged. This releases preflight remediation only: real held-out construction/review, human-reference verification and final execution authorization remain external gates. See artifacts/analysis/WP10_PREFLIGHT_AUDIT.md for verification limits and the retained earlier synthetic persistence interruption."
+    },
+    {
+      "date": "2026-09-25",
+      "previous_version": "1.0.3",
+      "reason": "Added failure-aware development reconciliation, source-bound rating lock/unblinding and family-weighted reports; separate prose-safety coverage and persistence, judge interruption recovery, D07 partition/reference/acceptance checks, and protocol-version binding. Aligned protocol 1.1.0, claim ledger and manuscript without changing design quantities. Expanded the conservative dependency inventory to execution, measurement, validation and their declared inputs. Final gates and final operator integration remain incomplete; no final readiness or empirical verification is claimed. Method text hashes now normalize only UTF-8 line endings to LF, matching treatment fingerprints; raw experimental evidence remains byte-exact."
+    },
+    {
+      "date": "2026-09-25",
+      "previous_version": "1.0.2",
+      "reason": "Added development-only plan-to-runtime binding and exclusive durable attempt claims, with selected judge settings resolution. Final execution remains blocked; no held-out, live call or design change."
+    },
+    {
+      "date": "2026-09-24",
+      "previous_version": "1.0.1",
+      "baseline_commit": "15c6e081a19d299a83c55a7fc0364857e42938d5",
+      "reason": "Reject duplicate producer JSON keys and contradictory model-owned safety/delegation decisions instead of replacing them; preserve omitted top_p in runtime metadata. Provider schema, scientific design, N/R and historical evidence are unchanged. Dependency-closure and final integration findings remain open; this snapshot is not authorization for held-out construction or final execution."
+    }
+  ],
+  "frozen_at": "2026-09-22",
+  "authority": "Explicit candidate decisions on 2026-09-22, bounded D06 evidence, and EXPERIMENT_PROTOCOL_V0.md",
+  "scope": "Executable method; final scenarios and author judgments are separately snapshotted; human response ratings remain in collection.",
+  "design": {
+    "architecture": "SINGLE_AGENT",
+    "support_factors": 3,
+    "configurations": 8,
+    "scenario_count": 74,
+    "generation_draws_per_cell": 2,
+    "planned_producer_invocations": 1184,
+    "families": 10,
+    "family_allocation": {
+      "F01": 6,
+      "F02": 8,
+      "F03": 6,
+      "F04": 6,
+      "F05": 10,
+      "F06": 10,
+      "F07": 6,
+      "F08": 4,
+      "F09": 6,
+      "F10": 12
+    },
+    "family_weighting": "equal_family"
+  },
+  "producer_runtime": {
+    "model": "openai/gpt-5.6-luna",
+    "provider_route": "openai",
+    "provider_response_name": "OpenAI",
+    "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+    "max_tokens": 4096,
+    "reasoning": {
+      "enabled": true,
+      "effort": "low"
+    },
+    "replica_seeds": [
+      42,
+      43
+    ],
+    "temperature": "OMITTED",
+    "top_p": "OMITTED",
+    "timeout_seconds": 30,
+    "structured_output": "agent_turn_output.schema.json strict provider schema plus local semantic validation"
+  },
+  "judge_runtime": {
+    "model": "openai/gpt-5.6-luna",
+    "provider_route": "openai",
+    "provider_response_name": "OpenAI",
+    "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+    "max_tokens": 2048,
+    "reasoning": {
+      "enabled": true,
+      "effort": "low"
+    },
+    "seed": 42,
+    "temperature": "OMITTED",
+    "top_p": "OMITTED",
+    "timeout_seconds": 30,
+    "wire_contract": "ten required flat score/evidence fields projected without repair to rubric 0.3.0",
+    "acceptance_gate": "D07 human-reference verification before final automatic scoring",
+    "declared_limitation": "Producer and judge use the same base model family; blinding and independent human reference mitigate but do not erase correlated-model bias."
+  },
+  "attempt_policy": {
+    "max_attempts_per_invocation": 1,
+    "automatic_retries": 0,
+    "quality_retries": 0,
+    "fallbacks": false,
+    "healing_or_imputation": false,
+    "failure_rule": "Retain every attempted outcome; unknown cost or any judge failure stops the judge batch."
+  },
+  "measurement": {
+    "rubric_id": "START_RESUME_QUALITY",
+    "rubric_version": "0.3.0",
+    "criteria": [
+      "Q1_REQUEST_ALIGNMENT",
+      "Q2_GROUNDING_ON_FACTS",
+      "Q3_NEXT_STATE_USABILITY",
+      "Q4_PROPORTIONALITY",
+      "Q5_STATE_DIALOGUE_CONSISTENCY"
+    ],
+    "categories": [
+      0,
+      1,
+      2
+    ],
+    "unjudgeable": "null with a nonblank criterion-specific reason",
+    "aggregate_quality_pass": false,
+    "missingness": [
+      "planned",
+      "producer_not_evaluable",
+      "rating_absent",
+      "criterion_unjudgeable",
+      "judge_failure",
+      "provider_failure"
+    ],
+    "primary_comparison": "B1_FULL versus B0_SIMPLE within scenario and replication slot",
+    "secondary_comparisons": "seven effect-coded factorial contrasts over complete eight-cell blocks",
+    "inference_scope": "descriptive finite reviewed benchmark; no population significance, equivalence or student-effectiveness claim"
+  },
+  "external_work_timing": {
+    "held_out_construction_review_and_sealing": "WP10_FIRST_GATE",
+    "human_reference_verification": "WP10 after the held-out package is ready and before final automatic scoring/unblinding",
+    "final_evaluation": "Producer after author-reviewed content snapshot; automatic scoring only after D07 acceptance."
+  },
+  "cost_boundary": {
+    "method_selection_depends_on_total_budget": false,
+    "candidate_owns_funding": true,
+    "technical_safeguards_retained": [
+      "explicit local allowance",
+      "actual cost receipt",
+      "no automatic retry",
+      "stop on unknown exposure"
+    ]
+  },
+  "frozen_artifacts": [
+    {
+      "path": ".python-version",
+      "sha256": "f8237a9fc32a95b709a7ebe37ce43ffe209e90001405f777fc6075d93bce1eb8"
+    },
+    {
+      "path": "artifacts/experiments/EXPERIMENT_PROTOCOL_V0.md",
+      "sha256": "9fdcacc23cf66ca45de41bab2244df377b22de2e7ba5e05fc90519beb2965580"
+    },
+    {
+      "path": "artifacts/experiments/benchmarks/START_RESUME_QUALITY.v0.1.0.json",
+      "sha256": "72582b98ca282f11c5e366f7cc01e1d3fa54dcdf33d764d8721672efa9a78ad2"
+    },
+    {
+      "path": "artifacts/experiments/benchmarks/START_RESUME_QUALITY_ANCHORS.v0.1.0.json",
+      "sha256": "ff95f4c6ed1b80397892c455ce4dc8a1ee8bd9d0cf7f5b81b7f4772b8b2735c8"
+    },
+    {
+      "path": "artifacts/experiments/configurations/B0_SIMPLE.v0.1.0.json",
+      "sha256": "152320c462a64618b7b94b367751f49e432d53dbc4e8f377975c415adf19c247"
+    },
+    {
+      "path": "artifacts/experiments/configurations/B1_FULL.v0.1.0.json",
+      "sha256": "4fa9d868ced609b357eb6786c31c02ab31d6f18dc7597fdc5b58e835cdf5f839"
+    },
+    {
+      "path": "artifacts/experiments/configurations/CONFIGURATION_MATRIX.v0.1.0.json",
+      "sha256": "bc4b3f6aa0c356964c27cf8079851a2644b5d5f4dcd5e33f378e531b0440a7c7"
+    },
+    {
+      "path": "artifacts/experiments/configurations/DEFAULT_INITIAL_STATES.v0.1.0.json",
+      "sha256": "0f29a491b0438a73ca8cc00e3ced6cd9dfcdf1eba4a3ee32f53eae3ccfe36569"
+    },
+    {
+      "path": "artifacts/experiments/configurations/G_P1_P2.v0.1.0.json",
+      "sha256": "65696898a02fa4b8e933e8db0f4328070b53956c77ba91c2f6ddfb2d476febb6"
+    },
+    {
+      "path": "artifacts/experiments/configurations/G_P1_P3.v0.1.0.json",
+      "sha256": "f560e392dc388457b6ec3986b0b9113ddbef81c341c3c015aa3ba44f64cfb468"
+    },
+    {
+      "path": "artifacts/experiments/configurations/G_P2_P3.v0.1.0.json",
+      "sha256": "0005291df55acc05e52ff3d9c933c7805f88607714c350903034c0898b41bc2c"
+    },
+    {
+      "path": "artifacts/experiments/configurations/S_P1.v0.1.0.json",
+      "sha256": "52d6fef6d85c0c444718ee334948bbc46ef2960e9794a9abf52439f2c4a42093"
+    },
+    {
+      "path": "artifacts/experiments/configurations/S_P2.v0.1.0.json",
+      "sha256": "342627b04ec4e5ab660abc60cbd4d6025b2741e053009f61aa3f0c93be553fc8"
+    },
+    {
+      "path": "artifacts/experiments/configurations/S_P3.v0.1.0.json",
+      "sha256": "73e534ed5a80000b98ff354d041854a1d4f298008fe3b4c407d35f0263aff556"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/__init__.py",
+      "sha256": "89aebf60d12be613127b3e5bb96d8678bf82a46e7c91a577ed4dffa70bb766d3"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/aggregate_scores.py",
+      "sha256": "ff8d9afd1172882f67032466b9489aadf5e6dc9ffd600f4fa5629771df3136a5"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/aggregation.py",
+      "sha256": "aa60a30659a967be549ce3b6776a917e40228d562096b0db1ee58cd458c161de"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/agreement.py",
+      "sha256": "6bc8f09a68bbf897dcb15573fe4132bdd876941ec8e7e57dc55ad4958bdf51f8"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/blind_runs.py",
+      "sha256": "4f9dfdb3c595cc9de939b4170848e9d4ed02edc505fcac8add74921677871cf6"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/blinding.py",
+      "sha256": "d0423669fd31689d6d228373631d6edf27c314e6ebde7ad82f708d6ad054fe52"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/contracts.py",
+      "sha256": "cef0911495940fc894e98e5069b64f8554617aaca0114f7519440e8349c366d5"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/final_analysis.py",
+      "sha256": "59186566d7b11fa62a523712a8ff92c1d96a321a22dd82c1e27a4ed0019f07e3"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/input_contract_audit.py",
+      "sha256": "939e8c3bca2d4ca4100f4abc97285bb3a54d9a579007077a432acb552a3c291b"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/judge_batch.py",
+      "sha256": "d9845e14ae4a5ca7f5f2d44d60b9ea02b022fe83a2818a71f551381d1bf195c9"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/judge_execution.py",
+      "sha256": "e26bdf5b82488028634e612d06566a5d15c5b7af2a41d7a5090c68659c293b5d"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/level_a.py",
+      "sha256": "e45a033e7abb484802ae850e3f5a07b9252fe6530d478c31e31461955204b1d0"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/llm_judge.py",
+      "sha256": "daee345997271a10125646b4579e1cf5831068730da20dbf93c8bb776331a919"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/measurement_contract.py",
+      "sha256": "5e4f1563376fcf027f33c81cd242ed10b9231ea83df380e4b6f522574d05acb6"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/measurement_pipeline.py",
+      "sha256": "40f39abd747915d609ea7313fc1ed35c87164a2216483097a19798c8184a9af1"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/ordinal_design.py",
+      "sha256": "99c21daa0dbfd1a01d676e46e594ab822250a46d7bfdaddf238c2b8b89a70688"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/rating_app.html",
+      "sha256": "3e12bc6267682078de734d2476c0849dbb81333990a35569300f918876063c12"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/rating_app.py",
+      "sha256": "b6ab88dac6dd1809f4b2341dbbfe95fa28cb9dcd82c4d898b47a813c4b90a063"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/rating_assignments.py",
+      "sha256": "f3455a735958f16c9126848dfe6dc1dd2557b92195c6b910e28f63ca529c9bec"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/rating_shared.html",
+      "sha256": "17fbc24428949132cf93f6ba4fd8367243dc5728a70607ed30c08503ab6404d3"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/resource_plan.py",
+      "sha256": "22bf2b755e6c8804db7239fe0476c82a73b3b276690435207fed6af2af370f40"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/rubrics/START_RESUME_QUALITY.v0.3.0.json",
+      "sha256": "00768681a4124a6a1dde4840e26781c6b1f38985ad5a844140d73d2935f2eb1e"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/safety_review.py",
+      "sha256": "10e42f1d9bf47843f6241f9991d81a589d524674f2dd624a63bb27d7549a8dd7"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/score_items.py",
+      "sha256": "87ed6b337ef14c74d927aa4ddbd6025f43ea199edc0c18359c133cf964452317"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/scoring.py",
+      "sha256": "d3a7f020d963085b33abedaa2a25e4cb911dd02645305186aad12699e2f3cca9"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/state_projection.py",
+      "sha256": "1ea4c82f5d343d4b17836d186b688952bae4cc9b43c5843546fa281a4a19b4ab"
+    },
+    {
+      "path": "artifacts/experiments/evaluation/verification.py",
+      "sha256": "17d0d60933938d669c8d590d6685afa75314456b6e0bda169fcf2cec7d784326"
+    },
+    {
+      "path": "artifacts/experiments/execution/__init__.py",
+      "sha256": "ae81173d3c4653f7a7a8775a13ef456d345678b3f713ef764fc4894e1a889096"
+    },
+    {
+      "path": "artifacts/experiments/execution/cli.py",
+      "sha256": "b26ecc2a45aa9716a16b309a00367b574fb1b0343998e240a50da7feefa9e7dc"
+    },
+    {
+      "path": "artifacts/experiments/execution/configuration_loader.py",
+      "sha256": "0bbdb07e059f5e3b731a63cc331f7a6281052ad00b9d697560b3247c24153cf2"
+    },
+    {
+      "path": "artifacts/experiments/execution/final_access.py",
+      "sha256": "40f8e2fcff8f486cdb2b8a2267321598905d31011bf16baafc34228d9b3e7bf8"
+    },
+    {
+      "path": "artifacts/experiments/execution/invocation_plan.py",
+      "sha256": "10450ee9c91c4c14444661eacca797e313e80c411028c3b0c9613db76296102e"
+    },
+    {
+      "path": "artifacts/experiments/execution/live_adapter.py",
+      "sha256": "800e954e764269d44e1417cf2d552dbb0273ba5713bedb3886eede0f3d14f403"
+    },
+    {
+      "path": "artifacts/experiments/execution/method_integrity.py",
+      "sha256": "c536717f0b1b510edf4f257c97c9ff3410140d211c87df1775e92d3e17ded8b1"
+    },
+    {
+      "path": "artifacts/experiments/execution/mock_adapter.py",
+      "sha256": "a1bc46e0d00d84a41c25c0191d7a73a8ea94c46cc164d05509c2c35568ec9dc5"
+    },
+    {
+      "path": "artifacts/experiments/execution/output_assembler.py",
+      "sha256": "cae07f7eb7eeabd4bcabe8685d4a6210d29b92f9ceb9e8b7c4606e53297dde98"
+    },
+    {
+      "path": "artifacts/experiments/execution/planned_execution.py",
+      "sha256": "1e8c59ef7a3c4bd504e2ff51f139da643b986af2f946797a6a6537a28ee4ca66"
+    },
+    {
+      "path": "artifacts/experiments/execution/prompt_composer.py",
+      "sha256": "4289105d0af106d1f67963cb69b0a54f5bf4693719524e37b9db1b9633fb0877"
+    },
+    {
+      "path": "artifacts/experiments/execution/reconcile_openrouter_logs.py",
+      "sha256": "00d5e49f5f37283cc6589ca6803190e054af1c0131f28343369c25d5743a185b"
+    },
+    {
+      "path": "artifacts/experiments/execution/reconciliation.py",
+      "sha256": "24d800197e7a8d894fca1d65f0c7481c6c87772df971be47c1ad40da4323b84f"
+    },
+    {
+      "path": "artifacts/experiments/execution/run_record_validator.py",
+      "sha256": "353a121dd716ff7145bc5fc03e0e12af9f88b209062ade277a7edbb1395a7034"
+    },
+    {
+      "path": "artifacts/experiments/execution/run_runtime_capability_probe.py",
+      "sha256": "4f571ad03d5949bd566286fa3751b418788aba153538879c744ad98b1ea1e0c7"
+    },
+    {
+      "path": "artifacts/experiments/execution/run_store.py",
+      "sha256": "f1bf81858a8ecf847f3704575b0490c43a6f47c8ebef8d1e664b2562776421f8"
+    },
+    {
+      "path": "artifacts/experiments/execution/runner.py",
+      "sha256": "6133d9f20afcd9f3cf45ec17d20de89b80eebeda887cb7172501702da1fb78c2"
+    },
+    {
+      "path": "artifacts/experiments/execution/scenario_expectations.py",
+      "sha256": "2173d2881465d2131c77fb1f083bdeeb49534d6d4d945258248152e1445a392f"
+    },
+    {
+      "path": "artifacts/experiments/execution/shared_context.py",
+      "sha256": "45eab78d9dc9629aa86fc9cbe521f231c3e48fe3143f3a80682e528d418a8d62"
+    },
+    {
+      "path": "artifacts/experiments/execution/structured_output.py",
+      "sha256": "b3e09587833414ab6ed20b2060c19f5a01603377d9cfc53cb4c63b304629da18"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/evaluation/invalid_blinded_item_config_id_leak.json",
+      "sha256": "f6796df5a4f63cb2df91bce03504e079384641ee9657f6b6d1144e75c6854cbc"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/evaluation/invalid_blinded_item_terminal_state_leak.json",
+      "sha256": "00a035457cc4bc9e20ad6384044a24cbd7f7acbe9f1c1e85168f1d945afdf28e"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/evaluation/invalid_score_record_missing_dimension.json",
+      "sha256": "10cefcdeb76dcf71141bd18bde6892894cbc1c2beac1a687ca8dbddd6aecc45f"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/evaluation/invalid_score_record_out_of_range.json",
+      "sha256": "1faa54c05baf8b99abd6f8662a3daa00d63aedad9ff7b9329861059989aa426a"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/evaluation/valid_adjudication_record.json",
+      "sha256": "e1397bce27f286da4a82007880b9022d08b49c70ad796bdee5dd330940cb8bb8"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/evaluation/valid_blinded_item.json",
+      "sha256": "4086b3fcd4f804db10a363c241601f84cc6b57f44b92081099fec64bc48b2d30"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/evaluation/valid_blinding_manifest.json",
+      "sha256": "5e2f0cb764bcf93bf176e31106b4b72ce8388e34cc038c56085331e5a79a7a0f"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/evaluation/valid_level_b_rule_uncalibrated.json",
+      "sha256": "672d15b296bde5f905dd64c39ef7cf409fa0fec921a764d889407d6c0bc8d6c6"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/evaluation/valid_score_record.json",
+      "sha256": "cfa363e1ad4cdeb6cbb1e3dbdeb7aa61736c4df94d1635d5768ad32c9b202cd8"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/execution/invalid_run_record_action_record_state_mismatch.json",
+      "sha256": "9fef0cd518f921dc7e83055ba92f168fca45a761a95b0a39a8a0fd788054517f"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/execution/invalid_run_record_b0_with_support_output.json",
+      "sha256": "2722e9d471c29293d57060877941249b5624a86062a0647959fe61e111868ce3"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/execution/invalid_run_record_missing_final_state.json",
+      "sha256": "5aa5fe738a17fa0690cc4e837a00f087873d28fe98362ff46bea6ed2302675c0"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/execution/invalid_run_record_pol01_semantic_violation.json",
+      "sha256": "4daab1ade9629f5c5dc34febd64ca255c818cd137cedfd4d583859563e2b5710"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/execution/invalid_run_record_safety_state_divergence.json",
+      "sha256": "a657e29ef503b912002a7a3486b5420270709d841af5a687e3489ba34bad04a7"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/execution/invalid_run_record_scenario_mismatch.json",
+      "sha256": "ed8efee15ad6d9901e19e2bc115d1a33797f497e98df6737fc886042abe9f212"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/execution/invalid_run_record_stop_contradiction.json",
+      "sha256": "46846069b158d13a18461e14c4ed3d258ffe3210b3f88dd7b6b0565b5bb56414"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/execution/valid_agent_turn_output_b0.json",
+      "sha256": "14d6466bbc417542d215f4d081d891e1a53080ef13d1dc54d837b3c9bae42b47"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/execution/valid_agent_turn_output_b1.json",
+      "sha256": "fdc37eb61ebb9da8f7c431469c127e546a1fc1084eeb1a3b368a905071bc0cc7"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/execution/valid_run_record_b0.json",
+      "sha256": "6e59487740c56fb8302749d2e8a2029e9e280be9835b298fdc9a4bd91cb880be"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/execution/valid_run_record_b1.json",
+      "sha256": "9119a288418755b4396f1d8a31a184f49bf3e532f0c679330fe294e6b170d104"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol01/invalid_output_inconsistent_activation.json",
+      "sha256": "2f21289ebe7973d3808d95a4a6f7643fdd214f175f0dc21b0220e79a54d884cd"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol01/invalid_output_missing_fields.json",
+      "sha256": "df10bb22bde1377f20fe8b24ee2c84537dc98ae00d3fc25562a68f28bd7e9a9c"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol01/invalid_pol01_complete_plan_missing.json",
+      "sha256": "c30bebf28c8bb4dc868770227b23fb9bffc13ac62ad9cf4edf5f16a533930aa2"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol01/invalid_pol01_confirmed_without_user_evidence.json",
+      "sha256": "379ec3b51d35328b2ece5cbb70f1783768f9a6c97c548e28c0d183a8c90723b9"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol01/invalid_pol01_stop_ignored.json",
+      "sha256": "9dcf64efe88e27258d1b83405fae8c0c8eaff764c936b0419f2e87e3db8fb6ff"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol01/invalid_pol01_system_invented_action.json",
+      "sha256": "2799906c4d1ca5a4cf7f5325fae908c307ccc8cd6931cc7bf03f7868a47acb8b"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol01/invalid_pol01_vague_action_plan_formulated.json",
+      "sha256": "8d78f6cd9e64935f26fe2be9b23267b0d984738ad6c6380fafd4272a6e912b30"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol01/invalid_pol01_vague_cue_plan_formulated.json",
+      "sha256": "2697a2c232c821641d1cb3194dd63041a311244c8ef0843864fb87f48fdf11fa"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol01/valid_output_activated.json",
+      "sha256": "ff718c4cecac5ba62f3236312e3b35143625d1c03b2eaf9eb81e41a9492dbe45"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol01/valid_output_non_activated.json",
+      "sha256": "8856e2b2e75e1611e595ba6f604e18f265f46f42aa171f48bc0fdfa1ec185650"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_delegation_after_stop.json",
+      "sha256": "d68237e4a88bf2017617582e7c560f6e38102775bafe672d1d6111d997cd15cf"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_delegation_when_pol03_off.json",
+      "sha256": "505c7b710fa9b5beeb83678c0aed3f13669ce06b47cac4437cde1f13c3325300"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_delegation_without_config_context.json",
+      "sha256": "e64bb5a91cfc316db0eaba7ee19c4efa2c090cf1471b6ad845a5f4335be3d1f9"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_direct_action_record_creation.json",
+      "sha256": "0a3b5e344d4d445d5d0ad27ae6b4656b6e0e6396f93bdee5dc523d9af33d3f6c"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_disciplinary_response_disguised.json",
+      "sha256": "17deede65c213b4c0967bb47678f4cdfd1114c735088738ce6c4c2a999d6f2c1"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_escalate_on_autonomy_request.json",
+      "sha256": "f4197329b56872f8468f28f0f19c59605a16a0d6b98c973cb157e0db45a9dd56"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_escalate_unjustified_signal.json",
+      "sha256": "ef6fb22e46a85c15d67cd904478018eb9288c692e128c34027ce9e7e0c757269"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_escalate_without_level_increase.json",
+      "sha256": "9cac813285f2297a766c2e48c6bfeecabbefa99ef635b972bb87ff4e55026dfb"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_grounded_facts_mismatch.json",
+      "sha256": "bdcb4d800cfd2eb61d7d03e276d2e3902c32396a90567a1791dac3c51866a5ae"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_impossible_timestamp.json",
+      "sha256": "ffc060b400d65fa76d99e9dfa0870021d746cae6d7d4b0dca029f44b4a1c5bd5"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_inactive_with_support_move.json",
+      "sha256": "7ce45f59e9e92b272727a97067d32a0bd2675007cbc5fc3b101ec207fdd896fa"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_incompatible_reason_signal.json",
+      "sha256": "fe968e6cbb2b5e5f97765c2aebc561d7f818dabd1674b3e45a9b557edce1893f"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_level3_pol03_on_without_delegation.json",
+      "sha256": "af430f1c463b982bf589d82d90abfd4107b4607cef20e8b25d08f864bb81d8d6"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_level3_without_config_context.json",
+      "sha256": "9a3127df1ea19718142ca70ad93f94d8f65b4e509fb68ac8a77fa712f3f65623"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_level3_without_justification.json",
+      "sha256": "0025b873fc5dd34cd529d88b700c03c45dab462f003452c8703e0cf02c7ecec9"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_level_out_of_bounds.json",
+      "sha256": "573b3944040937f7ad3d902aa3527bd50efcc0e26879868a88cda0d31093ac17"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_missing_fading_on_autonomy.json",
+      "sha256": "c63cbfec72b98862f7c88d29c29c8975e69640de8ca79652d05241ed631aaac6"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_missing_stop_on_request.json",
+      "sha256": "ac4ff5027c215cc83b4326250229751ca12c85de410691b500908f8a478a3500"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_multiple_questions_level1.json",
+      "sha256": "3e1926824329c483991ce5d1463a79a9012804fbfd040702749a0d371683f159"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_nonactivated_incompatible_reason.json",
+      "sha256": "14886ae0e6563b8c121d9d58d6ec9dc92c081643694a56b2637e092b0cfda89d"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_pending_pol03_without_delegation.json",
+      "sha256": "45efe3f780e2b9c7d03faadd9b15bc24389ba127ee392876eab2a7c33e7c32a6"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_psychological_diagnosis.json",
+      "sha256": "68e58e04601a4f9daad699d94a040197aac9f577eb693a76151c9b516a2654de"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_too_many_options_level2.json",
+      "sha256": "7d6cd470a521c04de4ae2b5c60fd0bdb68a5926d80d02fb5f66d73f041596fd3"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_turn_time_travel.json",
+      "sha256": "aafadfdb93d41128941fe203ca07c005997677a84e96ff0dabadcc025a0406f7"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_ungrounded_option_level2.json",
+      "sha256": "4821a6456c465372012334e8c5e5a6eda716a6870e0d623383f8b5c5ddd49d41"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/invalid_pol02_unjustified_level_jump.json",
+      "sha256": "9b37e678f2af2d7dfabc9a52a3dd4fe2aa647c6e2555604d7ac8e8b2c792526b"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/valid_pol02_fading_to_autonomy.json",
+      "sha256": "e9b65c2c43776f982398f4307cc67a7c7516b97136ced13ac7f1e380e4398740"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/valid_pol02_level1_orientation.json",
+      "sha256": "3641ebccfcb31d33183369368eca3a5cb04cef34f1ad326bea67e144d9a8da8f"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/valid_pol02_level2_options.json",
+      "sha256": "4acf2f7a0be61992effea57762262cc7e608edc37bd7725d1913ed886124c88c"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/valid_pol02_level3_delegation_pol03.json",
+      "sha256": "cdd5b59e173ad90649f439dab2b80d0822e748f4029bee7e5f87e13e8fd30249"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/valid_pol02_level3_structure_no_pol03.json",
+      "sha256": "8f83af765e67052587f50a5569c9703ef9e8496d002023777799149f10250cc0"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/valid_pol02_non_activated_content.json",
+      "sha256": "bb574d4c369a012d9da877ac7c017160c5b857d911058e27501e18cda52bfea3"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/valid_pol02_nonactivated_autonomous_plan.json",
+      "sha256": "bf42188433569c106f33c5dd203eadc532bd9050f3ac38fc68a29b0565610ee1"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol02/valid_pol02_stop.json",
+      "sha256": "bbd37eb463c81356becda8ef490e4b9fb882cfc2f315b5d78469c2d8717a1f0e"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_accepted_but_handoff_false.json",
+      "sha256": "1bfb3ac5040484a9a139bd772694dd5df0270d5d6c6721c85560134ee8f00923"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_accepted_version_exceeds_action_version.json",
+      "sha256": "a1fb20a4054f48372fcd93f59661ca730101008ed7ef5d7f4cde11a54597fedb"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_accepted_version_mismatch.json",
+      "sha256": "c17592338eb6ca079b9355621f06407c52fefaec33f2a6bca63bca9f76642881"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_accepted_without_evidence.json",
+      "sha256": "0c6904601223c8ffdb134b06b693b6e89df1fde050b3be1b88759b11e09cbfef"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_action_count_mismatch.json",
+      "sha256": "658c99009aa9b1c0c42725227bf8631a8f0635b0d96efa490811495678d233d7"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_action_proposed_with_accepted_version.json",
+      "sha256": "6ab2791fcb009a9b4ec7381e9574516e6719f0c74438e406441dbe8d9203f4a9"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_activated_not_applicable.json",
+      "sha256": "d7132566c390b925aae3c38bfec4127f5c6c180c0a63dda20bfed205413ff611"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_clarification_without_prompt.json",
+      "sha256": "d094d80c3f6e41818b9430a2d94aa06198b97b47159a075f6189f5b658d62878"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_duplicate_grounded_facts.json",
+      "sha256": "ce56093af0bf2299a3b6feffb8c426146820eda7b21618ef4cb97d83a9ccad2e"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_inconsistent_activation.json",
+      "sha256": "68431719060f9831f62914707123438951e7878e45c05bfabdd6435259f8fc5d"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_inconsistent_handoff.json",
+      "sha256": "656722638a3baf4c976ba71eff01616391b066815052ff0e3d366727935e4f38"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_mismatched_action_text.json",
+      "sha256": "8cf1d77f326c58a63c9661f49f131b83050bb3528f1bda2b99ebf7187b50a71c"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_mismatched_grounded_facts.json",
+      "sha256": "34b7cbae379c238c14e8916a9777fc69cf17ac10f6ae48e1cd2b2aeaa0acecc5"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_mismatched_user_evidence.json",
+      "sha256": "2fc4240b7643f758f67775a9bcd82d901e67907c1a68ab2d5c68a1f86921cb1a"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_status_conflict_proposed_stopped.json",
+      "sha256": "212e9d51efd4ffedbdea8cdab51c39673756c324edc02305325cdcdb6260d91b"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_system_proposed_without_facts.json",
+      "sha256": "40bfc44f19447ac5777b5411ac6afb10d4a1c84fbca68fa22409228fb2ed7ff2"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/invalid_pol03_turn_time_travel.json",
+      "sha256": "49bc93ba47baa5d930db65b02830a901d789b59c6fb5f446a10bd6bb85b28722"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/valid_pol03_accepted.json",
+      "sha256": "b676bf47c4c8c682eaac4bd0cf06bcfa131f414da6d6c83820d953b8b067f4fc"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/valid_pol03_non_activated.json",
+      "sha256": "fbfe79a18224426bb466704fbd73edced55ce37959c67a284256ed5559401f61"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol03/valid_pol03_proposed.json",
+      "sha256": "64fac1c1562f1fb3c644a4c7cdb44b9d95e7ab42f6283444d6e0db0ffff2e280"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol04/invalid_pol04_pressure_on_refusal.json",
+      "sha256": "beca412e2f7c0b8bbf83479fce54b66330f75b30997f904eb8ebc0f5f8577d2a"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol04/invalid_pol04_question_after_stop.json",
+      "sha256": "a308fdd58452397a91fcd97c4ee28b953511377d41c3ff5872d6ccb8aebeac1f"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol04/invalid_pol04_revocation_ignored.json",
+      "sha256": "403fcc08efaa4d721d895bfa9e071049a2ba675139c1b0716fb654e21265f600"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol04/invalid_pol04_tacit_modification.json",
+      "sha256": "66d6ac55128fab7e413c912713dd23c255f354b1ec72772da21bed77dab859ea"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol04/invalid_pol04_unauthorized_resume.json",
+      "sha256": "38f9aa4b7f8118023de31b87a72cd691ac012df70ffb2c4f49ccba37d95eb386"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol04/valid_pol04_explicit_resume.json",
+      "sha256": "5df12fa3d7b44f6543ca4563a34c0150414540602e4fa5e97dec836d707874c1"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol04/valid_pol04_explicit_revocation.json",
+      "sha256": "43f07f2d70d2de7475ab577b6c5a7f52637034f2a62b41fcae7c1e13d46b59c7"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol04/valid_pol04_modification_integrity.json",
+      "sha256": "2b5df8ddc62122370fd1c981150616d1a036e4587e5d93ef4d3859359246b2d1"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol04/valid_pol04_refusal_respect.json",
+      "sha256": "cf074a7fb475c4803614a16b59dff82f94c056ea1f7b594c6338086c3ae69b7b"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol04/valid_pol04_stop_compliance.json",
+      "sha256": "492ff10af50f751f9d5f18e85a3e9f5ed04bdc824008b40b0a2d4dc970459ac4"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol05/invalid_pol05_clinical_tutoring_in_crisis.json",
+      "sha256": "7f3760cab9eaf13201ea18faee82e66fda3c07a88cdd91f3f2b9b6cd4074755b"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol05/invalid_pol05_fake_human_feelings.json",
+      "sha256": "d2505119519be03d0a23f3f8257be1da57eb8804416aff968f9a0ac1761a637e"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol05/invalid_pol05_human_substitution_claim.json",
+      "sha256": "58bb41eee347b10b674e871debea6e8cbacdc8cbcaf2fff7e9a62d4a9eb3c3db"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol05/invalid_pol05_psychological_diagnosis.json",
+      "sha256": "ab81b8302e2715859dec40986719b00dfc24dfec77f2f6521f438b51c25f0741"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol05/valid_pol05_clinical_handoff.json",
+      "sha256": "13e597b7c923cd7c747c2a038d3e44579b87c69bf09dd4fb79287558a8005d6a"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol05/valid_pol05_identity_transparency.json",
+      "sha256": "3ceccb45bb4d3f189157ab9946f38b75bbfccee9d3fe2dc7aa7620554d33a688"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol05/valid_pol05_no_human_substitution.json",
+      "sha256": "220c5755aaeb6e4fbb862b33e6ae36c608851bfeb66055b9f2f059d3ec884079"
+    },
+    {
+      "path": "artifacts/experiments/fixtures/pol05/valid_pol05_no_unauthorized_diagnosis.json",
+      "sha256": "114a80b7faeb3112fa583b8a2da2114e3e898951217db99bb54b8e7af8b6d4a4"
+    },
+    {
+      "path": "artifacts/experiments/oracle/ORACLE-POL01.v0.1.0.json",
+      "sha256": "4eeff48b3e964954b96ec3d9bed56912adb84b4ea8825698d7316abda3370622"
+    },
+    {
+      "path": "artifacts/experiments/oracle/ORACLE-POL02.v0.1.0.json",
+      "sha256": "11696fe4239b50bbbd3de5e757b9b835be044098cbc17485ce0ebcd1d007162b"
+    },
+    {
+      "path": "artifacts/experiments/oracle/ORACLE-POL03.v0.1.0.json",
+      "sha256": "b5280d98311df73a29269827c73f29779d5cf9df4834d96071c23ea0116f2069"
+    },
+    {
+      "path": "artifacts/experiments/oracle/ORACLE-POL04.v0.1.0.json",
+      "sha256": "8d7cda58f0b862aa62ae4e832032c6c5e63ae795c209f6a72141bd285b6dc1da"
+    },
+    {
+      "path": "artifacts/experiments/oracle/ORACLE-POL05.v0.1.0.json",
+      "sha256": "be020ac55f5cbd6acdcff47fe90da048631c225f385d49375fd98cdf7d385b70"
+    },
+    {
+      "path": "artifacts/experiments/policies/POL-01_IF_THEN_PLAN.v0.1.0.json",
+      "sha256": "c452136820f0628f3b674532cb3ecf5e0e78cce8b0f1df72b918ec3cb6990411"
+    },
+    {
+      "path": "artifacts/experiments/policies/POL-02_GRADED_SCAFFOLD.v0.1.0.json",
+      "sha256": "03fa232e1844b6bfafc6fee44d996a513e1f492d95ac6b16ef956497cedb8cd1"
+    },
+    {
+      "path": "artifacts/experiments/policies/POL-03_ACCEPTED_NEXT_ACTION.v0.1.0.json",
+      "sha256": "9a2f4b5f649dbfe2e8272b3e5494417973f6854a5c8926fe4356db9d46ba46bd"
+    },
+    {
+      "path": "artifacts/experiments/policies/POL-04_AUTONOMY_GATE.v0.1.0.json",
+      "sha256": "e87462e6592955e742c4f549583174e4300b77c59ff7b1c413484cee57b7a74c"
+    },
+    {
+      "path": "artifacts/experiments/policies/POL-05_HUMAN_BOUNDARY.v0.1.0.json",
+      "sha256": "85017eb4590ef60f2e0702c2a84c0a30212ea2d4c024dc1771746b59199a996c"
+    },
+    {
+      "path": "artifacts/experiments/prompts/modules/BASE_AGENT.v0.1.0.md",
+      "sha256": "e296bdd753d6610a2581cbbdc01552c7c589cad13265480a4bd152b520e00544"
+    },
+    {
+      "path": "artifacts/experiments/prompts/modules/OUTPUT_AND_TRACE_CONTRACT.v0.1.0.md",
+      "sha256": "7e952adeb4366a78b51789149eff20912f8f3c36519b9f22095f8685096ec1e4"
+    },
+    {
+      "path": "artifacts/experiments/prompts/modules/POL-01_IF_THEN_PLAN.v0.1.0.md",
+      "sha256": "15e42e5f57c31fd56aed84ed768de627b293638bf84997b793d670771a994b2d"
+    },
+    {
+      "path": "artifacts/experiments/prompts/modules/POL-02_GRADED_SCAFFOLD.v0.1.0.md",
+      "sha256": "8286819c0ffdc36ca1ef42b46cda2d8b665b1b5ffe867ccb96ae44abf9e0fcea"
+    },
+    {
+      "path": "artifacts/experiments/prompts/modules/POL-03_ACCEPTED_NEXT_ACTION.v0.1.0.md",
+      "sha256": "17a91c0776fb74d2533ba05ed96eff372cedb892947456bab7a539b8de5804d5"
+    },
+    {
+      "path": "artifacts/experiments/prompts/modules/POL-04_AUTONOMY_GATE.v0.1.0.md",
+      "sha256": "fcb92da414afef619897051e4f1cdc56b342cff8dd90a4c62a0a852ff497d50b"
+    },
+    {
+      "path": "artifacts/experiments/prompts/modules/POL-05_HUMAN_BOUNDARY.v0.1.0.md",
+      "sha256": "34056e92a9446dc52c838072c7e8035511c89d969e04bedd519b6930b0270b64"
+    },
+    {
+      "path": "artifacts/experiments/requirements.txt",
+      "sha256": "ac6a89eba29e384b36ab0f9627c5b554bc0226e100a540d4cd8ca1f4113a5ab1"
+    },
+    {
+      "path": "artifacts/experiments/runtime_profiles/DEV_MOCK.v0.1.0.json",
+      "sha256": "802b046b1229fd34a031914ab57d3e0525c9f2b36cfeacc60d05444bc1fb52fd"
+    },
+    {
+      "path": "artifacts/experiments/runtime_profiles/DEV_OPENROUTER_DEEPSEEK_V4_FLASH_0731.v0.1.0.json",
+      "sha256": "0892eed3408e3c438e0c204d16323cdd253191dc5bc66d8ae6f51589bbacbd61"
+    },
+    {
+      "path": "artifacts/experiments/runtime_profiles/DEV_OPENROUTER_GEMINI37_FLASH.v0.1.0.json",
+      "sha256": "f7b4774bed6996c48f01404a708a983eaec0f81323771ebee8da69d500819702"
+    },
+    {
+      "path": "artifacts/experiments/runtime_profiles/DEV_OPENROUTER_GLM53_FLASH.v0.1.0.json",
+      "sha256": "0143e795776e7c725990dde615bf3c8621ad434f80489cfa27b51db3936dae22"
+    },
+    {
+      "path": "artifacts/experiments/runtime_profiles/DEV_OPENROUTER_GOOGLE_GEMMA4_31B.v0.1.0.json",
+      "sha256": "575371e082f711b01f7b853929885218eba0d79601aba40bfe8cabf7781bc6ba"
+    },
+    {
+      "path": "artifacts/experiments/runtime_profiles/DEV_OPENROUTER_GPT41.v0.1.0.json",
+      "sha256": "9b81ea276baa1cc9ae184992d1f415b4e56ca89dbd84b4c5996c5f28746c6165"
+    },
+    {
+      "path": "artifacts/experiments/runtime_profiles/DEV_OPENROUTER_GPT41_MINI.v0.1.0.json",
+      "sha256": "a848c0e1ba402d07f7e958b88c2dec60b5adb33b8866b467d36f31d4f52d045f"
+    },
+    {
+      "path": "artifacts/experiments/runtime_profiles/DEV_OPENROUTER_GPT4O_MINI.v0.1.0.json",
+      "sha256": "d666a14055efc57d4fcc5d999fad72e12f015e548fa2890581a4879b30f44e07"
+    },
+    {
+      "path": "artifacts/experiments/runtime_profiles/DEV_OPENROUTER_GPT56_LUNA.v0.1.0.json",
+      "sha256": "44a866a4bd678b88800289a5353da92170f987797c7162365e7d07a24efa5018"
+    },
+    {
+      "path": "artifacts/experiments/runtime_profiles/DEV_OPENROUTER_NVIDIA_NEMOTRON_120B.v0.1.0.json",
+      "sha256": "896aa7c0cedb472bd1115a73a6bb0169315db97f103f4375259ef59579943e95"
+    },
+    {
+      "path": "artifacts/experiments/runtime_profiles/DEV_OPENROUTER_NVIDIA_NEMOTRON_120B_FREE.v0.1.0.json",
+      "sha256": "a4133965efe1415e4a190f508d7bc8e37b7657a407aa02087527fdb96a938f11"
+    },
+    {
+      "path": "artifacts/experiments/runtime_profiles/DEV_OPENROUTER_OPENAI_GPT5_NANO.v0.1.0.json",
+      "sha256": "af1e453c8f262e14354498ca81d5a8778ab373df26033100129640de5d261fd5"
+    },
+    {
+      "path": "artifacts/experiments/runtime_profiles/METHOD_RUNTIME_CANDIDATES_2026-09-12.json",
+      "sha256": "972671102a0b0324428d6450aa4cc45e78ce5341e2f95a4043637e171fed5e85"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-INT-01_pol03_proposed_pol01_cannot_consume.json",
+      "sha256": "161c921c33d16f395b0d21a5de6ad5757dfa3edad13ae0dcf427c58634445ebf"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-INT-02_pol03_accepted_pol01_consumes.json",
+      "sha256": "970508f5dc78a043f431b2e5f46457c1144b1b41a410cc6c2189f29b4ae0186a"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-INT-03_pol02_l3_delegates_pol03.json",
+      "sha256": "d2d0190f96cf3737a02913b2157c4974144a1d926d7bbc189a6dbd32565f9de7"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-INT-04_pol02_l3_blocks_delegation_pol03_off.json",
+      "sha256": "52772b1509c24a46ef7afa0493f05ad3d570f0d79054ba4a25810a427d91ea0b"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-INT-05_pol02_l2_no_premature_delegation.json",
+      "sha256": "c01e72c0e588b1f9006cfa02cbfcac38ddac7a06208fea44665f96c77078a44a"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-INT-06_pol02_fading_user_provides_action_handoff_pol01.json",
+      "sha256": "840e126639bf2d750f7d660791694dccd3f40315d53b69d938e944310a04c9e9"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-INT-07_pol02_stop_during_escalation.json",
+      "sha256": "bc240d0f98ed5781389b178fc6c2e76feb77d2b7c0025b5ce1e12811bbb01a77"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL01-01_cue_action_specific.json",
+      "sha256": "da415f44ef611d3563d0957b37ae73c0d19e7dc8fcd4efbeff2b355acf17a5f8"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL01-02_vague_cue.json",
+      "sha256": "b96ef7795045e45ad374d25fd38093e31b2ad118a8b382802b82628d37c2d721"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL01-03_unobservable_action.json",
+      "sha256": "ea2c1f7235fcc8ed2a34f02fc7bf06db8452ef8004261c7366e3dd26aa2769f8"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL01-04_missing_cue_and_action.json",
+      "sha256": "0a6b2bd38978368f292eef50ca76a9896ac4cb3224df0be37790bbc403ac603b"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL01-05_valid_plan_confirm.json",
+      "sha256": "ddf2990abbd9e41994427ab9fe037cfc0d3662a694f5388d7acd55c7392aeb41"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL01-06_user_modifies.json",
+      "sha256": "ac0d8bae149c651ce4abf75f4806a1c10efb5f3509f0c976c3f7d051c8bafc41"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL01-07_user_refuses_stop.json",
+      "sha256": "062a9a662c2e45092b561ef7c1d4d32ad31d24b323a4d95fd13c12c590c49113"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL01-08_non_activation.json",
+      "sha256": "7c097ed662a9259ccc65da372095500b1f1834caa2d6ff2873422c06b6bfbaa5"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL02-01_autonomous_start.json",
+      "sha256": "d27e1da50f8a0df2865636fc10f9fbdc6816e3983966dad3bac37b3be80a9ad9"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL02-02_orientation_request.json",
+      "sha256": "d86c252800e2b2516bd628725683719a979db6d342cc640713e59f04c5ea6cce"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL02-03_stall_escalation_multi_turn.json",
+      "sha256": "54e0a34761fd7b7c8b0128075c02caa4a269d66856c00e6c822a0e098c9409bf"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL02-04_declared_options_selection.json",
+      "sha256": "2b8afd2be0220108594e7d0d810d07a7eda22681057a46e6529460e9dcdfc88d"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL02-05_max_support_pol03_active.json",
+      "sha256": "b30be5ec3a944634f988699ed34612ecd455b20fd2a8147e88f0f7e453e48e55"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL02-06_max_support_pol03_inactive.json",
+      "sha256": "2e2d2b0d518947eba5b4a87ecc7c546153a7f68043eff6bd3073f7d543028135"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL02-07_autonomy_fading_multi_turn.json",
+      "sha256": "20e25e942ad04507db41b5d098ac9fde7e1deec9785c929a9132a738e684fe28"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL02-08_user_stop.json",
+      "sha256": "ae0810e4202c9dc07b51d4967542c4458381e2610c04cfe2268a6eb4b488120e"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL02-09_content_question_non_activation.json",
+      "sha256": "16b5e6c031bacecf814453261deb6c0525edb8ea0efea951e26b9abcfefab11e"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL03-01_sufficient_facts_propose.json",
+      "sha256": "bfb9c0e0ad1c94eecff93a73d4b6c2b9f89242c7749b051ee8e986c767018f0a"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL03-02_missing_materials_clarify.json",
+      "sha256": "c08d9b828089a1fd8ebce451d3f33e001de325b6c799400978cab920da5bf402"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL03-03_broad_goal_no_false_concreteness.json",
+      "sha256": "c3cb94fc9dc258e21a81c2bbd42985884697d449c0c327ed6713adbb2f39973d"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL03-04_ambiguous_block_no_diagnosis.json",
+      "sha256": "22c11cd3a68063b158503246c3773beb42422805995b52acdfd798b76f93d619"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL03-05_explicit_acceptance.json",
+      "sha256": "8692bf1b25f2e026f039ef60bc4ca901881d0334002a0c0a1e7684e36e9b5c1c"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL03-06_user_modifies_new_version.json",
+      "sha256": "372355cf1d2796d33c7e6a1922a32f5e7d4faadc1edc8cd5193984ae6f745dc2"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL03-07_user_refuses_stop.json",
+      "sha256": "ac7df84bfe842937ad24191ccd0ba57024976262130cb09ea5402b30860137b1"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL03-08_content_request_non_activation.json",
+      "sha256": "5b09d14c122d379dfc11ffca1d0dc91de36434a6c04d0a59f5ff6d9da80ad7e6"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL04-01_explicit_stop.json",
+      "sha256": "b48d9ee0aa8a67cf8237e229be53efacab7608ae59d14991f5097fab9c371324"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL04-02_refusal_without_pressure.json",
+      "sha256": "a9dc07a1e63c38214fe63e7485a242ce6393208c9970b5cfa04398ff57148f0b"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL04-03_modify_accepted_action.json",
+      "sha256": "dea68881c5c16874d0c22a8d47a14c532a5a591cdfa946209966312c2201d3df"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL04-04_explicit_resume_after_stop.json",
+      "sha256": "6a79575d2acdc4a97297caf3e0504369ab21bc4c40a52decaabdfc09aeb1f7f7"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL04-05_explicit_revocation.json",
+      "sha256": "d3806a47cf8c237e05d447bdbbbc99defd7d3dfcb67623f5ee98d0d57107ed9c"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL05-01_ambiguous_block_no_diagnosis.json",
+      "sha256": "bd580c0ea00b0dae99fd5e99f8609ada348d41886e8c8e4cf0a3485b37b30a20"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL05-02_identity_boundary.json",
+      "sha256": "97d7f4f164fd3e0fe1fdfdf92b5b8d0c9ecb00fb8e1a0e073e58fd96857be06c"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL05-03_clinical_request_boundary.json",
+      "sha256": "e63cd33c36b702f7160c9debef47950de21832288817888d6341c2e448f9b8a3"
+    },
+    {
+      "path": "artifacts/experiments/scenarios/development/SCN-DEV-POL05-04_no_human_substitution.json",
+      "sha256": "1a8c27a23ec48efe63f0af15baa03543826d0dda72fc5f948c55940724fcedeb"
+    },
+    {
+      "path": "artifacts/experiments/schemas/action_record.schema.json",
+      "sha256": "6ac72a4efa32dd073baab6c03973cd1d29c01c19ed3a4faf4371ee6c2d17fa66"
+    },
+    {
+      "path": "artifacts/experiments/schemas/adjudication_record.schema.json",
+      "sha256": "63b20346eddbde0de078ce93c42afd45912040d796a5cc363463ad684f951352"
+    },
+    {
+      "path": "artifacts/experiments/schemas/agent_turn_output.schema.json",
+      "sha256": "ac728a25aefd10d3d540b6e6765d26ac51089b3a55f11d401921a6f3779cc120"
+    },
+    {
+      "path": "artifacts/experiments/schemas/benchmark_anchors.schema.json",
+      "sha256": "bee9c192a0db1fd570bcfc036039551e80aae409e5c24685d2ff0a6b123e449a"
+    },
+    {
+      "path": "artifacts/experiments/schemas/benchmark_quality.schema.json",
+      "sha256": "0d8543821fbdc4f315c5a919703dcaf6b90afd7647813d3b726ffd58547a2280"
+    },
+    {
+      "path": "artifacts/experiments/schemas/blinded_item.schema.json",
+      "sha256": "34902a59cd8898aa6e9f96bfc55e6226117ceccbe0b7736f3945b20f7896bf3d"
+    },
+    {
+      "path": "artifacts/experiments/schemas/blinding_manifest.schema.json",
+      "sha256": "db034fc2ddf62484e5b7dce6766cccb22153baba8b1eb526a8011cd939c1fa7c"
+    },
+    {
+      "path": "artifacts/experiments/schemas/configuration.schema.json",
+      "sha256": "3164e233613a8d3a2439d81543a22ddcd07066c54472a929f678afa8c2c01e43"
+    },
+    {
+      "path": "artifacts/experiments/schemas/configuration_matrix.schema.json",
+      "sha256": "65ccc3ffd5db01dfd71714327fc4f249ae06ef80af13072f9aa5982e040ea71c"
+    },
+    {
+      "path": "artifacts/experiments/schemas/invocation_plan.schema.json",
+      "sha256": "cfcb59bf81938630512ac25d25b80e9020a3b86cb3487147ab760068392926c6"
+    },
+    {
+      "path": "artifacts/experiments/schemas/level_b_decision_rule.schema.json",
+      "sha256": "3b45816497bd7b907180aeda52d810a0c97c9b72b80ed3e00ef44ff6ecd407b3"
+    },
+    {
+      "path": "artifacts/experiments/schemas/oracle.schema.json",
+      "sha256": "0450f3c35bf566da11be5f340ff9d6e1ea56e93ea9219ed58d0e64bdc49330e7"
+    },
+    {
+      "path": "artifacts/experiments/schemas/pol01_output.schema.json",
+      "sha256": "a48bf48304e72fc1d3940b415f9f5afc59f2108b88eb00f89d67cc39fa6bcf13"
+    },
+    {
+      "path": "artifacts/experiments/schemas/pol02_output.schema.json",
+      "sha256": "d411aa164fe59eb459d5e1473b8feb66e67a115fddd3f38bb51ef249ff57b6a6"
+    },
+    {
+      "path": "artifacts/experiments/schemas/pol03_output.schema.json",
+      "sha256": "798c462f1c7499c9c5ea585c3d4acb0924a8b8deae964488c0d684967234e39d"
+    },
+    {
+      "path": "artifacts/experiments/schemas/policy_contract.schema.json",
+      "sha256": "746456a67fc5fc505c50ede59fb6ac0133b4cc0740e25f7265645574364dc9b8"
+    },
+    {
+      "path": "artifacts/experiments/schemas/run_execution_result.schema.json",
+      "sha256": "148d31dec641a2578cfb2571c3b8c9db91012fcd57ee1eb1ce54bfa6a2ffda00"
+    },
+    {
+      "path": "artifacts/experiments/schemas/run_record.schema.json",
+      "sha256": "ba671d1b13530e4e6f115bea6efc642c562aae34441f04cd6266632bf8b03979"
+    },
+    {
+      "path": "artifacts/experiments/schemas/runtime_profile.schema.json",
+      "sha256": "4e0b189cbde39d6f12a7b1fc8f7529df9d1336e2ebf7ff5c213516326b5b7a92"
+    },
+    {
+      "path": "artifacts/experiments/schemas/safety_envelope_output.schema.json",
+      "sha256": "d7e20cc3c0deed2558c5684061e50f813621005a0b99b894e785e3c96466a813"
+    },
+    {
+      "path": "artifacts/experiments/schemas/safety_state.schema.json",
+      "sha256": "d3942f2864315ca2bd108bacd096fe7526f26060e2d4a547bda237e8b97f7d08"
+    },
+    {
+      "path": "artifacts/experiments/schemas/scaffold_state.schema.json",
+      "sha256": "2159e77277a0f0e81aecb4b23f74b0b47fed30375aacc7e956376277ee5af8ba"
+    },
+    {
+      "path": "artifacts/experiments/schemas/scenario.schema.json",
+      "sha256": "a0afb653485211413bd9cf39dee49d743d6002bc214af281e1ff479a1189b85d"
+    },
+    {
+      "path": "artifacts/experiments/schemas/scenario_family_taxonomy.schema.json",
+      "sha256": "e1563dd8e4c7922601a8e47f108054be6f972ae1bbd57936683a41b27d02f165"
+    },
+    {
+      "path": "artifacts/experiments/schemas/score_record.schema.json",
+      "sha256": "4eede834f3612a2ce39810d9916944bf877b9a0eb71128ad5c08185df39daa5c"
+    },
+    {
+      "path": "artifacts/experiments/schemas/shared_context.schema.json",
+      "sha256": "d4271edf78aa51799858f54b7b8d367c58e183c1f0cc7dbf9fc39ddd45751882"
+    },
+    {
+      "path": "artifacts/experiments/schemas/trace_event.schema.json",
+      "sha256": "1519469044c439f358ec036970782901b0bce515231db11b9fc454490fadc1f9"
+    },
+    {
+      "path": "artifacts/experiments/taxonomy/BENCHMARK_COVERAGE_PLAN.v0.1.0.json",
+      "sha256": "da8b8fc41211eccd1c8c67a7137bcb91136c194ee584011ef940be62271a6db7"
+    },
+    {
+      "path": "artifacts/experiments/taxonomy/SCENARIO_FAMILY_TAXONOMY.v0.1.0.json",
+      "sha256": "b7f2ae08c4a3f4e6e87340c82264a7e236d5acbb94a0e89c98c0c37f82ee4364"
+    },
+    {
+      "path": "artifacts/experiments/validate_experiments.py",
+      "sha256": "8dbd1d4a0931149ac224b61c3e8afcb36b0c5ee733e1f30244e98a2ec00182a3"
+    },
+    {
+      "path": "artifacts/experiments/validation/__init__.py",
+      "sha256": "614462b1101f05bb852b60e47ac4987ace2e3acea8e3c32d7f70a3c210d74726"
+    },
+    {
+      "path": "artifacts/experiments/validation/checks/__init__.py",
+      "sha256": "b0f7ef1b8c4ad6779fe9447d306d50d62812ae1facf08496c5edb941eeef4b7a"
+    },
+    {
+      "path": "artifacts/experiments/validation/checks/benchmark.py",
+      "sha256": "a22339d8f8d1344ede586ac0bbf1ff4bce520d89fa6ef94dc672547bb92cb8ad"
+    },
+    {
+      "path": "artifacts/experiments/validation/checks/configurations.py",
+      "sha256": "38df8e845b95f8936894f693310eabd333a9af95904d26d327e5d8131a1a997e"
+    },
+    {
+      "path": "artifacts/experiments/validation/checks/fixtures.py",
+      "sha256": "c427ffd18cafd45bfd06f8d008e4c0a9ed02791642f38b64b1c7260dd87c9188"
+    },
+    {
+      "path": "artifacts/experiments/validation/checks/policies.py",
+      "sha256": "cb33e643ddd5effcf1ca421b0e3b3670a191b12c746a5c477bf5bcfd0bf58165"
+    },
+    {
+      "path": "artifacts/experiments/validation/checks/scenarios.py",
+      "sha256": "a1d2773e363a84d125fddaee5ac37d92485a37ee3f4640165a62d3fa8b272f53"
+    },
+    {
+      "path": "artifacts/experiments/validation/checks/structure.py",
+      "sha256": "a1dbff29f426b35b473d98e92f097d6741f059615dac54a2a0e33ae40433ae4d"
+    },
+    {
+      "path": "artifacts/experiments/validation/cli.py",
+      "sha256": "3bf30e5fd26a16ab1c42418d30e80b73d5a5a0ec9c04e081b148396269ac7975"
+    },
+    {
+      "path": "artifacts/experiments/validation/context.py",
+      "sha256": "e6e6d79261c094d3b995741e1e2f9a2b654e18ea8c8bd5cda7bc427dd2f57a86"
+    },
+    {
+      "path": "artifacts/experiments/validation/manifests.py",
+      "sha256": "b92f96d3d65f649fd21e15df0e570a233b785537176c8bdbf63539dc8b717bc4"
+    },
+    {
+      "path": "artifacts/experiments/validation/report.py",
+      "sha256": "6161cd9945111940c35934155cc606a5c6cd5bb454c866dfb05416fbd69c6179"
+    },
+    {
+      "path": "artifacts/experiments/validation/runner.py",
+      "sha256": "ca955176144d7a4e6b13ac16ffe67f1e0d3b2d5770b85422477f00f77316b9c5"
+    },
+    {
+      "path": "artifacts/experiments/validation/scenario_taxonomy.py",
+      "sha256": "4fdc6344e0e90c93f8ed9e9bd429ac9c2202f27a6d455719dee65448c6e8a2ce"
+    },
+    {
+      "path": "artifacts/experiments/validation/semantics/__init__.py",
+      "sha256": "375ed134adbcaea7cdbc5d000f53a0a0701fcff1d063b8cd818dbeb0fd9e8cb6"
+    },
+    {
+      "path": "artifacts/experiments/validation/semantics/common.py",
+      "sha256": "f0cdfbccf8145063be8054c4ae79f509c7c904c3376e8014c46cf4ead91431fe"
+    },
+    {
+      "path": "artifacts/experiments/validation/semantics/pol01.py",
+      "sha256": "73df08233b8f8da91da106138724f75b98b094f7f9f8b3a4e32d29ef68f928b8"
+    },
+    {
+      "path": "artifacts/experiments/validation/semantics/pol02.py",
+      "sha256": "63060bec177f5ed9b28e69ad9c67dbe30a56d59668c4836a7e3bba65197d1ef9"
+    },
+    {
+      "path": "artifacts/experiments/validation/semantics/pol03.py",
+      "sha256": "597180f1bacb728201f2ca470c470b4cfa144c0c3c72fae5534a421ccb0a0eb7"
+    },
+    {
+      "path": "artifacts/experiments/validation/semantics/safety.py",
+      "sha256": "c7b96e9696b23ed86a9858cd343df2cafbed2350c620d41fa1a4a4dee2339b4f"
+    },
+    {
+      "path": "artifacts/experiments/validation/semantics/transitions.py",
+      "sha256": "798b9b841e9048c21e0048a971bc011bbaa469a0e73919518386f76e1414258d"
+    },
+    {
+      "path": "requirements-lock.txt",
+      "sha256": "9ebf0ba0bc03b0ad655d2e4ce95f8ed2c2f12e80a41123069fa751f50e225394"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "d3ff93a65ce5f91569f54b6f71cce54305620825c4c435d1142355cf41eb7a60"
+    }
+  ],
+  "amended_at": "2026-09-30",
+  "amendment_reason": "Candidate removed independent scenario review and authorized producer-only preparation before D07. No runtime, prompt, rubric, sample size or retry changes.",
+  "development_evidence": {
+    "scope": "Development capability evidence only; not held-out evidence, calibration, or a policy-effect result.",
+    "cumulative_cell_coverage": {
+      "planned_cells": 328,
+      "cells_with_at_least_one_completed_valid_record": 328,
+      "coverage_percentage": 100.0
+    },
+    "evidence_basis": [
+      "tmp/matrix_snapshot_v1_full_005",
+      "tmp/matrix_snapshot_v1_wp9_closure_001",
+      "tmp/matrix_snapshot_v1_wp9_final_001",
+      "tmp/matrix_snapshot_v1_wp9_revocation_probe_001",
+      "tmp/matrix_snapshot_v1_wp9_final_002",
+      "tmp/matrix_snapshot_v1_wp9_final_targeted_001"
+    ],
+    "latest_complete_snapshot": {
+      "cells": 328,
+      "completed_valid": 326,
+      "failed": 2,
+      "snapshot": "tmp/matrix_snapshot_v1_wp9_final_001"
+    },
+    "revocation_amendment_probe": {
+      "cells": 2,
+      "completed_valid": 2,
+      "failed": 0,
+      "snapshot": "tmp/matrix_snapshot_v1_wp9_revocation_probe_001"
+    },
+    "latest_partial_snapshot": {
+      "attempted_cells": 215,
+      "completed_valid": 212,
+      "failed": 3,
+      "snapshot": "tmp/matrix_snapshot_v1_wp9_final_002",
+      "termination": "candidate-requested stop after cumulative coverage was judged sufficient"
+    },
+    "final_targeted_probe": {
+      "cells": 3,
+      "completed_valid": 3,
+      "failed": 0,
+      "snapshot": "tmp/matrix_snapshot_v1_wp9_final_targeted_001"
+    },
+    "limitation": "No single 328-cell snapshot exists on the final amended prompt fingerprint; cumulative development coverage spans controlled prompt amendments and must not be reported as one 328/328 experimental run."
+  },
+  "dependency_inventory_scope": "Conservative superset of execution/evaluation/validation code, current and compatibility schemas, prompts, policy/config/runtime/oracle/taxonomy data, development inputs/fixtures, rubric/UI, protocol and dependency declarations. Excludes archives, reports, generated runs and held-out content; final seal and installed environment remain separate.",
+  "protocol_version": "1.1.0",
+  "frozen_artifact_hash_mode": "SHA256_UTF8_LF_NORMALIZED_TEXT",
+  "held_out_review": {
+    "mode": "AUTHOR_ONLY",
+    "decision_date": "2026-09-30",
+    "candidate_statement": "ho deciso di togliere questo step di verifica. mi vanno bene gli heldout fatti da me e verificati dal prof come metodo generativo",
+    "supervisor_scope": "Candidate-reported acceptance of generation method, not independent validation of scenarios.",
+    "limitation": "Author bias and semantic scenario validity are not independently assessed."
+  },
+  "producer_admission": "SEALED_AUTHOR_REVIEW_BEFORE_D07",
+  "preserved_development_batches": [
+    {
+      "batch_id": "BATCH-DEV-NATURAL-D07",
+      "plan_sha256": "3f1d23d102d7b0b119c5f0612a7b657a7ea7f7193ef43eed334a485cb40480b3",
+      "method_sha256": "ee8a8de41d9ad7d11126f63c9681af2cc01f8e7e7d599e83792ca341c419075a",
+      "reason": "Existing D07 responses and votes unchanged; runtime/measurement settings unchanged."
+    }
+  ]
+}

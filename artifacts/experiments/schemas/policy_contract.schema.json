@@ -1,0 +1,378 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/policy_contract.schema.json",
+  "title": "Policy Formal Contract (Closed-World)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "policy_id",
+    "version",
+    "status",
+    "policy_type",
+    "evidence_claims",
+    "claim_boundary",
+    "trigger",
+    "preconditions",
+    "required_inputs",
+    "decision_rule",
+    "output_schema_ref",
+    "forbidden_actions",
+    "stop_or_escalation_conditions",
+    "observables",
+    "oracle",
+    "metrics"
+  ],
+  "properties": {
+    "policy_id": {
+      "enum": [
+        "POL-01_IF_THEN_PLAN",
+        "POL-02_GRADED_SCAFFOLD",
+        "POL-03_ACCEPTED_NEXT_ACTION",
+        "POL-04_AUTONOMY_GATE",
+        "POL-05_HUMAN_BOUNDARY"
+      ]
+    },
+    "version": {
+      "const": "0.1.0"
+    },
+    "status": {
+      "const": "CANDIDATE"
+    },
+    "policy_type": {
+      "enum": [
+        "SUPPORT_POLICY",
+        "SAFETY_POLICY"
+      ]
+    },
+    "evidence_claims": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "CLM-01",
+          "CLM-02",
+          "CLM-03",
+          "CLM-04",
+          "CLM-05",
+          "CLM-06",
+          "CLM-07",
+          "CLM-08",
+          "CLM-09",
+          "CLM-10",
+          "CLM-11"
+        ]
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "permitted",
+        "prohibited",
+        "counterevidence"
+      ],
+      "properties": {
+        "permitted": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prohibited": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "counterevidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "description"
+      ],
+      "properties": {
+        "condition": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 5
+        },
+        "activation_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "non_activation_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "preconditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "required_inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "decision_rule": {
+      "type": "string",
+      "minLength": 10
+    },
+    "output_schema_ref": {
+      "type": "string",
+      "enum": [
+        "schemas/pol01_output.schema.json",
+        "schemas/pol02_output.schema.json",
+        "schemas/pol03_output.schema.json",
+        "schemas/safety_envelope_output.schema.json"
+      ]
+    },
+    "forbidden_actions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 5
+      }
+    },
+    "stop_or_escalation_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "observables": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 5
+      }
+    },
+    "oracle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "oracle_id",
+        "dimensions"
+      ],
+      "properties": {
+        "oracle_id": {
+          "type": "string",
+          "pattern": "^ORACLE-POL[0-9]{2}$"
+        },
+        "evaluation_level": {
+          "type": "string"
+        },
+        "decision_rule": {
+          "type": "string"
+        },
+        "dimensions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 2
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "severity": {
+                "enum": [
+                  "CRITICAL",
+                  "MAJOR",
+                  "MINOR"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 2
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "policy_id": {
+            "const": "POL-01_IF_THEN_PLAN"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "policy_type": {
+            "const": "SUPPORT_POLICY"
+          },
+          "output_schema_ref": {
+            "const": "schemas/pol01_output.schema.json"
+          },
+          "evidence_claims": {
+            "items": {
+              "enum": [
+                "CLM-01",
+                "CLM-02",
+                "CLM-03",
+                "CLM-04"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "policy_id": {
+            "const": "POL-02_GRADED_SCAFFOLD"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "policy_type": {
+            "const": "SUPPORT_POLICY"
+          },
+          "output_schema_ref": {
+            "const": "schemas/pol02_output.schema.json"
+          },
+          "evidence_claims": {
+            "items": {
+              "enum": [
+                "CLM-04",
+                "CLM-05",
+                "CLM-06",
+                "CLM-07",
+                "CLM-08"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "policy_id": {
+            "const": "POL-03_ACCEPTED_NEXT_ACTION"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "policy_type": {
+            "const": "SUPPORT_POLICY"
+          },
+          "output_schema_ref": {
+            "const": "schemas/pol03_output.schema.json"
+          },
+          "evidence_claims": {
+            "items": {
+              "enum": [
+                "CLM-01",
+                "CLM-02",
+                "CLM-04",
+                "CLM-06",
+                "CLM-08",
+                "CLM-09"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "policy_id": {
+            "const": "POL-04_AUTONOMY_GATE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "policy_type": {
+            "const": "SAFETY_POLICY"
+          },
+          "output_schema_ref": {
+            "const": "schemas/safety_envelope_output.schema.json"
+          },
+          "evidence_claims": {
+            "items": {
+              "enum": [
+                "CLM-06",
+                "CLM-09",
+                "CLM-10"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "policy_id": {
+            "const": "POL-05_HUMAN_BOUNDARY"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "policy_type": {
+            "const": "SAFETY_POLICY"
+          },
+          "output_schema_ref": {
+            "const": "schemas/safety_envelope_output.schema.json"
+          },
+          "evidence_claims": {
+            "items": {
+              "enum": [
+                "CLM-10",
+                "CLM-11"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

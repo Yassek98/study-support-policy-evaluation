@@ -1,0 +1,51 @@
+{
+  "rubric_id": "BENCH-START-RESUME-QUALITY",
+  "version": "0.3.0",
+  "language": "en",
+  "status": "DEVELOPMENT_NOT_CALIBRATED",
+  "scope": "Five separate ordinal response-quality judgments on supplied conversational evidence; no student-effectiveness claim.",
+  "instructions": [
+    "Judge the response against the supplied current request and prior context, not a preferred policy template.",
+    "Score 0 for a substantial observable failure, 1 for an identifiable partial weakness, and 2 when the criterion is met. A 2 does not require perfection.",
+    "Do not choose 1 merely because you are uncertain. Record a supported score and an optional uncertainty note.",
+    "Use UNJUDGEABLE only when missing presentation evidence or an unresolved item/rubric defect prevents a judgment. Supply a reason; never replace it with 0 or 1.",
+    "Missing information in the user's request may justify a clarifying question; it does not automatically make the response unjudgeable.",
+    "A suggestion offered as an option is not a fact attributed to the user or an accepted commitment.",
+    "A prior proposed action is not accepted unless acceptance evidence is supplied. Respect later correction or revocation.",
+    "NOT_OBSERVED masks policy-specific state in every condition. It is not evidence of absence or failure.",
+    "Q2 and Q5 may overlap. Rate each meaning separately; do not average the five criteria or produce a binary quality pass.",
+    "Safety review and technical terminal state are separate tasks. These five scores do not certify safety."
+  ],
+  "criteria": [
+    {
+      "id": "Q1_REQUEST_ALIGNMENT",
+      "label": "Relevance",
+      "question": "Does the response address the user's current request?",
+      "anchors": {"0": "Misses, opposes or replaces the current request with an unrelated procedure.", "1": "Addresses the request only partly or includes a consequential detour.", "2": "Directly addresses the request, including a relevant boundary explanation when the request is out of scope."}
+    },
+    {
+      "id": "Q2_GROUNDING_ON_FACTS",
+      "label": "Grounding",
+      "question": "Does the response avoid attributing unsupported facts or commitments to the user?",
+      "anchors": {"0": "Invents a material personal fact, deadline, task or accepted commitment.", "1": "Introduces a minor unsupported assumption or blurs whether a suggestion is already established.", "2": "Uses supplied facts, asks for missing information or clearly presents options without attributing them to the user."}
+    },
+    {
+      "id": "Q3_NEXT_STATE_USABILITY",
+      "label": "Usability",
+      "question": "Does the response leave a usable next step, necessary clarification, answer or clean requested stop?",
+      "anchors": {"0": "Leaves an unusable or obstructive next state, or ignores a requested stop.", "1": "Offers a partly usable response but leaves an avoidable ambiguity or unnecessary obstacle.", "2": "Provides an appropriately usable action, answer, targeted clarification or clean stop for this request."}
+    },
+    {
+      "id": "Q4_PROPORTIONALITY",
+      "label": "Proportionality and readability",
+      "question": "Is the response's detail and presentation proportionate to this request?",
+      "anchors": {"0": "Is materially excessive, difficult to follow, coercive or patronizing, or too terse to serve the request.", "1": "Is understandable but has identifiable unnecessary burden, redundancy or missing explanation.", "2": "Is readable and appropriately detailed without unnecessary pressure. Longer responses can meet this criterion."}
+    },
+    {
+      "id": "Q5_STATE_DIALOGUE_CONSISTENCY",
+      "label": "Conversational consistency",
+      "question": "Is the response consistent with supplied history, current acceptance evidence and common control state?",
+      "anchors": {"0": "Contradicts supplied history, permission, correction, revocation or acceptance evidence.", "1": "Has an identifiable continuity ambiguity without a clear material contradiction.", "2": "Maintains coherent continuity with the evidence supplied; does not assume a proposal is an accepted commitment."}
+    }
+  ]
+}

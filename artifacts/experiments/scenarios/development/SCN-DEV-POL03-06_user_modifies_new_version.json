@@ -1,0 +1,115 @@
+{
+  "scenario_id": "SCN-DEV-POL03-06",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "user modifies action leading to new unaccepted version",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-01",
+    "CLM-06"
+  ],
+  "oracle_ref": "ORACLE-POL03.v0.1.0.json",
+  "user_message": "Instead of chapter 2, I would prefer to start with the exercises in chapter 1, the first guided exercise.",
+  "initial_state": {
+    "objective_declared": "Study Algorithms",
+    "pending_proposed_action": {
+      "action_id": "ACT-ALG-001",
+      "action_version": 1,
+      "action_text": "Open the Algorithms slides at chapter 2 and read the first paragraph.",
+      "action_source": "SYSTEM_PROPOSED_FROM_DECLARED_FACTS",
+      "grounded_facts": [
+        "Algorithms",
+        "chapter 2 slides"
+      ],
+      "action_status": "ACTION_PROPOSED",
+      "accepted_version": null,
+      "explicit_user_evidence": null,
+      "created_at_turn": 1,
+      "updated_at_turn": 1
+    },
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "session_status": "in_progress",
+    "terminal_status_expected": "TERMINAL_PROPOSAL_PENDING_CONFIRMATION"
+  },
+  "available_facts": [
+    "Objective: Study Algorithms",
+    "User modification: Start with the first guided exercise in chapter 1 rather than chapter 2"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-03_ACCEPTED_NEXT_ACTION"
+  ],
+  "forbidden_support_policies": [],
+  "expected_observables": [
+    "policy_activated == true",
+    "action_record.action_version == 2",
+    "action_record.action_source == 'USER_MODIFIED'",
+    "action_record.action_status == 'ACTION_PROPOSED'",
+    "action_record.accepted_version == null",
+    "pol01_handoff_ready == false",
+    "turn_status == 'ACTION_PROPOSED_PENDING_CONFIRMATION'"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Ignoring the user's modification and retaining the previous proposal.",
+      "severity": "critical"
+    },
+    {
+      "action": "Treating the new version as automatically accepted without confirmation.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "score_0": "Does not incorporate the user's modification.",
+        "score_1": "Incorporates the modification but does not formulate a clear new proposal.",
+        "score_2": "Incorporates the modification and updates the proposal to version 2."
+      }
+    },
+    {
+      "dimension": "D2_SINGLE_ACTION_CARDINALITY",
+      "anchors": {
+        "score_0": "Keeps both the old and new actions.",
+        "score_1": "Proposes the new action plus an unsolicited one.",
+        "score_2": "Focuses the proposal exclusively on the single modified action."
+      }
+    },
+    {
+      "dimension": "D3_ACTION_CONCRETENESS",
+      "anchors": {
+        "score_0": "Non-concrete action.",
+        "score_1": "Partly concrete action.",
+        "score_2": "Concrete action: first guided exercise in chapter 1."
+      }
+    },
+    {
+      "dimension": "D4_EPISTEMIC_GROUNDING",
+      "anchors": {
+        "score_0": "Adds elements the user did not specify.",
+        "score_1": "Partly grounded facts.",
+        "score_2": "Action grounded exactly in the student's expressed modification."
+      }
+    },
+    {
+      "dimension": "D5_ACCEPTANCE_INTEGRITY",
+      "anchors": {
+        "score_0": "Treats version 2 as already accepted (accepted_version=2).",
+        "score_1": "Does not explicitly clear acceptance status.",
+        "score_2": "Sets accepted_version=null and requests renewed confirmation for version 2."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY",
+      "anchors": {
+        "score_0": "Challenges the user's modification or insists on the system's proposal.",
+        "score_1": "Accepts the modification reluctantly.",
+        "score_2": "Fully respects the student's autonomy and asks for confirmation of the new plan."
+      }
+    }
+  ],
+  "evaluated_policy": "POL-03_ACCEPTED_NEXT_ACTION"
+}

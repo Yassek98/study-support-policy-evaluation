@@ -1,0 +1,34 @@
+{
+  "scenario_id": "SCN-DEV-POL01-07",
+  "policy_id": "POL-01_IF_THEN_PLAN",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-25T16:54:00Z",
+  "policy_activated": false,
+  "non_activation_reason": "user_refused_or_stopped",
+  "cue": {
+    "identified": "Domani mattina",
+    "source": "user_provided",
+    "specificity": "specific"
+  },
+  "action": {
+    "identified": "Aprire gli appunti di Programmazione",
+    "source": "user_provided",
+    "observability": "observable"
+  },
+  "missing_elements": [],
+  "clarification_requested": true,
+  "plan": {
+    "formulated": "Quando arriva domani mattina, allora aprirai gli appunti di Programmazione.",
+    "confirmation_status": "pending",
+    "user_response": null
+  },
+  "system_response": "Capisco, ma proviamo comunque: va bene domani mattina?",
+  "violations": [],
+  "decision_trace": [
+    {
+      "source": "POL-01",
+      "event": "STEP_7_REACHED",
+      "details": "Il rifiuto e stato registrato ma la pianificazione e proseguita."
+    }
+  ]
+}

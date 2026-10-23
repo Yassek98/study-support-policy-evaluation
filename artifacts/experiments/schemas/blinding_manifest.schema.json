@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/blinding_manifest.schema.json",
+  "title": "Blinding Manifest",
+  "description": "Sealed manifest linking blinded item IDs back to source run records. NEVER included in the rater bundle. Opened only after rating lock and authorized unblinding in WP10.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "blind_batch_id",
+    "batch_created_at",
+    "entries"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "blind_batch_id": {
+      "type": "string",
+      "pattern": "^BATCH-[A-Z0-9_-]+$"
+    },
+    "batch_created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "blinded_item_id",
+          "source_run_id",
+          "source_run_record_path",
+          "source_result_record_path",
+          "scenario_id",
+          "configuration_id",
+          "replication_index",
+          "source_record_sha256",
+          "source_result_sha256",
+          "blinded_item_sha256"
+        ],
+        "properties": {
+          "blinded_item_id": {
+            "type": "string",
+            "pattern": "^BITEM-[a-f0-9]{16,64}$"
+          },
+          "source_run_id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_.-]+$"
+          },
+          "source_run_record_path": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Relative path from the declared source root to record.json."
+          },
+          "source_result_record_path": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Relative path from the declared source root to result.json."
+          },
+          "scenario_id": {
+            "type": "string",
+            "pattern": "^SCN-[A-Z0-9_-]+$"
+          },
+          "configuration_id": {
+            "type": "string",
+            "enum": ["B0_SIMPLE", "S_P1", "S_P2", "S_P3", "G_P1_P2", "G_P1_P3", "G_P2_P3", "B1_FULL"]
+          },
+          "replication_index": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "description": "Null when the development source did not declare an experimental replication index."
+          },
+          "source_record_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "source_result_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "blinded_item_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      }
+    }
+  }
+}

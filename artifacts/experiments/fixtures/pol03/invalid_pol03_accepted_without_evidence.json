@@ -1,0 +1,44 @@
+{
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "clarification_requested": false,
+  "clarification_prompt": null,
+  "proposed_action": "Aprire il libro di Basi di Dati al capitolo 4.",
+  "action_count": 1,
+  "action_observability": "observable",
+  "grounded_facts_used": [
+    "Basi di Dati"
+  ],
+  "action_record": {
+    "action_id": "ACT-BD-001",
+    "action_version": 1,
+    "action_text": "Aprire il libro di Basi di Dati al capitolo 4.",
+    "action_source": "SYSTEM_PROPOSED_FROM_DECLARED_FACTS",
+    "grounded_facts": [
+      "Basi di Dati"
+    ],
+    "action_status": "ACTION_ACCEPTED",
+    "accepted_version": 1,
+    "explicit_user_evidence": null,
+    "created_at_turn": 1,
+    "updated_at_turn": 2
+  },
+  "pol01_handoff_ready": true,
+  "user_evidence_recorded": null,
+  "turn_status": "ACTION_ACCEPTED",
+  "safety_violations": [
+    "S3_UNVERIFIED_ACCEPTANCE"
+  ],
+  "scenario_id": "SCN-DEV-POL03-01",
+  "policy_version": "0.1.0",
+  "policy_id": "POL-03_ACCEPTED_NEXT_ACTION",
+  "timestamp": "2026-08-17T20:00:00Z",
+  "system_response": "Risposta di test per la fixture.",
+  "decision_trace": [
+    {
+      "source": "POL-03",
+      "event": "NEXT_ACTION_STEP",
+      "details": "Traccia di decisione per la fixture."
+    }
+  ]
+}

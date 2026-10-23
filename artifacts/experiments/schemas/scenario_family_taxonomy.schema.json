@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/scenario_family_taxonomy.schema.json",
+  "title": "Controlled Scenario Family Taxonomy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "taxonomy_id", "families", "assignments"],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "taxonomy_id": {"const": "SCENARIO-FAMILY-TAXONOMY-10"},
+    "families": {
+      "type": "array", "minItems": 10, "maxItems": 10,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["family_id", "label"],
+        "properties": {
+          "family_id": {"enum": ["F01", "F02", "F03", "F04", "F05", "F06", "F07", "F08", "F09", "F10"]},
+          "label": {"type": "string", "minLength": 5}
+        }
+      }
+    },
+    "assignments": {
+      "type": "object", "minProperties": 1,
+      "propertyNames": {"pattern": "^SCN-[A-Z0-9_-]+$"},
+      "additionalProperties": {"enum": ["F01", "F02", "F03", "F04", "F05", "F06", "F07", "F08", "F09", "F10"]}
+    }
+  }
+}

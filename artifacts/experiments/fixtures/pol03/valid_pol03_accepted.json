@@ -1,0 +1,66 @@
+{
+  "scenario_id": "SCN-DEV-POL03-05",
+  "policy_id": "POL-03_ACCEPTED_NEXT_ACTION",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-17T20:05:00Z",
+  "system_response": "Ottimo, azione registrata: apriremo le slide di Sistemi Operativi sui semafori. Quando sei pronto, possiamo definire un momento preciso per iniziare.",
+  "decision_trace": [
+    {
+      "source": "POL-03",
+      "event": "CHECK_APPLICABILITY",
+      "details": "CHECK_APPLICABILITY: Pending proposal ACT-SO-001 found at version 1"
+    },
+    {
+      "source": "POL-03",
+      "event": "DETECT_USER_EVENT",
+      "details": "DETECT_USER_EVENT: Explicit user acceptance confirmed in message"
+    },
+    {
+      "source": "POL-03",
+      "event": "UPDATE_STATE",
+      "details": "UPDATE_STATE: ACT-SO-001 transitioned to ACTION_ACCEPTED with accepted_version=1"
+    },
+    {
+      "source": "POL-03",
+      "event": "RECORD_EVIDENCE",
+      "details": "RECORD_EVIDENCE: Exact user utterance recorded"
+    },
+    {
+      "source": "POL-03",
+      "event": "HANDOFF_GATE",
+      "details": "HANDOFF_GATE: POL-01 handoff is now READY"
+    }
+  ],
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "clarification_requested": false,
+  "clarification_prompt": null,
+  "proposed_action": "Aprire il file delle slide di Sistemi Operativi alla sezione sui semafori e leggere la definizione iniziale.",
+  "action_count": 1,
+  "action_observability": "observable",
+  "grounded_facts_used": [
+    "Sistemi Operativi",
+    "slide",
+    "sezione semafori"
+  ],
+  "action_record": {
+    "action_id": "ACT-SO-001",
+    "action_version": 1,
+    "action_text": "Aprire il file delle slide di Sistemi Operativi alla sezione sui semafori e leggere la definizione iniziale.",
+    "action_source": "SYSTEM_PROPOSED_FROM_DECLARED_FACTS",
+    "grounded_facts": [
+      "Sistemi Operativi",
+      "slide",
+      "sezione semafori"
+    ],
+    "action_status": "ACTION_ACCEPTED",
+    "accepted_version": 1,
+    "explicit_user_evidence": "Si, perfetto, facciamo cosi, apro le slide dei semafori.",
+    "created_at_turn": 1,
+    "updated_at_turn": 2
+  },
+  "pol01_handoff_ready": true,
+  "user_evidence_recorded": "Si, perfetto, facciamo cosi, apro le slide dei semafori.",
+  "turn_status": "ACTION_ACCEPTED",
+  "safety_violations": []
+}

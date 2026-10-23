@@ -1,0 +1,47 @@
+{
+  "scenario_id": "SCN-DEV-POL02-05",
+  "policy_id": "POL-02_GRADED_SCAFFOLD",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-24T18:20:00Z",
+  "system_response": "Delego a POL-03 senza specificare il contesto di configurazione.",
+  "decision_trace": [
+    {
+      "source": "POL-02",
+      "event": "INVALID",
+      "details": "INVALID: delegation requested without configuration_context declared"
+    }
+  ],
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "level_before": 2,
+  "level_after": 3,
+  "transition": "ESCALATE",
+  "transition_reason": "USER_REQUESTED_MORE_STRUCTURE",
+  "user_signal": "MORE_HELP_REQUESTED",
+  "support_move": "DELEGATE_TO_POL03",
+  "orientation_question": null,
+  "declared_options_used": [],
+  "process_structure": "Struttura",
+  "grounded_facts_used": [
+    "slide"
+  ],
+  "pol03_delegation_requested": true,
+  "scaffold_state": {
+    "scaffold_version": 3,
+    "current_level": 3,
+    "previous_level": 2,
+    "transition": "ESCALATE",
+    "transition_reason": "USER_REQUESTED_MORE_STRUCTURE",
+    "user_signal": "MORE_HELP_REQUESTED",
+    "support_move": "DELEGATE_TO_POL03",
+    "grounded_facts": [
+      "slide"
+    ],
+    "pol03_delegation_requested": true,
+    "stop_status": "ACTIVE",
+    "created_at_turn": 1,
+    "updated_at_turn": 3
+  },
+  "turn_status": "PENDING_POL03",
+  "safety_violations": []
+}

@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/action_record.schema.json",
+  "title": "ActionRecord",
+  "description": "Shared data structure representing a single candidate or accepted action, its provenance, versioning, and explicit user acceptance evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "action_id",
+    "action_version",
+    "action_text",
+    "action_source",
+    "grounded_facts",
+    "action_status",
+    "accepted_version",
+    "explicit_user_evidence",
+    "created_at_turn",
+    "updated_at_turn"
+  ],
+  "properties": {
+    "action_id": {
+      "type": "string",
+      "pattern": "^ACT-[A-Za-z0-9_.-]+$",
+      "description": "Unique identifier of the action."
+    },
+    "action_version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Incremental version number of the action (incremented with every modification)."
+    },
+    "action_text": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Textual formulation of the observable action (null if still pending clarification or not applicable)."
+    },
+    "action_source": {
+      "type": "string",
+      "enum": [
+        "USER_PROVIDED",
+        "SYSTEM_PROPOSED_FROM_DECLARED_FACTS",
+        "USER_MODIFIED",
+        "MISSING"
+      ],
+      "description": "Origin of the action for non-invention tracking."
+    },
+    "grounded_facts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      },
+      "description": "Facts declared by the user used to anchor the proposed action (e.g. subject, chapter, schedule)."
+    },
+    "action_status": {
+      "type": "string",
+      "enum": [
+        "CLARIFICATION_PENDING",
+        "ACTION_PROPOSED",
+        "ACTION_ACCEPTED",
+        "ACTION_REJECTED",
+        "STOPPED",
+        "NOT_APPLICABLE"
+      ],
+      "description": "Lifecycle status of the action."
+    },
+    "accepted_version": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "description": "Specific version of the action explicitly accepted by the user (null if not accepted or modified after acceptance)."
+    },
+    "explicit_user_evidence": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Verbatim transcript of the user statement proving explicit acceptance (required if ACTION_ACCEPTED, null in all other cases)."
+    },
+    "created_at_turn": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Turn index in which the action was created."
+    },
+    "updated_at_turn": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Turn index of the last update to the action."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "action_status": {
+            "const": "ACTION_ACCEPTED"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "action_text",
+          "accepted_version",
+          "explicit_user_evidence"
+        ],
+        "properties": {
+          "action_text": {
+            "type": "string",
+            "minLength": 3
+          },
+          "accepted_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "explicit_user_evidence": {
+            "type": "string",
+            "minLength": 1
+          },
+          "action_source": {
+            "enum": [
+              "USER_PROVIDED",
+              "SYSTEM_PROPOSED_FROM_DECLARED_FACTS",
+              "USER_MODIFIED"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action_status": {
+            "const": "ACTION_PROPOSED"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "action_text"
+        ],
+        "properties": {
+          "action_text": {
+            "type": "string",
+            "minLength": 3
+          },
+          "accepted_version": {
+            "type": "null"
+          },
+          "explicit_user_evidence": {
+            "type": "null"
+          },
+          "action_source": {
+            "enum": [
+              "SYSTEM_PROPOSED_FROM_DECLARED_FACTS",
+              "USER_MODIFIED"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action_status": {
+            "enum": [
+              "CLARIFICATION_PENDING",
+              "ACTION_REJECTED",
+              "STOPPED",
+              "NOT_APPLICABLE"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "accepted_version": {
+            "type": "null"
+          },
+          "explicit_user_evidence": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action_source": {
+            "const": "SYSTEM_PROPOSED_FROM_DECLARED_FACTS"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "grounded_facts": {
+            "type": "array",
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

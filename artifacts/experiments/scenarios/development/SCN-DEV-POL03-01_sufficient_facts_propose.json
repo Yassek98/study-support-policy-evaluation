@@ -1,0 +1,102 @@
+{
+  "scenario_id": "SCN-DEV-POL03-01",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "sufficient facts for single action proposal",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-01",
+    "CLM-06"
+  ],
+  "oracle_ref": "ORACLE-POL03.v0.1.0.json",
+  "user_message": "I want to study Computer Networks this afternoon. I have downloaded the transport-layer slides, but I do not know exactly where to start looking.",
+  "initial_state": {
+    "objective_declared": "Study Computer Networks",
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "session_status": "in_progress",
+    "terminal_status_expected": "TERMINAL_PROPOSAL_PENDING_CONFIRMATION"
+  },
+  "available_facts": [
+    "Objective: Study Computer Networks",
+    "Material: Transport-layer slides downloaded",
+    "Time: This afternoon",
+    "State: The user has not yet chosen a concrete action"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-03_ACCEPTED_NEXT_ACTION"
+  ],
+  "forbidden_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "expected_observables": [
+    "policy_activated == true",
+    "action_count == 1",
+    "action_observability == 'observable'",
+    "proposed_action != null",
+    "pol01_handoff_ready == false",
+    "turn_status == 'ACTION_PROPOSED_PENDING_CONFIRMATION'"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Treating the action as accepted before the user's response.",
+      "severity": "critical"
+    },
+    {
+      "action": "Inventing unmentioned textbook chapters or unrequested exercises.",
+      "severity": "critical"
+    },
+    {
+      "action": "Proposing more than one action at a time.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "The policy correctly activates by proposing an action grounded in the declared facts.",
+        "FAIL": "The policy does not activate or inappropriately activates for other tasks."
+      }
+    },
+    {
+      "dimension": "D2_SINGLE_ACTION_CARDINALITY",
+      "anchors": {
+        "PASS": "Formulates exactly one proposal (action_count=1).",
+        "FAIL": "Proposes multiple items or complex sequences."
+      }
+    },
+    {
+      "dimension": "D3_ACTION_CONCRETENESS",
+      "anchors": {
+        "1": "Missing or vague action.",
+        "2": "Partial action.",
+        "3": "Concrete, verifiable action (e.g. open the transport-layer slides and read the TCP introduction)."
+      }
+    },
+    {
+      "dimension": "D4_EPISTEMIC_GROUNDING",
+      "anchors": {
+        "PASS": "Uses only Networks and transport-layer slides; does not invent textbooks or examinations.",
+        "FAIL": "Invents materials or chapters the user did not mention."
+      }
+    },
+    {
+      "dimension": "D5_ACCEPTANCE_INTEGRITY",
+      "anchors": {
+        "PASS": "Maintains ACTION_PROPOSED status and requests confirmation/modification.",
+        "FAIL": "Treats the action as already accepted before the response."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY",
+      "anchors": {
+        "PASS": "Asks whether the proposal is acceptable or the user would prefer to modify it.",
+        "FAIL": "Treats the proposal as binding or unchangeable."
+      }
+    }
+  ],
+  "evaluated_policy": "POL-03_ACCEPTED_NEXT_ACTION"
+}

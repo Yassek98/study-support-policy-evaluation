@@ -1,0 +1,409 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExecutionRunRecord",
+  "description": "Busta autorevole e immutabile generata dal test/evaluation runner al termine di una singola esecuzione di scenario.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "timestamp",
+    "configuration",
+    "runtime_profile",
+    "scenario",
+    "initial_state",
+    "execution_telemetry",
+    "execution_status",
+    "terminal_status"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Identificativo univoco dell'esecuzione (es. UUID v4 o run-hash)."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-9]{2})$",
+      "description": "Timestamp ISO-8601 con fuso orario UTC obbligatorio."
+    },
+    "configuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "configuration_id",
+        "configuration_version",
+        "prompt_fingerprint",
+        "artifact_fingerprint",
+        "module_hashes"
+      ],
+      "properties": {
+        "configuration_id": {
+          "type": "string",
+          "enum": [
+            "B0_SIMPLE",
+            "S_P1",
+            "S_P2",
+            "S_P3",
+            "G_P1_P2",
+            "G_P1_P3",
+            "G_P2_P3",
+            "B1_FULL"
+          ]
+        },
+        "configuration_version": {
+          "type": "string",
+          "const": "0.1.0"
+        },
+        "prompt_fingerprint": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "artifact_fingerprint": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "module_hashes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "runtime_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile_id",
+        "version",
+        "profile_fingerprint",
+        "model",
+        "provider",
+        "seed",
+        "max_tokens"
+      ],
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_\\-]+$"
+        },
+        "version": {
+          "const": "0.1.0"
+        },
+        "profile_fingerprint": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provider": {
+          "type": "string",
+          "minLength": 1
+        },
+        "temperature": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 2.0
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "top_p": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "reasoning": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "enabled"
+          ],
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "effort": {
+              "enum": [
+                "none",
+                "minimal",
+                "low",
+                "medium",
+                "high"
+              ]
+            }
+          }
+        },
+        "stop_sequences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_id",
+        "scenario_version",
+        "scenario_fingerprint",
+        "turn_index",
+        "user_message"
+      ],
+      "properties": {
+        "scenario_id": {
+          "type": "string",
+          "pattern": "^SCN-(?:DEV|HELD)-(?:POL01|POL02|POL03|POL04|POL05|INT)-[0-9]{2}(?:_[a-z0-9_]+)?$",
+          "description": "Identificativo canonico dello scenario eseguito."
+        },
+        "scenario_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "Scenario version; the semantic validator requires exact equality with the canonical scenario."
+        },
+        "scenario_fingerprint": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "Impronta crittografica SHA-256 del file scenario canonico."
+        },
+        "turn_index": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Indice progressivo del turno eseguito."
+        },
+        "user_message": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Messaggio esatto dell'utente nel turno eseguito."
+        }
+      }
+    },
+    "initial_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "safety_state",
+        "shared_context"
+      ],
+      "properties": {
+        "shared_context": {"$ref": "shared_context.schema.json"},
+        "safety_state": {
+          "$ref": "safety_state.schema.json"
+        },
+        "scaffold_state": {
+          "$ref": "scaffold_state.schema.json"
+        },
+        "action_record": {
+          "oneOf": [
+            {
+              "$ref": "action_record.schema.json"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "final_state": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "safety_state"
+          ],
+          "properties": {
+            "safety_state": {
+              "$ref": "safety_state.schema.json"
+            },
+            "scaffold_state": {
+              "$ref": "scaffold_state.schema.json"
+            },
+            "action_record": {
+              "oneOf": [
+                {
+                  "$ref": "action_record.schema.json"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "agent_output": {
+      "oneOf": [
+        {
+          "$ref": "agent_turn_output.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "execution_telemetry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "latency_ms",
+        "attempts",
+        "token_usage",
+        "errors"
+      ],
+      "properties": {
+        "latency_ms": {
+          "type": "number",
+          "minimum": 0.0
+        },
+        "attempts": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "token_usage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "prompt_tokens",
+            "completion_tokens",
+            "total_tokens"
+          ],
+          "properties": {
+            "prompt_tokens": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "completion_tokens": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "total_tokens": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "terminal_status": {
+      "type": "string",
+      "enum": [
+        "COMPLETED",
+        "STOPPED",
+        "REFUSED",
+        "FAILED",
+        "VIOLATION"
+      ],
+      "description": "Sintesi complessiva dello stato terminale della run."
+    },
+    "execution_status": {
+      "type": "string",
+      "enum": [
+        "COMPLETED",
+        "FAILED"
+      ],
+      "description": "Stato tecnico di completamento del ciclo software del runner."
+    },
+    "interaction_outcome": {
+      "type": "string",
+      "enum": [
+        "SUPPORTED",
+        "STOPPED",
+        "REFUSED",
+        "NOT_EVALUATED"
+      ],
+      "description": "Esito comportamentale dell'interazione con l'utente (supporto erogato, stop onorato, rifiuto o non valutato)."
+    },
+    "safety_result": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "VIOLATION",
+        "NOT_EVALUATED"
+      ],
+      "description": "Esito di sicurezza rispetto ai vincoli invarianti del safety envelope."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "execution_status": {
+            "const": "COMPLETED"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "agent_output",
+          "final_state",
+          "interaction_outcome",
+          "safety_result"
+        ],
+        "properties": {
+          "agent_output": {
+            "type": "object"
+          },
+          "final_state": {
+            "type": "object"
+          },
+          "interaction_outcome": {
+            "enum": [
+              "SUPPORTED",
+              "STOPPED",
+              "REFUSED"
+            ]
+          },
+          "safety_result": {
+            "enum": [
+              "PASS",
+              "VIOLATION"
+            ]
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "terminal_status": {
+            "const": "FAILED"
+          },
+          "interaction_outcome": {
+            "const": "NOT_EVALUATED"
+          },
+          "safety_result": {
+            "const": "NOT_EVALUATED"
+          },
+          "execution_telemetry": {
+            "properties": {
+              "errors": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

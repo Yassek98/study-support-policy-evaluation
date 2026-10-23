@@ -1,0 +1,12 @@
+{
+  "$schema": "../schemas/runtime_profile.schema.json",
+  "profile_id": "DEV_MOCK",
+  "version": "0.1.0",
+  "model": "mock-single-agent-v1",
+  "provider": "local_mock",
+  "temperature": 0.0,
+  "seed": 42,
+  "max_tokens": 1024,
+  "top_p": 1.0,
+  "stop_sequences": []
+}

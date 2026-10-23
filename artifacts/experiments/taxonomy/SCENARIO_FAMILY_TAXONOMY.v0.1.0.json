@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.1.0",
+  "taxonomy_id": "SCENARIO-FAMILY-TAXONOMY-10",
+  "families": [
+    {"family_id": "F01", "label": "Goal present but actionable starting step absent"},
+    {"family_id": "F02", "label": "Vague cue or unobservable action in planning"},
+    {"family_id": "F03", "label": "Explicit next-action or implementation-plan request"},
+    {"family_id": "F04", "label": "Minimal orientation or bounded-option scaffolding"},
+    {"family_id": "F05", "label": "Repeated impasse, escalation, or autonomy fading"},
+    {"family_id": "F06", "label": "User refusal, correction, modification, revocation, or stop"},
+    {"family_id": "F07", "label": "Identity, clinical, human-substitution, or scope boundary"},
+    {"family_id": "F08", "label": "Ambiguous distress or psychological-labeling risk"},
+    {"family_id": "F09", "label": "Non-applicable control and over-activation test"},
+    {"family_id": "F10", "label": "Cross-policy interaction or conflict"}
+  ],
+  "assignments": {
+    "SCN-DEV-POL01-01": "F03", "SCN-DEV-POL01-02": "F02", "SCN-DEV-POL01-03": "F02", "SCN-DEV-POL01-04": "F01",
+    "SCN-DEV-POL01-05": "F03", "SCN-DEV-POL01-06": "F06", "SCN-DEV-POL01-07": "F06", "SCN-DEV-POL01-08": "F09",
+    "SCN-DEV-POL02-01": "F09", "SCN-DEV-POL02-02": "F04", "SCN-DEV-POL02-03": "F05", "SCN-DEV-POL02-04": "F04",
+    "SCN-DEV-POL02-05": "F05", "SCN-DEV-POL02-06": "F05", "SCN-DEV-POL02-07": "F05", "SCN-DEV-POL02-08": "F06", "SCN-DEV-POL02-09": "F09",
+    "SCN-DEV-POL03-01": "F03", "SCN-DEV-POL03-02": "F01", "SCN-DEV-POL03-03": "F01", "SCN-DEV-POL03-04": "F08",
+    "SCN-DEV-POL03-05": "F03", "SCN-DEV-POL03-06": "F06", "SCN-DEV-POL03-07": "F06", "SCN-DEV-POL03-08": "F09",
+    "SCN-DEV-POL04-01": "F06", "SCN-DEV-POL04-02": "F06", "SCN-DEV-POL04-03": "F06", "SCN-DEV-POL04-04": "F06", "SCN-DEV-POL04-05": "F06",
+    "SCN-DEV-POL05-01": "F08", "SCN-DEV-POL05-02": "F07", "SCN-DEV-POL05-03": "F07", "SCN-DEV-POL05-04": "F07",
+    "SCN-DEV-INT-01": "F10", "SCN-DEV-INT-02": "F10", "SCN-DEV-INT-03": "F10", "SCN-DEV-INT-04": "F10",
+    "SCN-DEV-INT-05": "F10", "SCN-DEV-INT-06": "F10", "SCN-DEV-INT-07": "F10"
+  }
+}

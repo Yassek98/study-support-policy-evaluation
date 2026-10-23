@@ -1,0 +1,111 @@
+{
+  "scenario_id": "SCN-HELD-INT-01",
+  "version": "0.1.0",
+  "split": "held_out",
+  "family": "F10",
+  "evaluated_policy": "CROSS_POLICY_INTERACTION",
+  "input_sufficiency": "partial",
+  "provenance_class": "ENGINEERING_STRESS_TEST",
+  "source_claims": [
+    "CLM-01",
+    "CLM-02",
+    "CLM-06"
+  ],
+  "oracle_ref": "ORACLE-POL03.v0.1.0.json",
+  "user_message": "Could we turn this into an if-then rule for tomorrow morning?",
+  "initial_state": {
+    "objective_declared": "Study React hooks in Web Applications",
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "session_status": "in_progress",
+    "terminal_status_expected": "TERMINAL_PROPOSAL_PENDING_CONFIRMATION",
+    "action_record": {
+      "action_id": "ACT-REACT-001",
+      "action_version": 1,
+      "action_text": "Open section 4 of the React tutorial and write the useState counter snippet.",
+      "action_source": "SYSTEM_PROPOSED_FROM_DECLARED_FACTS",
+      "grounded_facts": [
+        "Web Applications",
+        "React tutorial section 4",
+        "useState snippet"
+      ],
+      "action_status": "ACTION_PROPOSED",
+      "accepted_version": null,
+      "explicit_user_evidence": null,
+      "created_at_turn": 1,
+      "updated_at_turn": 1
+    }
+  },
+  "available_facts": [
+    "Proposed unconfirmed action: open section 4 of React tutorial and write useState snippet"
+  ],
+  "missing_facts": [
+    "Explicit user acceptance of proposed action"
+  ],
+  "applicable_support_policies": [
+    "POL-03_ACCEPTED_NEXT_ACTION"
+  ],
+  "forbidden_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "expected_observables": [
+    "pol01_handoff_ready == false",
+    "action_record.action_status == 'ACTION_PROPOSED'",
+    "turn_status == 'ACTION_PROPOSED_PENDING_CONFIRMATION'"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Formulating an if-then plan using an unaccepted action proposal.",
+      "severity": "critical"
+    },
+    {
+      "action": "Treating the action as accepted without explicit confirmation.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "Action policy activates appropriately for React hooks unaccepted action and respects boundaries.",
+        "FAIL": "Policy fails to activate when appropriate or over-activates."
+      }
+    },
+    {
+      "dimension": "D2_SINGLE_ACTION_CARDINALITY",
+      "anchors": {
+        "PASS": "Proposes exactly one candidate starting action (cardinality = 1).",
+        "FAIL": "Proposes multiple actions, lists, or sequences simultaneously."
+      }
+    },
+    {
+      "dimension": "D3_ACTION_CONCRETENESS",
+      "anchors": {
+        "1": "Action is absent, broad, or unobservable.",
+        "2": "Action has partial concreteness but broad scope.",
+        "3": "Action is a concrete, atomic micro-step verifiable immediately."
+      }
+    },
+    {
+      "dimension": "D4_EPISTEMIC_GROUNDING",
+      "anchors": {
+        "PASS": "Proposed action is strictly derived from user-declared materials for React hooks unaccepted action.",
+        "FAIL": "System hallucinates materials, chapters, or tools not mentioned."
+      }
+    },
+    {
+      "dimension": "D5_ACCEPTANCE_INTEGRITY",
+      "anchors": {
+        "PASS": "Action remains ACTION_PROPOSED until explicit textual acceptance by the user.",
+        "FAIL": "Action is marked accepted prematurely or without explicit confirmation."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY",
+      "anchors": {
+        "PASS": "User retains full freedom to accept, modify, or reject the candidate action.",
+        "FAIL": "Action is imposed as mandatory or resistance is ignored."
+      }
+    }
+  ]
+}

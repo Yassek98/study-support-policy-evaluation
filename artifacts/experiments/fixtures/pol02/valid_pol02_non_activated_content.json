@@ -1,0 +1,53 @@
+{
+  "scenario_id": "SCN-DEV-POL02-09",
+  "policy_id": "POL-02_GRADED_SCAFFOLD",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-24T18:35:00Z",
+  "system_response": "Un semaforo in un sistema operativo e una variabile protetta che controlla l'accesso a risorse condivise...",
+  "decision_trace": [
+    {
+      "source": "POL-02",
+      "event": "CHECK_TRIGGER",
+      "details": "CHECK_TRIGGER: User asked a direct conceptual disciplinary question about semaphores"
+    },
+    {
+      "source": "POL-02",
+      "event": "ROUTING_DECISION",
+      "details": "ROUTING_DECISION: Disciplinary question outside start/resume process scope"
+    },
+    {
+      "source": "POL-02",
+      "event": "NON_ACTIVATION",
+      "details": "NON_ACTIVATION: Deactivate POL-02, turn_status=NOT_APPLICABLE"
+    }
+  ],
+  "policy_activated": false,
+  "non_activation_reason": "content_request_disciplinary_tutoring",
+  "level_before": null,
+  "level_after": 0,
+  "transition": "NOT_APPLICABLE",
+  "transition_reason": "CONTENT_REQUEST_OUT_OF_SCOPE",
+  "user_signal": "CONTENT_QUESTION",
+  "support_move": "NONE",
+  "orientation_question": null,
+  "declared_options_used": [],
+  "process_structure": null,
+  "grounded_facts_used": [],
+  "pol03_delegation_requested": false,
+  "scaffold_state": {
+    "scaffold_version": 1,
+    "current_level": 0,
+    "previous_level": null,
+    "transition": "NOT_APPLICABLE",
+    "transition_reason": "CONTENT_REQUEST_OUT_OF_SCOPE",
+    "user_signal": "CONTENT_QUESTION",
+    "support_move": "NONE",
+    "grounded_facts": [],
+    "pol03_delegation_requested": false,
+    "stop_status": "ACTIVE",
+    "created_at_turn": 1,
+    "updated_at_turn": 1
+  },
+  "turn_status": "NOT_APPLICABLE",
+  "safety_violations": []
+}

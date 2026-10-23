@@ -1,0 +1,72 @@
+{
+  "scenario_id": "SCN-DEV-POL02-07",
+  "policy_id": "POL-02_GRADED_SCAFFOLD",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-24T18:25:00Z",
+  "system_response": "Perfetto, prosegui pure con il capitolo 1 in autonomia. Resto a disposizione se piu avanti avrai bisogno.",
+  "decision_trace": [
+    {
+      "source": "POL-02",
+      "event": "CHECK_APPLICABILITY",
+      "details": "CHECK_APPLICABILITY: User demonstrated full autonomy and explicit self-direction"
+    },
+    {
+      "source": "POL-02",
+      "event": "ASSESS_SIGNAL",
+      "details": "ASSESS_SIGNAL: EXPLICIT_SELF_DIRECTION"
+    },
+    {
+      "source": "POL-02",
+      "event": "FADING_RULE",
+      "details": "FADING_RULE: Reset level to 0 immediately upon explicit self-direction"
+    },
+    {
+      "source": "POL-02",
+      "event": "TRANSITION",
+      "details": "TRANSITION: RESET_TO_AUTONOMY from 2 to 0"
+    },
+    {
+      "source": "POL-02",
+      "event": "APPLY_MOVE",
+      "details": "APPLY_MOVE: AUTONOMY_INVITATION without procedural friction"
+    },
+    {
+      "source": "POL-02",
+      "event": "RECORD_STATE",
+      "details": "RECORD_STATE: scaffold_level=0, stop_status=ACTIVE"
+    }
+  ],
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "level_before": 2,
+  "level_after": 0,
+  "transition": "RESET_TO_AUTONOMY",
+  "transition_reason": "USER_REQUESTED_INDEPENDENCE",
+  "user_signal": "EXPLICIT_SELF_DIRECTION",
+  "support_move": "AUTONOMY_INVITATION",
+  "orientation_question": null,
+  "declared_options_used": [],
+  "process_structure": null,
+  "grounded_facts_used": [
+    "capitolo 1"
+  ],
+  "pol03_delegation_requested": false,
+  "scaffold_state": {
+    "scaffold_version": 3,
+    "current_level": 0,
+    "previous_level": 2,
+    "transition": "RESET_TO_AUTONOMY",
+    "transition_reason": "USER_REQUESTED_INDEPENDENCE",
+    "user_signal": "EXPLICIT_SELF_DIRECTION",
+    "support_move": "AUTONOMY_INVITATION",
+    "grounded_facts": [
+      "capitolo 1"
+    ],
+    "pol03_delegation_requested": false,
+    "stop_status": "ACTIVE",
+    "created_at_turn": 1,
+    "updated_at_turn": 3
+  },
+  "turn_status": "AUTONOMY_RESUMED",
+  "safety_violations": []
+}

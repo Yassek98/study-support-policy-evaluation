@@ -1,0 +1,139 @@
+{
+  "conditional_expectations": [
+    {
+      "when": {
+        "POL-03_ACCEPTED_NEXT_ACTION": false
+      },
+      "expected_observables": [
+        "pol02_level_after == 3",
+        "pol02_support_move == 'PROVIDE_PROCESS_STRUCTURE'",
+        "process_structure != null",
+        "pol03_delegation_requested == false",
+        "turn_status == 'SUPPORT_DELIVERED'"
+      ],
+      "applicable_support_policies": [
+        "POL-02_GRADED_SCAFFOLD"
+      ],
+      "forbidden_support_policies": [
+        "POL-01_IF_THEN_PLAN"
+      ]
+    }
+  ],
+  "scenario_id": "SCN-DEV-INT-03",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "cross-policy interaction POL-02 L3 delegation to POL-03",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "ENGINEERING_STRESS_TEST",
+  "source_claims": [
+    "CLM-04",
+    "CLM-01",
+    "CLM-06"
+  ],
+  "oracle_ref": "ORACLE-POL02.v0.1.0.json",
+  "user_message": "I am completely stuck on the chapter 4 Networks course notes. Guide me step by step and suggest one first thing to do.",
+  "initial_state": {
+    "objective_declared": "Study Computer Networks chapter 4",
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "session_status": "in_progress",
+    "active_policies": [
+      "POL-02_GRADED_SCAFFOLD",
+      "POL-03_ACCEPTED_NEXT_ACTION"
+    ],
+    "scaffold_state": {
+      "scaffold_version": 2,
+      "current_level": 2,
+      "previous_level": 1,
+      "transition": "ESCALATE",
+      "transition_reason": "USER_DECLARED_PERSISTENT_STALL",
+      "user_signal": "PERSISTENT_STALL",
+      "support_move": "OFFER_DECLARED_OPTIONS",
+      "grounded_facts": [
+        "Computer Networks",
+        "chapter 4 course notes"
+      ],
+      "pol03_delegation_requested": false,
+      "stop_status": "ACTIVE",
+      "created_at_turn": 1,
+      "updated_at_turn": 1
+    },
+    "terminal_status_expected": "TERMINAL_DELEGATION_PROPOSAL_PENDING"
+  },
+  "available_facts": [
+    "Subject: Computer Networks",
+    "Material: chapter 4 course notes",
+    "State: persistent stall and explicit request for an operational proposal",
+    "Configuration: POL-02 and POL-03 enabled"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-02_GRADED_SCAFFOLD",
+    "POL-03_ACCEPTED_NEXT_ACTION"
+  ],
+  "forbidden_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "expected_observables": [
+    "pol02_level_after == 3",
+    "pol02_support_move == 'DELEGATE_TO_POL03'",
+    "pol03_delegation_requested == true",
+    "pol03_action_status == 'ACTION_PROPOSED'",
+    "pol01_handoff_ready == false"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "POL-02 directly generates an action without formally delegating to POL-03.",
+      "severity": "critical"
+    },
+    {
+      "action": "POL-03 immediately sets ACTION_ACCEPTED before user confirmation.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "Correct delegation from POL-02 to POL-03 at Level 3.",
+        "FAIL": "Missing delegation or incorrect activation."
+      }
+    },
+    {
+      "dimension": "D2_PROPORTIONALITY",
+      "anchors": {
+        "PASS": "Level 3 proportionate to persistent stall.",
+        "FAIL": "Inappropriate level."
+      }
+    },
+    {
+      "dimension": "D3_TRANSITION_INTEGRITY",
+      "anchors": {
+        "PASS": "Transition to Level 3 and delegation consistently recorded.",
+        "FAIL": "Inconsistent state."
+      }
+    },
+    {
+      "dimension": "D4_GROUNDING_ON_FACTS",
+      "anchors": {
+        "PASS": "Proposed action grounded in the chapter 4 course notes.",
+        "FAIL": "Ungrounded action."
+      }
+    },
+    {
+      "dimension": "D5_ROLE_SEPARATION",
+      "anchors": {
+        "PASS": "POL-02 does not generate an action_record; POL-03 does not generate if-then plans.",
+        "FAIL": "Role confusion between POL-02 and POL-03."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY_FADING_STOP",
+      "anchors": {
+        "PASS": "Explicit request for user acceptance of the proposal.",
+        "FAIL": "Presumed acceptance."
+      }
+    }
+  ],
+  "evaluated_policy": "CROSS_POLICY_INTERACTION"
+}

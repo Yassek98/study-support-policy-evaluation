@@ -1,0 +1,97 @@
+{
+  "matrix_id": "FACTORIAL_2X3_V0_1_0",
+  "version": "0.1.0",
+  "status": "CANDIDATE",
+  "architecture": "SINGLE_AGENT",
+  "safety_envelope": [
+    "POL-04_AUTONOMY_GATE",
+    "POL-05_HUMAN_BOUNDARY"
+  ],
+  "factors": [
+    "P1_POL01",
+    "P2_POL02",
+    "P3_POL03"
+  ],
+  "configurations": [
+    {
+      "configuration_id": "B0_SIMPLE",
+      "factors": {
+        "P1_POL01": false,
+        "P2_POL02": false,
+        "P3_POL03": false
+      },
+      "manifest_ref": "configurations/B0_SIMPLE.v0.1.0.json",
+      "interpretation": "minimal single-agent prompt + invariant safety envelope"
+    },
+    {
+      "configuration_id": "S_P1",
+      "factors": {
+        "P1_POL01": true,
+        "P2_POL02": false,
+        "P3_POL03": false
+      },
+      "manifest_ref": "configurations/S_P1.v0.1.0.json",
+      "interpretation": "single-policy ablation: if-then planning only"
+    },
+    {
+      "configuration_id": "S_P2",
+      "factors": {
+        "P1_POL01": false,
+        "P2_POL02": true,
+        "P3_POL03": false
+      },
+      "manifest_ref": "configurations/S_P2.v0.1.0.json",
+      "interpretation": "single-policy ablation: graded scaffolding only"
+    },
+    {
+      "configuration_id": "S_P3",
+      "factors": {
+        "P1_POL01": false,
+        "P2_POL02": false,
+        "P3_POL03": true
+      },
+      "manifest_ref": "configurations/S_P3.v0.1.0.json",
+      "interpretation": "single-policy ablation: accepted next action only"
+    },
+    {
+      "configuration_id": "G_P1_P2",
+      "factors": {
+        "P1_POL01": true,
+        "P2_POL02": true,
+        "P3_POL03": false
+      },
+      "manifest_ref": "configurations/G_P1_P2.v0.1.0.json",
+      "interpretation": "grouped pair ablation: if-then planning + graded scaffolding"
+    },
+    {
+      "configuration_id": "G_P1_P3",
+      "factors": {
+        "P1_POL01": true,
+        "P2_POL02": false,
+        "P3_POL03": true
+      },
+      "manifest_ref": "configurations/G_P1_P3.v0.1.0.json",
+      "interpretation": "grouped pair ablation: if-then planning + accepted next action"
+    },
+    {
+      "configuration_id": "G_P2_P3",
+      "factors": {
+        "P1_POL01": false,
+        "P2_POL02": true,
+        "P3_POL03": true
+      },
+      "manifest_ref": "configurations/G_P2_P3.v0.1.0.json",
+      "interpretation": "grouped pair ablation: graded scaffolding + accepted next action"
+    },
+    {
+      "configuration_id": "B1_FULL",
+      "factors": {
+        "P1_POL01": true,
+        "P2_POL02": true,
+        "P3_POL03": true
+      },
+      "manifest_ref": "configurations/B1_FULL.v0.1.0.json",
+      "interpretation": "full support-policy package (P1 + P2 + P3) + invariant safety envelope"
+    }
+  ]
+}

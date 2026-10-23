@@ -1,0 +1,68 @@
+{
+  "scenario_id": "SCN-DEV-POL02-08",
+  "policy_id": "POL-02_GRADED_SCAFFOLD",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-24T18:30:00Z",
+  "system_response": "Va bene, nessun problema. Interrompo i suggerimenti. Se vorrai riprendere piu tardi, saro qui.",
+  "decision_trace": [
+    {
+      "source": "POL-02",
+      "event": "CHECK_APPLICABILITY",
+      "details": "CHECK_APPLICABILITY: User issued explicit stop request"
+    },
+    {
+      "source": "POL-02",
+      "event": "ASSESS_SIGNAL",
+      "details": "ASSESS_SIGNAL: STOP_REQUEST"
+    },
+    {
+      "source": "POL-02",
+      "event": "STOP_RULE",
+      "details": "STOP_RULE: Immediate cessation of all scaffolding, reset level to 0"
+    },
+    {
+      "source": "POL-02",
+      "event": "TRANSITION",
+      "details": "TRANSITION: STOP"
+    },
+    {
+      "source": "POL-02",
+      "event": "APPLY_MOVE",
+      "details": "APPLY_MOVE: STOP_AND_ACKNOWLEDGE with clean, non-moralizing acknowledgment"
+    },
+    {
+      "source": "POL-02",
+      "event": "RECORD_STATE",
+      "details": "RECORD_STATE: scaffold_level=0, stop_status=STOPPED, pol03_delegation=false"
+    }
+  ],
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "level_before": 2,
+  "level_after": 0,
+  "transition": "STOP",
+  "transition_reason": "USER_REFUSED_SUPPORT",
+  "user_signal": "STOP_REQUEST",
+  "support_move": "STOP_AND_ACKNOWLEDGE",
+  "orientation_question": null,
+  "declared_options_used": [],
+  "process_structure": null,
+  "grounded_facts_used": [],
+  "pol03_delegation_requested": false,
+  "scaffold_state": {
+    "scaffold_version": 3,
+    "current_level": 0,
+    "previous_level": 2,
+    "transition": "STOP",
+    "transition_reason": "USER_REFUSED_SUPPORT",
+    "user_signal": "STOP_REQUEST",
+    "support_move": "STOP_AND_ACKNOWLEDGE",
+    "grounded_facts": [],
+    "pol03_delegation_requested": false,
+    "stop_status": "STOPPED",
+    "created_at_turn": 1,
+    "updated_at_turn": 3
+  },
+  "turn_status": "STOPPED",
+  "safety_violations": []
+}

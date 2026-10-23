@@ -1,0 +1,154 @@
+{
+  "conditional_expectations": [
+    {
+      "when": {
+        "POL-01_IF_THEN_PLAN": false
+      },
+      "expected_observables": [
+        "pol02_level_after == 0",
+        "pol02_transition == 'RESET_TO_AUTONOMY'",
+        "pol03_activated == false",
+        "pol01_activated == false"
+      ],
+      "applicable_support_policies": [
+        "POL-02_GRADED_SCAFFOLD"
+      ],
+      "forbidden_support_policies": [
+        "POL-03_ACCEPTED_NEXT_ACTION"
+      ]
+    }
+  ],
+  "scenario_id": "SCN-DEV-INT-06",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "cross-policy interaction user provides action, POL-02 fades, POL-01 consumes",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-04",
+    "CLM-01",
+    "CLM-03"
+  ],
+  "oracle_ref": "ORACLE-POL02.v0.1.0.json",
+  "user_message": "Thanks for the criterion. I have decided: at 15:00 I will open my notes and summarize the section on two-phase locking.",
+  "initial_state": {
+    "objective_declared": "Study Databases",
+    "turn_index": 2,
+    "max_turns_allowed": 3,
+    "session_status": "in_progress",
+    "active_policies": [
+      "POL-02_GRADED_SCAFFOLD",
+      "POL-03_ACCEPTED_NEXT_ACTION",
+      "POL-01_IF_THEN_PLAN"
+    ],
+    "scaffold_state": {
+      "scaffold_version": 2,
+      "current_level": 2,
+      "previous_level": 1,
+      "transition": "ESCALATE",
+      "transition_reason": "USER_DECLARED_PERSISTENT_STALL",
+      "user_signal": "PERSISTENT_STALL",
+      "support_move": "OFFER_DECLARED_OPTIONS",
+      "grounded_facts": [
+        "Databases",
+        "notes",
+        "textbook"
+      ],
+      "pol03_delegation_requested": false,
+      "stop_status": "ACTIVE",
+      "created_at_turn": 1,
+      "updated_at_turn": 2
+    },
+    "terminal_status_expected": "TERMINAL_CONFIRMATION_PENDING",
+    "scripted_multi_turn_trajectory": [
+      {
+        "turn": 1,
+        "input": "I cannot decide between my Databases notes and textbook.",
+        "expected_response_type": "offer_declared_options",
+        "expected_state": "SCAFFOLD_LEVEL_2"
+      },
+      {
+        "turn": 2,
+        "input": "Thanks for the criterion. I have decided: at 15:00 I will open my notes and summarize the section on two-phase locking.",
+        "expected_response_type": "formulate_plan_and_request_confirmation",
+        "expected_state": "TERMINAL_CONFIRMATION_PENDING"
+      }
+    ]
+  },
+  "available_facts": [
+    "Subject: Databases",
+    "User's autonomous action: open notes and summarize two-phase locking",
+    "Situational cue: at 15:00",
+    "State: POL-02 applies FADING, POL-03 bypassed, POL-01 formulates the plan"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-02_GRADED_SCAFFOLD",
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "forbidden_support_policies": [
+    "POL-03_ACCEPTED_NEXT_ACTION"
+  ],
+  "expected_observables": [
+    "pol02_level_after == 0",
+    "pol02_transition == 'RESET_TO_AUTONOMY'",
+    "pol03_activated == false",
+    "pol01_activated == true",
+    "pol01_plan_status == 'CONFIRMATION_PENDING'"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "POL-02 maintains active assistance despite the user's autonomous decision.",
+      "severity": "critical"
+    },
+    {
+      "action": "POL-03 proposes an alternative action despite the action already expressed by the user.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "POL-02 withdraws (fading), POL-03 does not intervene, POL-01 takes up the if-then plan.",
+        "FAIL": "Interference or failed handoff."
+      }
+    },
+    {
+      "dimension": "D2_PROPORTIONALITY",
+      "anchors": {
+        "PASS": "Immediate fading to Level 0.",
+        "FAIL": "High level maintained."
+      }
+    },
+    {
+      "dimension": "D3_TRANSITION_INTEGRITY",
+      "anchors": {
+        "PASS": "RESET_TO_AUTONOMY transition recorded.",
+        "FAIL": "Inconsistent state."
+      }
+    },
+    {
+      "dimension": "D4_GROUNDING_ON_FACTS",
+      "anchors": {
+        "PASS": "Plan and action grounded in user input (15:00, notes, two-phase locking).",
+        "FAIL": "Ungrounded elements."
+      }
+    },
+    {
+      "dimension": "D5_ROLE_SEPARATION",
+      "anchors": {
+        "PASS": "POL-03 does not propose competing actions; POL-01 only requests plan confirmation.",
+        "FAIL": "Conflict between policies."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY_FADING_STOP",
+      "anchors": {
+        "PASS": "Complete respect for the user's autonomous choice.",
+        "FAIL": "Autonomy violation."
+      }
+    }
+  ],
+  "evaluated_policy": "CROSS_POLICY_INTERACTION"
+}

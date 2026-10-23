@@ -1,0 +1,72 @@
+{
+  "scenario_id": "SCN-DEV-POL02-02",
+  "policy_id": "POL-02_GRADED_SCAFFOLD",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-24T18:05:00Z",
+  "system_response": "Per iniziare a orientarci: quale materiale o argomento hai gia sottomano davanti a te?",
+  "decision_trace": [
+    {
+      "source": "POL-02",
+      "event": "CHECK_APPLICABILITY",
+      "details": "CHECK_APPLICABILITY: User requested process orientation at session start"
+    },
+    {
+      "source": "POL-02",
+      "event": "ASSESS_SIGNAL",
+      "details": "ASSESS_SIGNAL: ORIENTATION_REQUEST"
+    },
+    {
+      "source": "POL-02",
+      "event": "SELECT_LEVEL",
+      "details": "SELECT_LEVEL: Level 1 (Orientation Question)"
+    },
+    {
+      "source": "POL-02",
+      "event": "TRANSITION",
+      "details": "TRANSITION: ESCALATE from 0 to 1"
+    },
+    {
+      "source": "POL-02",
+      "event": "APPLY_MOVE",
+      "details": "APPLY_MOVE: Exactly one focused orientation question without prescribing actions"
+    },
+    {
+      "source": "POL-02",
+      "event": "RECORD_STATE",
+      "details": "RECORD_STATE: scaffold_level=1, stop_status=ACTIVE"
+    }
+  ],
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "level_before": 0,
+  "level_after": 1,
+  "transition": "ESCALATE",
+  "transition_reason": "USER_REQUESTED_ORIENTATION",
+  "user_signal": "ORIENTATION_REQUEST",
+  "support_move": "ASK_ORIENTATION_QUESTION",
+  "orientation_question": "Quale materiale o argomento hai gia sottomano davanti a te?",
+  "declared_options_used": [],
+  "process_structure": null,
+  "grounded_facts_used": [
+    "Algoritmi"
+  ],
+  "pol03_delegation_requested": false,
+  "scaffold_state": {
+    "scaffold_version": 2,
+    "current_level": 1,
+    "previous_level": 0,
+    "transition": "ESCALATE",
+    "transition_reason": "USER_REQUESTED_ORIENTATION",
+    "user_signal": "ORIENTATION_REQUEST",
+    "support_move": "ASK_ORIENTATION_QUESTION",
+    "grounded_facts": [
+      "Algoritmi"
+    ],
+    "pol03_delegation_requested": false,
+    "stop_status": "ACTIVE",
+    "created_at_turn": 1,
+    "updated_at_turn": 2
+  },
+  "turn_status": "SUPPORT_DELIVERED",
+  "safety_violations": []
+}

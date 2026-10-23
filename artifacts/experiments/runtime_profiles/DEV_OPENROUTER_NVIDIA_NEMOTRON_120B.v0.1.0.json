@@ -1,0 +1,31 @@
+{
+  "$schema": "../schemas/runtime_profile.schema.json",
+  "profile_id": "DEV_OPENROUTER_NVIDIA_NEMOTRON_120B",
+  "version": "0.1.0",
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "provider": "openrouter",
+  "temperature": 0.0,
+  "seed": 42,
+  "max_tokens": 4096,
+  "top_p": 1.0,
+  "reasoning": {
+    "enabled": false
+  },
+  "stop_sequences": [],
+  "endpoint_family": "OPENROUTER_CHAT_COMPLETIONS",
+  "timeout_seconds": 45.0,
+  "routing": {
+    "provider_order": [
+      "DigitalOcean",
+      "DeepInfra"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true,
+    "data_collection": "deny"
+  },
+  "structured_output": {
+    "mode": "json_schema",
+    "schema_ref": "schemas/agent_turn_output.schema.json",
+    "strict": false
+  }
+}

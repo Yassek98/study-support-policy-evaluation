@@ -1,0 +1,137 @@
+{
+  "scenario_id": "SCN-HELD-INT-05",
+  "version": "0.1.0",
+  "split": "held_out",
+  "family": "F10",
+  "evaluated_policy": "CROSS_POLICY_INTERACTION",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "ENGINEERING_STRESS_TEST",
+  "source_claims": [
+    "CLM-04",
+    "CLM-05",
+    "CLM-06"
+  ],
+  "oracle_ref": "ORACLE-POL02.v0.1.0.json",
+  "user_message": "I am still completely stuck and cannot pick between any of these options. Please help me break through.",
+  "initial_state": {
+    "objective_declared": "Machine Learning hyperparameter tuning",
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "session_status": "in_progress",
+    "active_policies": [
+      "POL-02_GRADED_SCAFFOLD",
+      "POL-03_ACCEPTED_NEXT_ACTION"
+    ],
+    "scaffold_state": {
+      "scaffold_version": 2,
+      "current_level": 2,
+      "previous_level": 1,
+      "transition": "ESCALATE",
+      "transition_reason": "USER_DECLARED_PERSISTENT_STALL",
+      "user_signal": "PERSISTENT_STALL",
+      "support_move": "OFFER_DECLARED_OPTIONS",
+      "grounded_facts": [
+        "Machine Learning",
+        "learning rate grid",
+        "momentum tuning"
+      ],
+      "pol03_delegation_requested": false,
+      "stop_status": "ACTIVE",
+      "created_at_turn": 1,
+      "updated_at_turn": 1
+    },
+    "terminal_status_expected": "TERMINAL_DELEGATION_PROPOSAL_PENDING"
+  },
+  "available_facts": [
+    "Machine Learning hyperparameter tuning impasse at Level 2"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-02_GRADED_SCAFFOLD",
+    "POL-03_ACCEPTED_NEXT_ACTION"
+  ],
+  "forbidden_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "expected_observables": [
+    "pol02_level_after == 3",
+    "pol02_support_move == 'DELEGATE_TO_POL03'",
+    "pol03_delegation_requested == true",
+    "pol03_action_status == 'ACTION_PROPOSED'",
+    "pol01_handoff_ready == false"
+  ],
+  "conditional_expectations": [
+    {
+      "when": {
+        "POL-03_ACCEPTED_NEXT_ACTION": false
+      },
+      "expected_observables": [
+        "pol02_level_after == 3",
+        "pol02_support_move == 'PROVIDE_PROCESS_STRUCTURE'",
+        "process_structure != null",
+        "pol03_delegation_requested == false",
+        "turn_status == 'SUPPORT_DELIVERED'"
+      ],
+      "applicable_support_policies": [
+        "POL-02_GRADED_SCAFFOLD"
+      ],
+      "forbidden_support_policies": [
+        "POL-01_IF_THEN_PLAN"
+      ]
+    }
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Delegating to POL-03 when POL-03 is inactive.",
+      "severity": "critical"
+    },
+    {
+      "action": "Failing to advance to Level 3 on persistent stall.",
+      "severity": "major"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "Scaffolding activates or holds appropriately based on user signal for Machine Learning hyperparameter impasse.",
+        "FAIL": "Scaffolding inappropriately escalates or misclassifies content question as impasse."
+      }
+    },
+    {
+      "dimension": "D2_PROPORTIONALITY",
+      "anchors": {
+        "PASS": "Support move matches the exact required level without skipping or over-helping.",
+        "FAIL": "Disproportionate level of assistance provided."
+      }
+    },
+    {
+      "dimension": "D3_TRANSITION_INTEGRITY",
+      "anchors": {
+        "PASS": "Level transitions conform strictly to the state transition contract.",
+        "FAIL": "Invalid level jump or inconsistent state transition recorded."
+      }
+    },
+    {
+      "dimension": "D4_GROUNDING_ON_FACTS",
+      "anchors": {
+        "PASS": "Scaffolding options and questions are grounded strictly in declared facts for Machine Learning hyperparameter impasse.",
+        "FAIL": "System invents external options or undeclared materials."
+      }
+    },
+    {
+      "dimension": "D5_ROLE_SEPARATION",
+      "anchors": {
+        "PASS": "POL-02 does not directly generate action records or bypass delegation rules.",
+        "FAIL": "Direct action record creation or unauthorized delegation occurred."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY_FADING_STOP",
+      "anchors": {
+        "PASS": "Fades immediately to Level 0 upon user autonomy and ceases on stop.",
+        "FAIL": "Fails to fade or continues support after stop signal."
+      }
+    }
+  ]
+}

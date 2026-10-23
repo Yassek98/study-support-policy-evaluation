@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Response review</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#182b42;background:#f3f6fa;font-size:18px;line-height:1.55}body{margin:0}header{background:#182b42;color:white;padding:1rem 2rem}h1{font-size:1.45rem;margin:0}h2{font-size:1.1rem}main{max-width:1080px;margin:auto;padding:1.3rem;display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}.card,fieldset{background:white;border:1px solid #ccd5df;border-radius:10px;padding:1rem;margin:0 0 1rem}.bubble{white-space:pre-wrap;overflow-wrap:anywhere;padding:.8rem;border-radius:10px;background:#eef5ff}.user{background:#f1f3f5}legend{font-weight:700}.choices{display:flex;gap:.5rem;flex-wrap:wrap}.choice{flex:1;min-width:6rem;border:2px solid #7890a9;border-radius:7px;padding:.65rem;cursor:pointer}.choice:has(input:checked){border-color:#1756a8;background:#e5f0ff}textarea{width:100%;box-sizing:border-box;min-height:4rem;font:inherit}button{font:inherit;background:#1756a8;color:white;border:0;padding:.7rem 1rem;border-radius:7px;cursor:pointer}button:disabled{opacity:.5}.subtle{font-size:.9rem;color:#425975}#message{color:#9c231c;white-space:pre-wrap}[hidden]{display:none!important}:focus-visible{outline:3px solid #d28a00;outline-offset:3px}@media(max-width:800px){main{display:block;padding:1rem}}
+</style>
+<style>@media(min-width:801px){#case{position:sticky;top:1rem;align-self:start;max-height:calc(100vh - 2rem);overflow:auto;padding-right:.3rem}}#complete{grid-column:1/-1}</style>
+<header><h1>Response review</h1><p id="progress">Loading assignment…</p></header>
+<main><section id="complete" class="card" hidden><h2>Review complete</h2><p>Your reviews are saved. You can close this page.</p></section>
+<div id="case"><p class="subtle">Development review. Judge only the supplied interaction, not an imagined longer conversation.</p>
+<section class="card"><h2>Previous context — summary</h2><div id="prior" class="bubble user"></div></section>
+<section class="card"><h2>User message — verbatim</h2><div id="user" class="bubble user"></div></section>
+<section class="card"><h2>Response — verbatim</h2><div id="response" class="bubble"></div></section>
+<section class="card"><h2>Conversation status</h2><div id="status"></div></section></div>
+<form id="form"><details class="card"><summary>How to choose a score</summary><div id="instructions"></div></details>
+<p class="subtle">Choose one score for each criterion. Use “Cannot judge” only for missing presentation evidence or an item/rubric defect, with a reason.</p>
+<div id="criteria"></div><label for="comment">Optional comment</label><textarea id="comment" maxlength="4000"></textarea>
+<p id="message" role="status" aria-live="polite"></p><button id="submit">Save this review</button>
+<p class="subtle">Saved reviews cannot be overwritten. Safety assessment is a separate task.</p></form></main>
+<script>
+const TOKEN='__SESSION_TOKEN__';const $=id=>document.getElementById(id);let current=null,criteria=[],dirty=false;
+function text(id,value){$(id).textContent=value}
+async function refresh(){
+ const res=await fetch('/api/state');if(!res.ok)throw Error('Could not load the assignment. Contact the coordinator.');const data=await res.json();current=data.item;criteria=data.criteria;
+ text('progress',`${data.rater} · ${data.submitted} of ${data.assigned} saved`);$('case').hidden=!current;$('form').hidden=!current;$('complete').hidden=!!current;if(!current){dirty=false;return}
+ text('prior',current.prior_summary);text('user',current.user_message);text('response',current.response);text('status',current.conversation_status);
+ $('instructions').replaceChildren();for(const instruction of data.instructions){const p=document.createElement('p');p.textContent=instruction;$('instructions').append(p)}
+ $('criteria').replaceChildren();for(const c of criteria){
+  const field=document.createElement('fieldset'),legend=document.createElement('legend'),question=document.createElement('p'),choices=document.createElement('div');legend.textContent=c.label;question.textContent=c.question;choices.className='choices';field.append(legend,question,choices);
+  const reasonLabel=document.createElement('label'),reason=document.createElement('textarea');reason.id=`reason-${c.id}`;reasonLabel.htmlFor=reason.id;reasonLabel.textContent='Why can this criterion not be judged?';reasonLabel.hidden=true;reason.hidden=true;
+  for(const value of ['0','1','2','UNJUDGEABLE']){const label=document.createElement('label'),input=document.createElement('input');label.className='choice';input.type='radio';input.name=c.id;input.value=value;input.required=true;
+   label.append(input,document.createTextNode(value==='UNJUDGEABLE'?'Cannot judge':`${value} · ${c.anchors[value]}`));choices.append(label);
+   input.addEventListener('change',()=>{const needsReason=value==='UNJUDGEABLE';reasonLabel.hidden=!needsReason;reason.hidden=!needsReason;reason.required=needsReason;if(!needsReason)reason.value=''})}
+  field.append(reasonLabel,reason);$('criteria').append(field)
+ }
+ $('comment').value='';dirty=false;
+}
+$('form').addEventListener('input',()=>dirty=true);window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
+$('form').addEventListener('submit',async event=>{event.preventDefault();$('submit').disabled=true;text('message','');try{
+ const ratings={};for(const c of criteria){const selected=document.querySelector(`input[name="${c.id}"]:checked`);if(!selected)throw Error('Choose all five judgments.');const score=selected.value==='UNJUDGEABLE'?null:Number(selected.value);const evidence=score===null?$(`reason-${c.id}`).value:'';if(score===null&&!evidence.trim())throw Error('Explain each Cannot judge selection.');ratings[c.id]={score,evidence}}
+ const res=await fetch('/api/ratings',{method:'POST',headers:{'Content-Type':'application/json','X-Session-Token':TOKEN},body:JSON.stringify({blinded_item_id:current.blinded_item_id,ratings,comment:$('comment').value})});const answer=await res.json();if(!res.ok)throw Error(answer.error);dirty=false;await refresh();scrollTo(0,0)
+ }catch(error){text('message',error.message)}finally{$('submit').disabled=false}});
+refresh().catch(error=>text('message',error.message));
+</script></html>

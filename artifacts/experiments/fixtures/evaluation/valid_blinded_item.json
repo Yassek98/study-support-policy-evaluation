@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.1.0",
+  "blind_batch_id": "BATCH-DEV-001",
+  "blinded_item_id": "BITEM-aaaaaaaaaaaaaaaa",
+  "turn_context": {
+    "user_message": "Voglio iniziare a studiare domani mattina.",
+    "prior_user_declared_facts": [
+      "Analisi 2",
+      "capitolo serie",
+      "tre esercizi"
+    ],
+    "normalized_state_before": {
+      "session_control": "ACTIVE",
+      "plan_commitment": "NONE",
+      "action_commitment": "NONE",
+      "clarification_status": "NONE",
+      "support_permission": "ALLOWED"
+    }
+  },
+  "system_response": "Perfetto, domani mattina apri Analisi 2 e fai i primi tre esercizi sulle serie.",
+  "normalized_state_after": {
+    "session_control": "ACTIVE",
+    "plan_commitment": "CONFIRMED",
+    "action_commitment": "NONE",
+    "clarification_status": "NONE",
+    "support_permission": "ALLOWED"
+  },
+  "item_content_sha256": "515b92fea15f59d4cd637351ad1fb1f3227e786699ee62d11e3ccab86c13734f"
+}

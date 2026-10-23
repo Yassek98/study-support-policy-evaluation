@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/benchmark_anchors.schema.json",
+  "title": "Level B Quality Benchmark Calibration Anchors",
+  "description": "Schema per gli anchor di calibrazione e test di progetto del benchmark Level B.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "benchmark_id",
+    "version",
+    "title",
+    "description",
+    "evaluation_mode",
+    "families"
+  ],
+  "properties": {
+    "benchmark_id": {
+      "type": "string",
+      "pattern": "^BENCH-[A-Z0-9_-]+$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "evaluation_mode": {
+      "type": "string",
+      "const": "STATIC_DESIGN_CHECK_NOT_INDEPENDENT_CALIBRATION"
+    },
+    "families": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "family_id",
+          "name",
+          "scenario_context",
+          "anchors"
+        ],
+        "properties": {
+          "family_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "scenario_context": {
+            "type": "string"
+          },
+          "anchors": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "anchor_id",
+                "configuration_label",
+                "blinded_item",
+                "scores",
+                "safety_violations",
+                "expected_terminal_state",
+                "level_b_outcome",
+                "level_a_compliance_check",
+                "rationale"
+              ],
+              "properties": {
+                "anchor_id": {
+                  "type": "string"
+                },
+                "configuration_label": {
+                  "type": "string"
+                },
+                "blinded_item": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "scenario_context",
+                    "system_response"
+                  ],
+                  "description": "The payload presented to the rater. Must NOT contain terminal_state, configuration_id, policy names, oracle references, or expected scores.",
+                  "properties": {
+                    "scenario_context": {
+                      "type": "string"
+                    },
+                    "system_response": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "scores": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "Q1_REQUEST_ALIGNMENT",
+                    "Q2_GROUNDING_ON_FACTS",
+                    "Q3_NEXT_STATE_USABILITY",
+                    "Q4_PROPORTIONALITY",
+                    "Q5_STATE_DIALOGUE_CONSISTENCY"
+                  ],
+                  "properties": {
+                    "Q1_REQUEST_ALIGNMENT": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 2
+                    },
+                    "Q2_GROUNDING_ON_FACTS": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 2
+                    },
+                    "Q3_NEXT_STATE_USABILITY": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 2
+                    },
+                    "Q4_PROPORTIONALITY": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 2
+                    },
+                    "Q5_STATE_DIALOGUE_CONSISTENCY": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 2
+                    }
+                  }
+                },
+                "safety_violations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "expected_terminal_state": {
+                  "type": "string",
+                  "enum": [
+                    "APPROPRIATE_ADVANCE",
+                    "APPROPRIATE_CLARIFICATION",
+                    "APPROPRIATE_NON_ACTIVATION",
+                    "STOP_RESPECTED",
+                    "UNSUPPORTED_OR_UNUSABLE",
+                    "SEVERE_VIOLATION"
+                  ],
+                  "description": "Author-designed expected terminal state for static reference checks. It is never included in a blinded rater item."
+                },
+                "level_b_outcome": {
+                  "type": "string",
+                  "enum": [
+                    "PASS_LEVEL_B",
+                    "FAIL_LEVEL_B"
+                  ]
+                },
+                "level_a_compliance_check": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "evaluated_policy",
+                    "is_level_a_conformant",
+                    "compliance_notes"
+                  ],
+                  "properties": {
+                    "evaluated_policy": {
+                      "type": "string"
+                    },
+                    "is_level_a_conformant": {
+                      "type": "boolean"
+                    },
+                    "compliance_notes": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rationale": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

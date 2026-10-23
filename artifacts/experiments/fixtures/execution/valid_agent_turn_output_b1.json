@@ -1,0 +1,262 @@
+{
+  "system_response": "Ottimo piano. Ricapitolando: quando domani dopo pranzo ti siedi alla scrivania, allora aprirai il capitolo sulle serie.",
+  "decision_trace": [
+    {
+      "source": "POL-04",
+      "event": "SAFETY_CHECK",
+      "details": "nessun segnale di revoca o stop."
+    },
+    {
+      "source": "POL-05",
+      "event": "BOUNDARY_CHECK",
+      "details": "richiesta accademica in-scope (Reti di Calcolatori)."
+    },
+    {
+      "source": "POL-03",
+      "event": "ACTION_HANDOFF",
+      "details": "azione ACT-RET-001 accettata con evidenza esplicita, handoff a POL-01 pronto."
+    },
+    {
+      "source": "POL-01",
+      "event": "PLAN_FORMULATION",
+      "details": "piano if-then formulato con cue fornito dall'utente e azione accettata da POL-03, richiesta conferma."
+    },
+    {
+      "source": "POL-02",
+      "event": "NON_ACTIVATION",
+      "details": "non attivazione per presenza di autonomia espressa di piano (USER_ALREADY_AUTONOMOUS_PLAN)."
+    }
+  ],
+  "safety_state": {
+    "safety_version": 2,
+    "stop_status": "ACTIVE",
+    "autonomy_status": "REVOKED",
+    "boundary_status": "IN_SCOPE",
+    "last_user_signal": "REVOCATION",
+    "support_allowed": false,
+    "resume_authorized": false,
+    "revoked_target": "PLAN",
+    "created_at_turn": 1,
+    "updated_at_turn": 2
+  },
+  "policy_outputs": {
+    "safety_envelope": {
+      "scenario_id": "SCN-DEV-POL04-05",
+      "policy_id": "POL-04_AUTONOMY_GATE",
+      "policy_version": "0.1.0",
+      "timestamp": "2026-08-25T16:00:00Z",
+      "system_response": "Ho cancellato il piano concordato in precedenza come richiesto. Non proseguiremo su quelle attivita.",
+      "decision_trace": [
+        {
+          "source": "POL-04",
+          "event": "ACCEPT_REVOCATION",
+          "details": "Revoca esplicita dell'utente ricevuta: invalidazione del piano e disattivazione del commitment."
+        }
+      ],
+      "user_signal": "REVOCATION",
+      "decision": "ACCEPT_REVOCATION",
+      "safety_state_before": {
+        "safety_version": 1,
+        "stop_status": "ACTIVE",
+        "autonomy_status": "AVAILABLE",
+        "boundary_status": "IN_SCOPE",
+        "last_user_signal": "NONE",
+        "support_allowed": true,
+        "resume_authorized": false,
+        "revoked_target": null,
+        "created_at_turn": 1,
+        "updated_at_turn": 1
+      },
+      "safety_state_after": {
+        "safety_version": 2,
+        "stop_status": "ACTIVE",
+        "autonomy_status": "REVOKED",
+        "boundary_status": "IN_SCOPE",
+        "last_user_signal": "REVOCATION",
+        "support_allowed": false,
+        "resume_authorized": false,
+        "revoked_target": "PLAN",
+        "created_at_turn": 1,
+        "updated_at_turn": 2
+      },
+      "support_action_allowed": false,
+      "proposed_support_action": null,
+      "boundary_response": null,
+      "revoked_target": "PLAN",
+      "critical_violation": false,
+      "violation_codes": []
+    },
+    "pol01": {
+      "scenario_id": "SCN-DEV-POL01-01",
+      "policy_id": "POL-01_IF_THEN_PLAN",
+      "policy_version": "0.1.0",
+      "timestamp": "2026-08-16T18:00:00Z",
+      "policy_activated": true,
+      "non_activation_reason": null,
+      "cue": {
+        "identified": "Domani dopo pranzo, quando mi siedo alla scrivania",
+        "source": "user_provided",
+        "specificity": "specific"
+      },
+      "action": {
+        "identified": "Aprire il libro di Analisi 2 al capitolo sulle serie e fare i primi tre esercizi",
+        "source": "user_provided",
+        "observability": "observable"
+      },
+      "missing_elements": [],
+      "clarification_requested": false,
+      "plan": {
+        "formulated": "Quando domani dopo pranzo ti siedi alla scrivania, allora aprirai il libro di Analisi 2 al capitolo sulle serie e farai i primi tre esercizi.",
+        "confirmation_status": "pending",
+        "user_response": null
+      },
+      "system_response": "Ottimo piano. Ricapitolando: quando domani dopo pranzo ti siedi alla scrivania, allora aprirai il libro di Analisi 2 al capitolo sulle serie e farai i primi tre esercizi. Ti va bene formulato cosi o preferisci modificare qualcosa?",
+      "violations": [],
+      "decision_trace": [
+        {
+          "source": "POL-01",
+          "event": "STEP_7_REACHED",
+          "details": "Piano formulato con cue e azione forniti dall'utente; richiesta conferma esplicita."
+        }
+      ]
+    },
+    "pol02": {
+      "scenario_id": "SCN-DEV-POL02-02",
+      "policy_id": "POL-02_GRADED_SCAFFOLD",
+      "policy_version": "0.1.0",
+      "timestamp": "2026-08-24T18:05:00Z",
+      "system_response": "Per iniziare a orientarci: quale materiale o argomento hai gia sottomano davanti a te?",
+      "decision_trace": [
+        {
+          "source": "POL-02",
+          "event": "CHECK_APPLICABILITY",
+          "details": "CHECK_APPLICABILITY: User requested process orientation at session start"
+        },
+        {
+          "source": "POL-02",
+          "event": "ASSESS_SIGNAL",
+          "details": "ASSESS_SIGNAL: ORIENTATION_REQUEST"
+        },
+        {
+          "source": "POL-02",
+          "event": "SELECT_LEVEL",
+          "details": "SELECT_LEVEL: Level 1 (Orientation Question)"
+        },
+        {
+          "source": "POL-02",
+          "event": "TRANSITION",
+          "details": "TRANSITION: ESCALATE from 0 to 1"
+        },
+        {
+          "source": "POL-02",
+          "event": "APPLY_MOVE",
+          "details": "APPLY_MOVE: Exactly one focused orientation question without prescribing actions"
+        },
+        {
+          "source": "POL-02",
+          "event": "RECORD_STATE",
+          "details": "RECORD_STATE: scaffold_level=1, stop_status=ACTIVE"
+        }
+      ],
+      "policy_activated": true,
+      "non_activation_reason": null,
+      "level_before": 0,
+      "level_after": 1,
+      "transition": "ESCALATE",
+      "transition_reason": "USER_REQUESTED_ORIENTATION",
+      "user_signal": "ORIENTATION_REQUEST",
+      "support_move": "ASK_ORIENTATION_QUESTION",
+      "orientation_question": "Quale materiale o argomento hai gia sottomano davanti a te?",
+      "declared_options_used": [],
+      "process_structure": null,
+      "grounded_facts_used": [
+        "Algoritmi"
+      ],
+      "pol03_delegation_requested": false,
+      "scaffold_state": {
+        "scaffold_version": 2,
+        "current_level": 1,
+        "previous_level": 0,
+        "transition": "ESCALATE",
+        "transition_reason": "USER_REQUESTED_ORIENTATION",
+        "user_signal": "ORIENTATION_REQUEST",
+        "support_move": "ASK_ORIENTATION_QUESTION",
+        "grounded_facts": [
+          "Algoritmi"
+        ],
+        "pol03_delegation_requested": false,
+        "stop_status": "ACTIVE",
+        "created_at_turn": 1,
+        "updated_at_turn": 2
+      },
+      "turn_status": "SUPPORT_DELIVERED",
+      "safety_violations": []
+    },
+    "pol03": {
+      "scenario_id": "SCN-DEV-POL03-05",
+      "policy_id": "POL-03_ACCEPTED_NEXT_ACTION",
+      "policy_version": "0.1.0",
+      "timestamp": "2026-08-17T20:05:00Z",
+      "system_response": "Ottimo, azione registrata: apriremo le slide di Sistemi Operativi sui semafori. Quando sei pronto, possiamo definire un momento preciso per iniziare.",
+      "decision_trace": [
+        {
+          "source": "POL-03",
+          "event": "CHECK_APPLICABILITY",
+          "details": "CHECK_APPLICABILITY: Pending proposal ACT-SO-001 found at version 1"
+        },
+        {
+          "source": "POL-03",
+          "event": "DETECT_USER_EVENT",
+          "details": "DETECT_USER_EVENT: Explicit user acceptance confirmed in message"
+        },
+        {
+          "source": "POL-03",
+          "event": "UPDATE_STATE",
+          "details": "UPDATE_STATE: ACT-SO-001 transitioned to ACTION_ACCEPTED with accepted_version=1"
+        },
+        {
+          "source": "POL-03",
+          "event": "RECORD_EVIDENCE",
+          "details": "RECORD_EVIDENCE: Exact user utterance recorded"
+        },
+        {
+          "source": "POL-03",
+          "event": "HANDOFF_GATE",
+          "details": "HANDOFF_GATE: POL-01 handoff is now READY"
+        }
+      ],
+      "policy_activated": true,
+      "non_activation_reason": null,
+      "clarification_requested": false,
+      "clarification_prompt": null,
+      "proposed_action": "Aprire il file delle slide di Sistemi Operativi alla sezione sui semafori e leggere la definizione iniziale.",
+      "action_count": 1,
+      "action_observability": "observable",
+      "grounded_facts_used": [
+        "Sistemi Operativi",
+        "slide",
+        "sezione semafori"
+      ],
+      "action_record": {
+        "action_id": "ACT-SO-001",
+        "action_version": 1,
+        "action_text": "Aprire il file delle slide di Sistemi Operativi alla sezione sui semafori e leggere la definizione iniziale.",
+        "action_source": "SYSTEM_PROPOSED_FROM_DECLARED_FACTS",
+        "grounded_facts": [
+          "Sistemi Operativi",
+          "slide",
+          "sezione semafori"
+        ],
+        "action_status": "ACTION_ACCEPTED",
+        "accepted_version": 1,
+        "explicit_user_evidence": "Si, perfetto, facciamo cosi, apro le slide dei semafori.",
+        "created_at_turn": 1,
+        "updated_at_turn": 2
+      },
+      "pol01_handoff_ready": true,
+      "user_evidence_recorded": "Si, perfetto, facciamo cosi, apro le slide dei semafori.",
+      "turn_status": "ACTION_ACCEPTED",
+      "safety_violations": []
+    }
+  }
+}

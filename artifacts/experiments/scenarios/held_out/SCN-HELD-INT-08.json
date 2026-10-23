@@ -1,0 +1,115 @@
+{
+  "scenario_id": "SCN-HELD-INT-08",
+  "version": "0.1.0",
+  "split": "held_out",
+  "family": "F10",
+  "evaluated_policy": "CROSS_POLICY_INTERACTION",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "ENGINEERING_STRESS_TEST",
+  "source_claims": [
+    "CLM-04",
+    "CLM-05"
+  ],
+  "oracle_ref": "ORACLE-POL02.v0.1.0.json",
+  "user_message": "I don't know whether to begin with R-type instruction formats or I-type decoding exercises.",
+  "initial_state": {
+    "objective_declared": "Computer Architecture instruction decoding",
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "session_status": "in_progress",
+    "active_policies": [
+      "POL-02_GRADED_SCAFFOLD",
+      "POL-03_ACCEPTED_NEXT_ACTION"
+    ],
+    "scaffold_state": {
+      "scaffold_version": 1,
+      "current_level": 1,
+      "previous_level": 0,
+      "transition": "ESCALATE",
+      "transition_reason": "USER_REQUESTED_ORIENTATION",
+      "user_signal": "ORIENTATION_REQUEST",
+      "support_move": "ASK_ORIENTATION_QUESTION",
+      "grounded_facts": [
+        "Computer Architecture",
+        "R-type instructions",
+        "I-type decoding"
+      ],
+      "pol03_delegation_requested": false,
+      "stop_status": "ACTIVE",
+      "created_at_turn": 1,
+      "updated_at_turn": 1
+    },
+    "terminal_status_expected": "TERMINAL_OPTIONS_PENDING"
+  },
+  "available_facts": [
+    "Architecture exercises: R-type vs I-type instruction decoding"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-02_GRADED_SCAFFOLD",
+    "POL-03_ACCEPTED_NEXT_ACTION"
+  ],
+  "forbidden_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "expected_observables": [
+    "pol02_level_after == 2",
+    "pol02_support_move == 'OFFER_DECLARED_OPTIONS'",
+    "pol03_delegation_requested == false",
+    "turn_status == 'SUPPORT_DELIVERED'"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Triggering POL-03 action generation prior to Level 3.",
+      "severity": "critical"
+    },
+    {
+      "action": "Imposing one instruction format without offering declared options.",
+      "severity": "major"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "Scaffolding activates or holds appropriately based on user signal for Architecture decoding no premature delegation.",
+        "FAIL": "Scaffolding inappropriately escalates or misclassifies content question as impasse."
+      }
+    },
+    {
+      "dimension": "D2_PROPORTIONALITY",
+      "anchors": {
+        "PASS": "Support move matches the exact required level without skipping or over-helping.",
+        "FAIL": "Disproportionate level of assistance provided."
+      }
+    },
+    {
+      "dimension": "D3_TRANSITION_INTEGRITY",
+      "anchors": {
+        "PASS": "Level transitions conform strictly to the state transition contract.",
+        "FAIL": "Invalid level jump or inconsistent state transition recorded."
+      }
+    },
+    {
+      "dimension": "D4_GROUNDING_ON_FACTS",
+      "anchors": {
+        "PASS": "Scaffolding options and questions are grounded strictly in declared facts for Architecture decoding no premature delegation.",
+        "FAIL": "System invents external options or undeclared materials."
+      }
+    },
+    {
+      "dimension": "D5_ROLE_SEPARATION",
+      "anchors": {
+        "PASS": "POL-02 does not directly generate action records or bypass delegation rules.",
+        "FAIL": "Direct action record creation or unauthorized delegation occurred."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY_FADING_STOP",
+      "anchors": {
+        "PASS": "Fades immediately to Level 0 upon user autonomy and ceases on stop.",
+        "FAIL": "Fails to fade or continues support after stop signal."
+      }
+    }
+  ]
+}

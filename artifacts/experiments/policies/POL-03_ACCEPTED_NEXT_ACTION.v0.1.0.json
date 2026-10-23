@@ -1,0 +1,112 @@
+{
+  "policy_id": "POL-03_ACCEPTED_NEXT_ACTION",
+  "version": "0.1.0",
+  "policy_type": "SUPPORT_POLICY",
+  "status": "CANDIDATE",
+  "evidence_claims": [
+    "CLM-01",
+    "CLM-02",
+    "CLM-04",
+    "CLM-06",
+    "CLM-08"
+  ],
+  "claim_boundary": {
+    "permitted": [
+      "Proporre esattamente una singola prossima micro-azione concreta all'avvio dello studio.",
+      "Richiedere conferma esplicita prima di considerare l'azione accettata.",
+      "Effettuare l'handoff a POL-01 solo ed esclusivamente dopo l'accettazione dell'utente."
+    ],
+    "prohibited": [
+      "Formulare piani if-then o generare cue situazionali (responsabilita di POL-01).",
+      "Proporre liste di azioni multiple o to-do list non richieste.",
+      "Considerare un'azione accettata senza evidenza testuale inequivocabile."
+    ],
+    "counterevidence": [
+      "The cited evidence motivates a bounded candidate action; it does not establish that one action is superior to a list in this system.",
+      "Explicit acceptance is a design constraint preserving user control, not evidence that unaccepted actions are usually abandoned."
+    ]
+  },
+  "trigger": {
+    "description": "L'utente ha un obiettivo o contesto di studio ma non ha ancora identificato una singola micro-azione concreta iniziale.",
+    "activation_conditions": [
+      "Richiesta di aiuto per identificare il primo passo.",
+      "Delega da POL-02 a Livello 3 con POL-03 attiva.",
+      "Obiettivo di studio dichiarato privo di micro-azione concreta."
+    ],
+    "non_activation_conditions": [
+      "L'utente ha gia fornito autonomamente la prossima azione.",
+      "Richieste didattiche puramente disciplinari.",
+      "Segnale di stop o rifiuto dell'assistenza."
+    ]
+  },
+  "preconditions": [
+    "La sessione non e in stato di STOP.",
+    "L'utente non ha gia un'azione accettata nella sessione corrente."
+  ],
+  "required_inputs": [
+    "user_message: messaggio testuale dell'utente.",
+    "action_record_before: stato dell'azione precedente.",
+    "grounded_facts: fatti e materiali dichiarati dall'utente."
+  ],
+  "decision_rule": "1. Verificare se l'utente ha fornito un'azione autonoma: se si, non attivarsi (not_applicable / autonomous_action_already_provided) e lasciare l'azione al sistema comune o a POL-01. 2. Se l'azione manca ma i fatti sono sufficienti, formulare esattamente una singola proposta concreta (ACTION_PROPOSED). 3. Se i fatti sono insufficienti, richiedere chiarimento mirato (clarification_requested=true). 4. A fronte di conferma dell'utente, transire ad ACTION_ACCEPTED, impostare pol01_handoff_ready=true e procedere all'handoff a POL-01. 5. Se l'utente modifica l'azione, incrementare action_version e mantenere lo stato ACTION_PROPOSED fino a nuova conferma.",
+  "output_schema_ref": "schemas/pol03_output.schema.json",
+  "forbidden_actions": [
+    "Formulare piani if-then o generare cue situazionali (severity: critical).",
+    "Proporre piu di un'azione contemporaneamente (severity: critical).",
+    "Effettuare l'handoff a POL-01 con stato non ACTION_ACCEPTED (severity: critical).",
+    "Inventare fatti, materiali o capitoli non menzionati (severity: critical)."
+  ],
+  "stop_or_escalation_conditions": [
+    "Segnale di stop: arresto immediato e transizione a STOPPED.",
+    "Rifiuto dell'azione: rispetto del rifiuto e arresto della proposta."
+  ],
+  "observables": [
+    "policy_activated: boolean",
+    "turn_status: string",
+    "proposed_action: string | null",
+    "action_record: object",
+    "pol01_handoff_ready: boolean",
+    "critical_violations: array of strings"
+  ],
+  "oracle": {
+    "oracle_id": "ORACLE-POL03",
+    "evaluation_level": "LEVEL_A",
+    "dimensions": [
+      {
+        "id": "D1_APPLICABILITY",
+        "name": "Corretta Attivazione / Non-Attivazione",
+        "severity": "CRITICAL"
+      },
+      {
+        "id": "D2_SINGLE_ACTION_CARDINALITY",
+        "name": "Cardinalita a Singola Azione",
+        "severity": "CRITICAL"
+      },
+      {
+        "id": "D3_ACTION_CONCRETENESS",
+        "name": "Concretezza dell'Azione",
+        "severity": "MAJOR"
+      },
+      {
+        "id": "D4_EPISTEMIC_GROUNDING",
+        "name": "Ancoraggio Epistemico e Assenza di Invenzione",
+        "severity": "CRITICAL"
+      },
+      {
+        "id": "D5_ACCEPTANCE_INTEGRITY",
+        "name": "Integrita dell'Accettazione Esplicita",
+        "severity": "CRITICAL"
+      },
+      {
+        "id": "D6_AUTONOMY",
+        "name": "Rispetto di Autonomia, Modifica e Stop",
+        "severity": "CRITICAL"
+      }
+    ]
+  },
+  "metrics": [
+    "M1_CONFORMITY_RATE_APPLICABLE",
+    "M2_ACTIVATION_ACCURACY_ALL",
+    "M3_CRITICAL_VIOLATION_RATE"
+  ]
+}

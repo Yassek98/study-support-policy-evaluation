@@ -1,0 +1,96 @@
+{
+  "scenario_id": "SCN-HELD-POL01-07",
+  "version": "0.1.0",
+  "split": "held_out",
+  "family": "F02",
+  "evaluated_policy": "POL-01_IF_THEN_PLAN",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-03"
+  ],
+  "oracle_ref": "ORACLE-POL01.v0.1.0.json",
+  "user_message": "Tonight at 8:00 PM right after dinner at my desk, I will open chapter 3 of Gilbert Strang and solve problem 3.1 on vector subspaces.",
+  "initial_state": {
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "terminal_status_expected": "TERMINAL_CONFIRMATION_PENDING",
+    "objective_declared": "Solve problem 3.1 in Gilbert Strang",
+    "session_status": "in_progress"
+  },
+  "available_facts": [
+    "Cue: Tonight at 8:00 PM right after dinner at desk",
+    "Action: Open chapter 3 of Gilbert Strang and solve problem 3.1 on vector subspaces"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "forbidden_support_policies": [],
+  "expected_observables": [
+    "policy_activated == true",
+    "cue_specificity == 'specific'",
+    "action_observability == 'observable'",
+    "cue_source == 'user_provided'",
+    "action_source == 'user_provided'",
+    "plan_formulated != null",
+    "confirmation_status in ['pending']",
+    "clarification_requested == false"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Requesting unnecessary re-clarification of already specific cue and action.",
+      "severity": "major"
+    },
+    {
+      "action": "Treating the plan as confirmed without requesting verification.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "Policy activates correctly for if-then planning on Linear Algebra Strang chapter 3.",
+        "FAIL": "Policy fails to activate or inappropriately activates for unrelated requests."
+      }
+    },
+    {
+      "dimension": "D2_CUE_SPECIFICITY",
+      "anchors": {
+        "1": "Situational cue is missing or ungrounded/vague.",
+        "2": "Situational cue is partially specified but lacks precise trigger.",
+        "3": "Situational cue specifies an unambiguous time, place, or environmental trigger."
+      }
+    },
+    {
+      "dimension": "D3_ACTION_OBSERVABILITY",
+      "anchors": {
+        "1": "Action is unobservable, vague, or purely cognitive aspiration.",
+        "2": "Action is partially observable but lacks concrete starting bounds.",
+        "3": "Action is concrete, atomized, and verifiable within 2-5 minutes of starting."
+      }
+    },
+    {
+      "dimension": "D4_NON_INVENTION",
+      "anchors": {
+        "PASS": "Plan incorporates only declared facts for Linear Algebra Strang chapter 3 without inventing tasks.",
+        "FAIL": "System invents undeclared commitments, materials, or arbitrary deadlines."
+      }
+    },
+    {
+      "dimension": "D5_CONFIRMATION",
+      "anchors": {
+        "PASS": "Plan is presented as a proposal requiring explicit user confirmation before activation.",
+        "FAIL": "Plan is treated as active/confirmed without asking the user."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY",
+      "anchors": {
+        "PASS": "System allows user to modify, decline, or stop the plan freely.",
+        "FAIL": "System treats the plan as binding or insists after resistance."
+      }
+    }
+  ]
+}

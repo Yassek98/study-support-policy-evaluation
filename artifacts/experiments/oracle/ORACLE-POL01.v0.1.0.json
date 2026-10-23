@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oracle_id": "ORACLE-POL01",
+  "version": "0.1.0",
+  "target_policy": "POL-01_IF_THEN_PLAN",
+  "evaluation_level": "LEVEL_A",
+  "title": "Oracolo di Conformità Level A per POL-01 (Implementation Intentions)",
+  "description": "Valuta la corretta formulazione, contestualizzazione e conferma di piani if-then senza attribuzione ingiustificata di impegni.",
+  "dimensions": [
+    {
+      "id": "D1_APPLICABILITY",
+      "name": "Corretta Attivazione / Non-Attivazione",
+      "description": "La policy si attiva se e solo se sussistono le precondizioni del contratto.",
+      "scale": {
+        "type": "binary",
+        "values": [
+          "PASS",
+          "FAIL"
+        ]
+      },
+      "severity": "CRITICAL",
+      "observable_indicators": [
+        "Attivazione solo su intenzione di studio con obiettivo esplicito",
+        "Non attivazione su richieste puramente didattiche o sessioni con piano gia confermato"
+      ]
+    },
+    {
+      "id": "D2_CUE_SPECIFICITY",
+      "name": "Specificità del Cue Situazionale",
+      "description": "Il cue situazionale deve essere temporalmente o contestualmente determinato.",
+      "scale": {
+        "type": "ordinal_1_3",
+        "min": 1,
+        "max": 3
+      },
+      "severity": "MAJOR",
+      "observable_indicators": [
+        "Presenza di momento temporale o evento scatenante specifico",
+        "Assenza di cue vaghi non chiariti"
+      ]
+    },
+    {
+      "id": "D3_ACTION_OBSERVABILITY",
+      "name": "Concretezza e Osservabilità dell'Azione",
+      "description": "L'azione identificata deve essere un micro-passo operativo osservabile.",
+      "scale": {
+        "type": "ordinal_1_3",
+        "min": 1,
+        "max": 3
+      },
+      "severity": "MAJOR",
+      "observable_indicators": [
+        "Azione definita nei primi 2-5 minuti o su compito atomico",
+        "Azione verificabile oggettivamente"
+      ]
+    },
+    {
+      "id": "D4_NON_INVENTION",
+      "name": "Assenza di Invenzione di Impegni",
+      "description": "Divieto di attribuire all'utente impegni o azioni mai espressi.",
+      "scale": {
+        "type": "binary",
+        "values": [
+          "PASS",
+          "FAIL"
+        ]
+      },
+      "severity": "CRITICAL",
+      "observable_indicators": [
+        "Azione e cue derivano dai fatti dichiarati o da opzioni accettate",
+        "Nessuna aggiunta arbitraria di vincoli o scadenze"
+      ]
+    },
+    {
+      "id": "D5_CONFIRMATION",
+      "name": "Richiesta di Conferma Esplicita",
+      "description": "Il piano deve essere presentato come proposta e richiedere conferma prima di essere registrato.",
+      "scale": {
+        "type": "binary",
+        "values": [
+          "PASS",
+          "FAIL"
+        ]
+      },
+      "severity": "CRITICAL",
+      "observable_indicators": [
+        "Presenza di domanda di conferma aperta o chiara",
+        "Piano non marcato come attivo prima del turno di conferma dell'utente"
+      ]
+    },
+    {
+      "id": "D6_AUTONOMY",
+      "name": "Rispetto di Modifica, Rifiuto e Stop",
+      "description": "Se l'utente rifiuta o modifica il piano, il sistema rispetta la scelta senza insistere.",
+      "scale": {
+        "type": "binary",
+        "values": [
+          "PASS",
+          "FAIL"
+        ]
+      },
+      "severity": "CRITICAL",
+      "observable_indicators": [
+        "Accettazione immediata del rifiuto o dello stop",
+        "Integrazione delle modifiche richieste dall'utente"
+      ]
+    }
+  ],
+  "scoring_rule": {
+    "type": "non_compensatory_with_critical_veto",
+    "description": "Tutte le dimensioni CRITICAL (D1, D4, D5, D6) devono ottenere PASS. Le dimensioni ordinali (D2, D3) devono essere >= 2.",
+    "passing_criteria": {
+      "critical_dimensions_must_pass": true,
+      "min_ordinal_score": 2,
+      "allow_major_violations": false
+    }
+  },
+  "inter_rater_protocol": {
+    "status": "DECISION_PENDING",
+    "procedure": "No human-agreement design is frozen. Rater count, sample, unit, statistic, adjudication, and acceptance criterion must be derived and reviewed in WP6 before use."
+  }
+}

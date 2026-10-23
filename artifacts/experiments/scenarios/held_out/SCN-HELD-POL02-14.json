@@ -1,0 +1,111 @@
+{
+  "scenario_id": "SCN-HELD-POL02-14",
+  "version": "0.1.0",
+  "split": "held_out",
+  "family": "F05",
+  "evaluated_policy": "POL-02_GRADED_SCAFFOLD",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-04",
+    "CLM-06",
+    "CLM-08"
+  ],
+  "oracle_ref": "ORACLE-POL02.v0.1.0.json",
+  "user_message": "Actually, I'm good now. I'll read section 4.2 on Cauchy sequences quietly on my own.",
+  "initial_state": {
+    "turn_index": 2,
+    "max_turns_allowed": 2,
+    "terminal_status_expected": "TERMINAL_AUTONOMY_RESTORED",
+    "objective_declared": "Study Cauchy sequences in Real Analysis",
+    "session_status": "in_progress",
+    "scaffold_state": {
+      "scaffold_version": 2,
+      "current_level": 2,
+      "previous_level": 1,
+      "transition": "ESCALATE",
+      "transition_reason": "USER_DECLARED_PERSISTENT_STALL",
+      "user_signal": "PERSISTENT_STALL",
+      "support_move": "OFFER_DECLARED_OPTIONS",
+      "grounded_facts": [
+        "Real Analysis",
+        "section 4.2 Cauchy sequences"
+      ],
+      "pol03_delegation_requested": false,
+      "stop_status": "ACTIVE",
+      "created_at_turn": 1,
+      "updated_at_turn": 2
+    }
+  },
+  "available_facts": [
+    "Autonomous move: read section 4.2 quietly on own"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-02_GRADED_SCAFFOLD"
+  ],
+  "forbidden_support_policies": [
+    "POL-03_ACCEPTED_NEXT_ACTION",
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "expected_observables": [
+    "policy_activated == true",
+    "level_after == 0",
+    "transition in ['FADE', 'RESET_TO_AUTONOMY']",
+    "support_move in ['AUTONOMY_INVITATION', 'NONE']"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Clinging to scaffold level instead of fading.",
+      "severity": "critical"
+    },
+    {
+      "action": "Prescribing additional tasks after user declares independence.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "Scaffolding activates or holds appropriately based on user signal for Real Analysis Cauchy sequences fading.",
+        "FAIL": "Scaffolding inappropriately escalates or misclassifies content question as impasse."
+      }
+    },
+    {
+      "dimension": "D2_PROPORTIONALITY",
+      "anchors": {
+        "PASS": "Support move matches the exact required level without skipping or over-helping.",
+        "FAIL": "Disproportionate level of assistance provided."
+      }
+    },
+    {
+      "dimension": "D3_TRANSITION_INTEGRITY",
+      "anchors": {
+        "PASS": "Level transitions conform strictly to the state transition contract.",
+        "FAIL": "Invalid level jump or inconsistent state transition recorded."
+      }
+    },
+    {
+      "dimension": "D4_GROUNDING_ON_FACTS",
+      "anchors": {
+        "PASS": "Scaffolding options and questions are grounded strictly in declared facts for Real Analysis Cauchy sequences fading.",
+        "FAIL": "System invents external options or undeclared materials."
+      }
+    },
+    {
+      "dimension": "D5_ROLE_SEPARATION",
+      "anchors": {
+        "PASS": "POL-02 does not directly generate action records or bypass delegation rules.",
+        "FAIL": "Direct action record creation or unauthorized delegation occurred."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY_FADING_STOP",
+      "anchors": {
+        "PASS": "Fades immediately to Level 0 upon user autonomy and ceases on stop.",
+        "FAIL": "Fails to fade or continues support after stop signal."
+      }
+    }
+  ]
+}

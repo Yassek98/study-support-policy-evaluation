@@ -1,0 +1,241 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/oracle.schema.json",
+  "title": "Policy Evaluation Oracle Specification (Closed-World)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "oracle_id",
+    "version",
+    "target_policy",
+    "evaluation_level",
+    "title",
+    "description",
+    "dimensions",
+    "scoring_rule",
+    "inter_rater_protocol"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "oracle_id": {
+      "type": "string",
+      "pattern": "^ORACLE-POL[0-9]{2}$"
+    },
+    "version": {
+      "const": "0.1.0"
+    },
+    "target_policy": {
+      "enum": [
+        "POL-01_IF_THEN_PLAN",
+        "POL-02_GRADED_SCAFFOLD",
+        "POL-03_ACCEPTED_NEXT_ACTION",
+        "POL-04_AUTONOMY_GATE",
+        "POL-05_HUMAN_BOUNDARY"
+      ]
+    },
+    "evaluation_level": {
+      "enum": [
+        "LEVEL_A",
+        "LEVEL_A_SPECIFICATION_CONFORMITY"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5
+    },
+    "description": {
+      "type": "string",
+      "minLength": 5
+    },
+    "dimensions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "description",
+          "scale",
+          "severity"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Z][0-9]_[A-Z0-9_]+$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 3
+          },
+          "description": {
+            "type": "string",
+            "minLength": 5
+          },
+          "severity": {
+            "enum": [
+              "CRITICAL",
+              "MAJOR",
+              "MINOR"
+            ]
+          },
+          "scale": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "enum": [
+                  "binary",
+                  "ordinal_1_3"
+                ]
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "min": {
+                "type": "integer"
+              },
+              "max": {
+                "type": "integer"
+              }
+            }
+          },
+          "observable_indicators": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "scoring_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "description"
+      ],
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "passing_criteria": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "critical_dimensions_must_pass"
+          ],
+          "properties": {
+            "critical_dimensions_must_pass": {
+              "type": "boolean"
+            },
+            "min_ordinal_score": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "allow_major_violations": {
+              "type": "boolean"
+            }
+          }
+        },
+        "non_compensatory_veto": {
+          "type": "boolean"
+        },
+        "pass_threshold": {
+          "type": "string"
+        }
+      }
+    },
+    "inter_rater_protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "procedure"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "DECISION_PENDING",
+            "FROZEN"
+          ]
+        },
+        "sample_size_scenarios": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "total_scenarios_in_set": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "percentage_evaluated": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "min_concordant_units": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_evaluation_units": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "min_agreement_percentage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "unit_of_agreement": {
+          "enum": [
+            "SCENARIO_LEVEL_PASS_FAIL",
+            "DIMENSION_LEVEL_SCORES"
+          ]
+        },
+        "procedure": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "FROZEN"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "sample_size_scenarios",
+              "total_scenarios_in_set",
+              "percentage_evaluated",
+              "min_concordant_units",
+              "total_evaluation_units",
+              "min_agreement_percentage",
+              "unit_of_agreement"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

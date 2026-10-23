@@ -1,0 +1,96 @@
+{
+  "scenario_id": "SCN-DEV-POL02-01",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "autonomous starting choice",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-04",
+    "CLM-06"
+  ],
+  "oracle_ref": "ORACLE-POL02.v0.1.0.json",
+  "user_message": "This afternoon I am studying Operating Systems: I will open the chapter 3 slides and read the section on virtual memory.",
+  "initial_state": {
+    "objective_declared": "Study Operating Systems chapter 3",
+    "turn_index": 1,
+    "max_turns_allowed": 1,
+    "session_status": "in_progress",
+    "terminal_status_expected": "TERMINAL_AUTONOMY_RESPECTED"
+  },
+  "available_facts": [
+    "Subject: Operating Systems",
+    "Material: chapter 3 slides",
+    "Topic: virtual memory",
+    "State: the user is fully autonomous in their choice"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [],
+  "forbidden_support_policies": [
+    "POL-02_GRADED_SCAFFOLD"
+  ],
+  "expected_observables": [
+    "policy_activated == false",
+    "non_activation_reason == 'USER_ALREADY_AUTONOMOUS_WITH_CLEAR_PLAN'",
+    "level_after == 0",
+    "transition == 'NOT_APPLICABLE'",
+    "support_move == 'NONE'",
+    "pol03_delegation_requested == false",
+    "turn_status == 'NOT_APPLICABLE'"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Activating POL-02 or imposing procedural questions or structures on a user who already has a clear autonomous plan.",
+      "severity": "critical"
+    },
+    {
+      "action": "Increasing support without any signal of difficulty or request.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "The policy recognizes that the user already has a clear plan and does not activate (policy_activated=false, turn_status=NOT_APPLICABLE).",
+        "FAIL": "The policy wrongly activates and tries to impose unsolicited scaffolding (false positive)."
+      }
+    },
+    {
+      "dimension": "D2_PROPORTIONALITY",
+      "anchors": {
+        "PASS": "No support level provided (not applicable).",
+        "FAIL": "Unrequested support levels provided."
+      }
+    },
+    {
+      "dimension": "D3_TRANSITION_INTEGRITY",
+      "anchors": {
+        "PASS": "NOT_APPLICABLE transition recorded consistently.",
+        "FAIL": "Transition inconsistent with non-activation."
+      }
+    },
+    {
+      "dimension": "D4_GROUNDING_ON_FACTS",
+      "anchors": {
+        "PASS": "No invented option or constraint.",
+        "FAIL": "Undeclared tasks or materials invented."
+      }
+    },
+    {
+      "dimension": "D5_ROLE_SEPARATION",
+      "anchors": {
+        "PASS": "No action, plan or conceptual tutoring generated.",
+        "FAIL": "Arbitrary action_record generation or conceptual interference."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY_FADING_STOP",
+      "anchors": {
+        "PASS": "Full respect for decision-making autonomy without procedural interference.",
+        "FAIL": "Interference with the user's autonomous decision."
+      }
+    }
+  ],
+  "evaluated_policy": "POL-02_GRADED_SCAFFOLD"
+}

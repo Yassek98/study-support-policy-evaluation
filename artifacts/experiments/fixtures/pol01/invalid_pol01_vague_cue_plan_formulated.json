@@ -1,0 +1,34 @@
+{
+  "scenario_id": "SCN-DEV-POL01-02",
+  "policy_id": "POL-01_IF_THEN_PLAN",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-25T16:50:00Z",
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "cue": {
+    "identified": "Quando avro un po' di tempo",
+    "source": "user_provided",
+    "specificity": "vague"
+  },
+  "action": {
+    "identified": "Ripassare le slide di Reti",
+    "source": "user_provided",
+    "observability": "observable"
+  },
+  "missing_elements": [],
+  "clarification_requested": false,
+  "plan": {
+    "formulated": "Quando avro un po' di tempo, allora ripassero le slide di Reti.",
+    "confirmation_status": "pending",
+    "user_response": null
+  },
+  "system_response": "Ecco il piano: quando avrai un po' di tempo, ripasserai le slide di Reti. Confermi?",
+  "violations": [],
+  "decision_trace": [
+    {
+      "source": "POL-01",
+      "event": "STEP_7_REACHED",
+      "details": "Il cue vago e stato trattato erroneamente come operativo."
+    }
+  ]
+}

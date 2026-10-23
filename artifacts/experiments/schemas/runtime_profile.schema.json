@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/runtime_profile.schema.json",
+  "title": "Runtime Execution Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile_id",
+    "version",
+    "model",
+    "provider",
+    "seed",
+    "max_tokens"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "profile_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_\\-]+$"
+    },
+    "version": {
+      "const": "0.1.0"
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provider": {
+      "type": "string",
+      "enum": [
+        "local_mock",
+        "openrouter"
+      ]
+    },
+    "temperature": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 2.0
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "max_tokens": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "top_p": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "reasoning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "effort": {
+          "enum": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      }
+    },
+    "stop_sequences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "endpoint_family": {
+      "type": "string",
+      "enum": [
+        "LOCAL_MOCK",
+        "OPENROUTER_CHAT_COMPLETIONS"
+      ]
+    },
+    "timeout_seconds": {
+      "type": "number",
+      "exclusiveMinimum": 0.0
+    },
+    "routing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider_order",
+        "allow_fallbacks",
+        "require_parameters"
+      ],
+      "properties": {
+        "provider_order": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "allow_fallbacks": {
+          "type": "boolean"
+        },
+        "require_parameters": {
+          "type": "boolean"
+        },
+        "data_collection": {
+          "type": "string",
+          "enum": [
+            "allow",
+            "deny"
+          ]
+        }
+      }
+    },
+    "structured_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "schema_ref",
+        "strict"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "json_schema",
+            "json_object",
+            "prompt_only"
+          ]
+        },
+        "schema_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "strict": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "provider": {
+            "const": "openrouter"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "endpoint_family",
+          "timeout_seconds",
+          "routing",
+          "structured_output"
+        ],
+        "properties": {
+          "endpoint_family": {
+            "const": "OPENROUTER_CHAT_COMPLETIONS"
+          },
+          "routing": {
+            "properties": {
+              "allow_fallbacks": {
+                "const": false
+              },
+              "require_parameters": {
+                "const": true
+              }
+            }
+          },
+          "structured_output": {
+            "properties": {
+              "mode": {
+                "const": "json_schema"
+              },
+              "strict": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

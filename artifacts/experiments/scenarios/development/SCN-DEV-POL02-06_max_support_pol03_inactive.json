@@ -1,0 +1,141 @@
+{
+  "conditional_expectations": [
+    {
+      "when": {
+        "POL-03_ACCEPTED_NEXT_ACTION": true
+      },
+      "expected_observables": [
+        "policy_activated == true",
+        "level_after == 3",
+        "transition == 'ESCALATE'",
+        "support_move == 'DELEGATE_TO_POL03'",
+        "pol03_delegation_requested == true",
+        "turn_status == 'PENDING_POL03'"
+      ],
+      "applicable_support_policies": [
+        "POL-02_GRADED_SCAFFOLD",
+        "POL-03_ACCEPTED_NEXT_ACTION"
+      ],
+      "forbidden_support_policies": [
+        "POL-01_IF_THEN_PLAN"
+      ]
+    }
+  ],
+  "scenario_id": "SCN-DEV-POL02-06",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "maximum support request with POL-03 inactive",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "ENGINEERING_STRESS_TEST",
+  "source_claims": [
+    "CLM-04",
+    "CLM-06"
+  ],
+  "oracle_ref": "ORACLE-POL02.v0.1.0.json",
+  "user_message": "I am completely stuck on the chapter 2 Algorithms slides. Guide me and give me a clear structure to get organized.",
+  "initial_state": {
+    "objective_declared": "Study Algorithms chapter 2 slides",
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "session_status": "in_progress",
+    "active_policies": [
+      "POL-02_GRADED_SCAFFOLD"
+    ],
+    "scaffold_state": {
+      "scaffold_version": 2,
+      "current_level": 2,
+      "previous_level": 1,
+      "transition": "ESCALATE",
+      "transition_reason": "USER_DECLARED_PERSISTENT_STALL",
+      "user_signal": "PERSISTENT_STALL",
+      "support_move": "OFFER_DECLARED_OPTIONS",
+      "grounded_facts": [
+        "Algorithms",
+        "chapter 2 slides"
+      ],
+      "pol03_delegation_requested": false,
+      "stop_status": "ACTIVE",
+      "created_at_turn": 1,
+      "updated_at_turn": 1
+    },
+    "terminal_status_expected": "TERMINAL_STRUCTURE_PROVIDED"
+  },
+  "available_facts": [
+    "Subject: Algorithms",
+    "Material: chapter 2 slides",
+    "State: request for maximum procedural structure",
+    "Configuration: POL-03 DISABLED"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-02_GRADED_SCAFFOLD"
+  ],
+  "forbidden_support_policies": [
+    "POL-01_IF_THEN_PLAN",
+    "POL-03_ACCEPTED_NEXT_ACTION"
+  ],
+  "expected_observables": [
+    "policy_activated == true",
+    "level_after == 3",
+    "transition == 'ESCALATE'",
+    "support_move == 'PROVIDE_PROCESS_STRUCTURE'",
+    "process_structure != null",
+    "pol03_delegation_requested == false",
+    "turn_status == 'SUPPORT_DELIVERED'"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Requesting delegation to POL-03 or creating an action_record when POL-03 is disabled.",
+      "severity": "critical"
+    },
+    {
+      "action": "Formulating a binding action for the user.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "Correct activation respecting the configuration without POL-03.",
+        "FAIL": "Failure to activate."
+      }
+    },
+    {
+      "dimension": "D2_PROPORTIONALITY",
+      "anchors": {
+        "PASS": "Structured Level 3 proportionate to the request.",
+        "FAIL": "Disproportionate level."
+      }
+    },
+    {
+      "dimension": "D3_TRANSITION_INTEGRITY",
+      "anchors": {
+        "PASS": "Transition to Level 3 recorded.",
+        "FAIL": "Inconsistent state."
+      }
+    },
+    {
+      "dimension": "D4_GROUNDING_ON_FACTS",
+      "anchors": {
+        "PASS": "Structure based exclusively on the chapter 2 slides.",
+        "FAIL": "Materials invented."
+      }
+    },
+    {
+      "dimension": "D5_ROLE_SEPARATION",
+      "anchors": {
+        "PASS": "Provides process structure and invites the user to decide, without delegating to POL-03.",
+        "FAIL": "Attempted delegation to disabled POL-03 or direct action_record generation."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY_FADING_STOP",
+      "anchors": {
+        "PASS": "Final invitation for the user to define their own action.",
+        "FAIL": "Prescriptive closing."
+      }
+    }
+  ],
+  "evaluated_policy": "POL-02_GRADED_SCAFFOLD"
+}

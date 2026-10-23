@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/invocation_plan.schema.json",
+  "title": "Frozen Invocation Plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "batch_id",
+    "protocol_version",
+    "execution_mode",
+    "configuration_ids",
+    "scenario_ids",
+    "replication_count",
+    "invocation_count",
+    "invocations",
+    "plan_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "batch_id": {"type": "string", "pattern": "^BATCH-[A-Z0-9_-]+$"},
+    "protocol_version": {"type": "string", "minLength": 1},
+    "execution_mode": {"enum": ["development", "pilot", "evaluation"]},
+    "configuration_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": ["B0_SIMPLE", "S_P1", "S_P2", "S_P3", "G_P1_P2", "G_P1_P3", "G_P2_P3", "B1_FULL"]
+      }
+    },
+    "scenario_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^SCN-[A-Z0-9_-]+$"}
+    },
+    "replication_count": {"type": "integer", "minimum": 1},
+    "invocation_count": {"type": "integer", "minimum": 1},
+    "invocations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["run_id", "configuration_id", "scenario_id", "replication_index"],
+        "properties": {
+          "run_id": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+$"},
+          "configuration_id": {
+            "enum": ["B0_SIMPLE", "S_P1", "S_P2", "S_P3", "G_P1_P2", "G_P1_P3", "G_P2_P3", "B1_FULL"]
+          },
+          "scenario_id": {"type": "string", "pattern": "^SCN-[A-Z0-9_-]+$"},
+          "replication_index": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

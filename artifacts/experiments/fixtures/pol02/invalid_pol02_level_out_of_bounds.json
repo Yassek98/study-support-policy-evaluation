@@ -1,0 +1,47 @@
+{
+  "scenario_id": "SCN-DEV-POL02-02",
+  "policy_id": "POL-02_GRADED_SCAFFOLD",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-24T18:00:00Z",
+  "system_response": "Livello fuori dominio massimo.",
+  "decision_trace": [
+    {
+      "source": "POL-02",
+      "event": "INVALID",
+      "details": "INVALID: level_after > 3"
+    }
+  ],
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "level_before": 2,
+  "level_after": 4,
+  "transition": "ESCALATE",
+  "transition_reason": "USER_REQUESTED_MORE_STRUCTURE",
+  "user_signal": "MORE_HELP_REQUESTED",
+  "support_move": "PROVIDE_PROCESS_STRUCTURE",
+  "orientation_question": null,
+  "declared_options_used": [],
+  "process_structure": "Struttura eccessiva.",
+  "grounded_facts_used": [
+    "Algoritmi"
+  ],
+  "pol03_delegation_requested": false,
+  "scaffold_state": {
+    "scaffold_version": 2,
+    "current_level": 4,
+    "previous_level": 2,
+    "transition": "ESCALATE",
+    "transition_reason": "USER_REQUESTED_MORE_STRUCTURE",
+    "user_signal": "MORE_HELP_REQUESTED",
+    "support_move": "PROVIDE_PROCESS_STRUCTURE",
+    "grounded_facts": [
+      "Algoritmi"
+    ],
+    "pol03_delegation_requested": false,
+    "stop_status": "ACTIVE",
+    "created_at_turn": 1,
+    "updated_at_turn": 2
+  },
+  "turn_status": "SUPPORT_DELIVERED",
+  "safety_violations": []
+}

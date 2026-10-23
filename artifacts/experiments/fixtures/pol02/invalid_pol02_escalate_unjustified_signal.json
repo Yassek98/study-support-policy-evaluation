@@ -1,0 +1,58 @@
+{
+  "scenario_id": "SCN-DEV-POL02-02",
+  "policy_id": "POL-02_GRADED_SCAFFOLD",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-24T18:00:00Z",
+  "system_response": "Escalation forzata senza che l'utente abbia espresso difficolta.",
+  "decision_trace": [
+    {
+      "source": "POL-02",
+      "event": "INVALID",
+      "details": "INVALID: ESCALATE applied on NO_ASSISTANCE_REQUESTED"
+    }
+  ],
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "level_before": 0,
+  "level_after": 2,
+  "transition": "ESCALATE",
+  "transition_reason": "INITIAL_MINIMUM_SUPPORT",
+  "user_signal": "NO_ASSISTANCE_REQUESTED",
+  "support_move": "OFFER_DECLARED_OPTIONS",
+  "orientation_question": null,
+  "declared_options_used": [
+    "appunti",
+    "slide"
+  ],
+  "process_structure": null,
+  "grounded_facts_used": [
+    "appunti",
+    "slide"
+  ],
+  "pol03_delegation_requested": false,
+  "scaffold_state": {
+    "scaffold_version": 2,
+    "current_level": 2,
+    "previous_level": 0,
+    "transition": "ESCALATE",
+    "transition_reason": "INITIAL_MINIMUM_SUPPORT",
+    "user_signal": "NO_ASSISTANCE_REQUESTED",
+    "support_move": "OFFER_DECLARED_OPTIONS",
+    "grounded_facts": [
+      "appunti",
+      "slide"
+    ],
+    "pol03_delegation_requested": false,
+    "stop_status": "ACTIVE",
+    "created_at_turn": 1,
+    "updated_at_turn": 2
+  },
+  "turn_status": "SUPPORT_DELIVERED",
+  "safety_violations": [
+    {
+      "rule_id": "PREMATURE_OVER_ASSISTANCE",
+      "severity": "major",
+      "description": "Escalation non giustificata da segnali dialogici."
+    }
+  ]
+}

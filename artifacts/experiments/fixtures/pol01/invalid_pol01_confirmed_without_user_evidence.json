@@ -1,0 +1,34 @@
+{
+  "scenario_id": "SCN-DEV-POL01-05",
+  "policy_id": "POL-01_IF_THEN_PLAN",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-25T16:53:00Z",
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "cue": {
+    "identified": "Domani alle 10, quando la coinquilina esce",
+    "source": "user_provided",
+    "specificity": "specific"
+  },
+  "action": {
+    "identified": "Aprire il PDF della dispensa di Sistemi Operativi dall'inizio",
+    "source": "user_provided",
+    "observability": "observable"
+  },
+  "missing_elements": [],
+  "clarification_requested": false,
+  "plan": {
+    "formulated": "Quando domani alle 10 la coinquilina esce, allora aprirai il PDF della dispensa di Sistemi Operativi.",
+    "confirmation_status": "confirmed",
+    "user_response": null
+  },
+  "system_response": "Piano confermato.",
+  "violations": [],
+  "decision_trace": [
+    {
+      "source": "POL-01",
+      "event": "STEP_8_REACHED",
+      "details": "Il sistema ha marcato il piano come confermato senza evidenza esplicita."
+    }
+  ]
+}

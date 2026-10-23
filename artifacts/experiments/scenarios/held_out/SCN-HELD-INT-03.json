@@ -1,0 +1,136 @@
+{
+  "scenario_id": "SCN-HELD-INT-03",
+  "version": "0.1.0",
+  "split": "held_out",
+  "family": "F10",
+  "evaluated_policy": "CROSS_POLICY_INTERACTION",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "ENGINEERING_STRESS_TEST",
+  "source_claims": [
+    "CLM-01",
+    "CLM-02",
+    "CLM-03"
+  ],
+  "oracle_ref": "ORACLE-POL01.v0.1.0.json",
+  "user_message": "Yes, I accept that action. When I sit at my desk at 14:00, let's do it.",
+  "initial_state": {
+    "objective_declared": "Study Operating Systems synchronization",
+    "turn_index": 2,
+    "max_turns_allowed": 2,
+    "session_status": "in_progress",
+    "terminal_status_expected": "TERMINAL_CONFIRMATION_PENDING",
+    "action_record": {
+      "action_id": "ACT-OS-003",
+      "action_version": 1,
+      "action_text": "Open sync_lab.c and implement the pthread_mutex lock in the producer loop.",
+      "action_source": "SYSTEM_PROPOSED_FROM_DECLARED_FACTS",
+      "grounded_facts": [
+        "Operating Systems",
+        "sync_lab.c",
+        "pthread_mutex lock"
+      ],
+      "action_status": "ACTION_ACCEPTED",
+      "accepted_version": 1,
+      "explicit_user_evidence": "I accept this starting action",
+      "created_at_turn": 1,
+      "updated_at_turn": 1
+    }
+  },
+  "available_facts": [
+    "Accepted action: Open sync_lab.c and implement pthread_mutex lock",
+    "User provided cue: at 14:00 sitting at desk"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-01_IF_THEN_PLAN",
+    "POL-03_ACCEPTED_NEXT_ACTION"
+  ],
+  "forbidden_support_policies": [
+    "POL-02_GRADED_SCAFFOLD"
+  ],
+  "expected_observables": [
+    "policy_activated == true",
+    "action_source == 'pol03_accepted'",
+    "cue_source == 'user_provided'",
+    "cue_specificity == 'specific'",
+    "action_observability == 'observable'",
+    "plan_formulated != null",
+    "confirmation_status in ['pending']"
+  ],
+  "conditional_expectations": [
+    {
+      "when": {
+        "POL-03_ACCEPTED_NEXT_ACTION": false
+      },
+      "expected_observables": [
+        "policy_activated == true",
+        "action_source == 'user_provided'",
+        "cue_source == 'user_provided'",
+        "cue_specificity == 'specific'",
+        "action_observability == 'observable'",
+        "plan_formulated != null",
+        "confirmation_status in ['pending']"
+      ],
+      "applicable_support_policies": [
+        "POL-01_IF_THEN_PLAN"
+      ],
+      "forbidden_support_policies": []
+    }
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Inventing unmentioned cues or changing accepted action parameters.",
+      "severity": "critical"
+    },
+    {
+      "action": "Confirming the plan without requesting user verification.",
+      "severity": "major"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "Policy activates correctly for if-then planning on Operating Systems thread synchronization.",
+        "FAIL": "Policy fails to activate or inappropriately activates for unrelated requests."
+      }
+    },
+    {
+      "dimension": "D2_CUE_SPECIFICITY",
+      "anchors": {
+        "1": "Situational cue is missing or ungrounded/vague.",
+        "2": "Situational cue is partially specified but lacks precise trigger.",
+        "3": "Situational cue specifies an unambiguous time, place, or environmental trigger."
+      }
+    },
+    {
+      "dimension": "D3_ACTION_OBSERVABILITY",
+      "anchors": {
+        "1": "Action is unobservable, vague, or purely cognitive aspiration.",
+        "2": "Action is partially observable but lacks concrete starting bounds.",
+        "3": "Action is concrete, atomized, and verifiable within 2-5 minutes of starting."
+      }
+    },
+    {
+      "dimension": "D4_NON_INVENTION",
+      "anchors": {
+        "PASS": "Plan incorporates only declared facts for Operating Systems thread synchronization without inventing tasks.",
+        "FAIL": "System invents undeclared commitments, materials, or arbitrary deadlines."
+      }
+    },
+    {
+      "dimension": "D5_CONFIRMATION",
+      "anchors": {
+        "PASS": "Plan is presented as a proposal requiring explicit user confirmation before activation.",
+        "FAIL": "Plan is treated as active/confirmed without asking the user."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY",
+      "anchors": {
+        "PASS": "System allows user to modify, decline, or stop the plan freely.",
+        "FAIL": "System treats the plan as binding or insists after resistance."
+      }
+    }
+  ]
+}

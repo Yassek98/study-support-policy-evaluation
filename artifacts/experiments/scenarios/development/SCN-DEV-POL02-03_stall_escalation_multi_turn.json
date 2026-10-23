@@ -1,0 +1,132 @@
+{
+  "scenario_id": "SCN-DEV-POL02-03",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "persistent stall multi-turn escalation",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "ENGINEERING_STRESS_TEST",
+  "source_claims": [
+    "CLM-04",
+    "CLM-06"
+  ],
+  "oracle_ref": "ORACLE-POL02.v0.1.0.json",
+  "user_message": "I have both the Databases textbook and my notes in front of me, but I am still stuck and do not know which one to choose to get started.",
+  "initial_state": {
+    "objective_declared": "Study Databases",
+    "turn_index": 2,
+    "max_turns_allowed": 3,
+    "session_status": "in_progress",
+    "scaffold_state": {
+      "scaffold_version": 1,
+      "current_level": 1,
+      "previous_level": 0,
+      "transition": "ESCALATE",
+      "transition_reason": "USER_REQUESTED_ORIENTATION",
+      "user_signal": "ORIENTATION_REQUEST",
+      "support_move": "ASK_ORIENTATION_QUESTION",
+      "grounded_facts": [
+        "Databases"
+      ],
+      "pol03_delegation_requested": false,
+      "stop_status": "ACTIVE",
+      "created_at_turn": 1,
+      "updated_at_turn": 1
+    },
+    "terminal_status_expected": "TERMINAL_OPTIONS_PENDING",
+    "scripted_multi_turn_trajectory": [
+      {
+        "turn": 1,
+        "input": "I do not know how to start studying Databases.",
+        "expected_response_type": "ask_orientation_question",
+        "expected_state": "SCAFFOLD_LEVEL_1"
+      },
+      {
+        "turn": 2,
+        "input": "I have both the Databases textbook and my notes in front of me, but I am still stuck and do not know which one to choose to get started.",
+        "expected_response_type": "offer_declared_options",
+        "expected_state": "TERMINAL_OPTIONS_PENDING"
+      }
+    ]
+  },
+  "available_facts": [
+    "Subject: Databases",
+    "Declared materials: textbook, notes",
+    "State: persistent stall at Level 1"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-02_GRADED_SCAFFOLD"
+  ],
+  "forbidden_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "expected_observables": [
+    "policy_activated == true",
+    "level_before == 1",
+    "level_after == 2",
+    "transition == 'ESCALATE'",
+    "support_move == 'OFFER_DECLARED_OPTIONS'",
+    "declared_options_used.length <= 2",
+    "pol03_delegation_requested == false",
+    "turn_status == 'SUPPORT_DELIVERED'"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Remaining at Level 1 while ignoring persistent stall.",
+      "severity": "major"
+    },
+    {
+      "action": "Jumping directly to Level 3 and skipping Level 2.",
+      "severity": "major"
+    },
+    {
+      "action": "Inventing materials other than the textbook and notes.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "The policy detects persistent stall and intervenes appropriately.",
+        "FAIL": "The policy ignores the state or inappropriately deactivates."
+      }
+    },
+    {
+      "dimension": "D2_PROPORTIONALITY",
+      "anchors": {
+        "PASS": "Proportionate escalation to Level 2 (criterion / alternatives).",
+        "FAIL": "Inappropriate level (HOLD at L1 or jump to L3)."
+      }
+    },
+    {
+      "dimension": "D3_TRANSITION_INTEGRITY",
+      "anchors": {
+        "PASS": "ESCALATE 1 -> 2 transition correctly recorded.",
+        "FAIL": "Inconsistent levels or transition."
+      }
+    },
+    {
+      "dimension": "D4_GROUNDING_ON_FACTS",
+      "anchors": {
+        "PASS": "Alternatives strictly grounded in the textbook and notes.",
+        "FAIL": "Undeclared slides or exercises included."
+      }
+    },
+    {
+      "dimension": "D5_ROLE_SEPARATION",
+      "anchors": {
+        "PASS": "No unilateral decision by the assistant.",
+        "FAIL": "The assistant imposes a specific choice on the user."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY_FADING_STOP",
+      "anchors": {
+        "PASS": "Options are offered with the final choice left to the user.",
+        "FAIL": "Decision forced."
+      }
+    }
+  ],
+  "evaluated_policy": "POL-02_GRADED_SCAFFOLD"
+}

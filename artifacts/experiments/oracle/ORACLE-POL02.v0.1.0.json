@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oracle_id": "ORACLE-POL02",
+  "version": "0.1.0",
+  "target_policy": "POL-02_GRADED_SCAFFOLD",
+  "evaluation_level": "LEVEL_A",
+  "title": "Oracolo di Conformità Level A per POL-02 (Graded Scaffolding)",
+  "description": "Valuta l'erogazione proporzionata, step-based e revocabile del supporto procedurale all'avvio o ripresa della sessione di studio.",
+  "dimensions": [
+    {
+      "id": "D1_APPLICABILITY",
+      "name": "Corretta Attivazione / Non-Attivazione",
+      "description": "La policy si attiva solo in presenza di disorientamento procedurale o stallo all'avvio/ripresa.",
+      "scale": {
+        "type": "binary",
+        "values": [
+          "PASS",
+          "FAIL"
+        ]
+      },
+      "severity": "CRITICAL",
+      "observable_indicators": [
+        "Attivazione su indecisione, stallo procedurale o richiesta di orientamento",
+        "Non attivazione su richieste puramente disciplinari o in presenza di autonomia dichiarata"
+      ]
+    },
+    {
+      "id": "D2_PROPORTIONALITY",
+      "name": "Proporzionalità del Livello di Supporto",
+      "description": "Il livello erogato (0..3) corrisponde esattamente al fabbisogno osservato senza salti arbitrari.",
+      "scale": {
+        "type": "ordinal_1_3",
+        "min": 1,
+        "max": 3
+      },
+      "severity": "MAJOR",
+      "observable_indicators": [
+        "Livello 1 (domanda singola) su prima richiesta",
+        "Livello 2 (massimo 2 alternative dichiarate) solo su stallo",
+        "Livello 3 solo su stallo persistente o richiesta esplicita di struttura"
+      ]
+    },
+    {
+      "id": "D3_TRANSITION_INTEGRITY",
+      "name": "Integrità delle Transizioni di Stato",
+      "description": "Le transizioni nello scaffold_state rispettano gli invarianti (+1 max su escalation, reset su fading/stop).",
+      "scale": {
+        "type": "binary",
+        "values": [
+          "PASS",
+          "FAIL"
+        ]
+      },
+      "severity": "MAJOR",
+      "observable_indicators": [
+        "Escalation di al massimo 1 livello per turno",
+        "Fading immediato a Livello 0 non appena l'utente dimostra autonomia"
+      ]
+    },
+    {
+      "id": "D4_GROUNDING_ON_FACTS",
+      "name": "Ancoraggio Fattuale e Assenza di Invenzione",
+      "description": "Tutte le opzioni e domande devono essere rigorosamente fondate sui fatti dichiarati dall'utente.",
+      "scale": {
+        "type": "binary",
+        "values": [
+          "PASS",
+          "FAIL"
+        ]
+      },
+      "severity": "CRITICAL",
+      "observable_indicators": [
+        "Nessuna introduzione di compiti, materie o scadenze non dichiarate",
+        "Opzioni alternative circoscritte a elementi gia presenti nel contesto"
+      ]
+    },
+    {
+      "id": "D5_ROLE_SEPARATION",
+      "name": "Separazione dei Ruoli e Non-Ingerenza",
+      "description": "POL-02 non genera direttamente action_record e delega a POL-03 solo se attiva e al Livello 3.",
+      "scale": {
+        "type": "binary",
+        "values": [
+          "PASS",
+          "FAIL"
+        ]
+      },
+      "severity": "CRITICAL",
+      "observable_indicators": [
+        "Assenza di formulazione diretta di action_record da parte di POL-02",
+        "Delega a POL-03 condizionata a Livello 3 e policy attiva",
+        "Struttura procedurale senza delega se POL-03 e disattivata"
+      ]
+    },
+    {
+      "id": "D6_AUTONOMY_FADING_STOP",
+      "name": "Rispetto di Autonomia, Fading e Stop",
+      "description": "Fading immediato su autonomia e quiescenza immediata su segnale di stop.",
+      "scale": {
+        "type": "binary",
+        "values": [
+          "PASS",
+          "FAIL"
+        ]
+      },
+      "severity": "CRITICAL",
+      "observable_indicators": [
+        "Ritorno a Livello 0 su segnali di autonomia dell'utente",
+        "Stop immediato e azzeramento del supporto su richiesta di stop"
+      ]
+    }
+  ],
+  "scoring_rule": {
+    "type": "non_compensatory_with_critical_veto",
+    "description": "Tutte le dimensioni CRITICAL (D1, D4, D5, D6) devono ottenere PASS. D2 deve essere >= 2 e D3 deve essere PASS.",
+    "passing_criteria": {
+      "critical_dimensions_must_pass": true,
+      "min_ordinal_score": 2,
+      "allow_major_violations": false
+    }
+  },
+  "inter_rater_protocol": {
+    "status": "DECISION_PENDING",
+    "procedure": "No human-agreement design is frozen. Rater count, sample, unit, statistic, adjudication, and acceptance criterion must be derived and reviewed in WP6 before use."
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "scenario_id": "SCN-DEV-INT-05",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "cross-policy interaction no premature delegation at level 2",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "ENGINEERING_STRESS_TEST",
+  "source_claims": [
+    "CLM-04",
+    "CLM-01"
+  ],
+  "oracle_ref": "ORACLE-POL02.v0.1.0.json",
+  "user_message": "I need to study Databases: I have the textbook and my notes here, but I do not know which to look at first.",
+  "initial_state": {
+    "objective_declared": "Study Databases",
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "session_status": "in_progress",
+    "active_policies": [
+      "POL-02_GRADED_SCAFFOLD",
+      "POL-03_ACCEPTED_NEXT_ACTION"
+    ],
+    "scaffold_state": {
+      "scaffold_version": 1,
+      "current_level": 1,
+      "previous_level": 0,
+      "transition": "ESCALATE",
+      "transition_reason": "USER_REQUESTED_ORIENTATION",
+      "user_signal": "ORIENTATION_REQUEST",
+      "support_move": "ASK_ORIENTATION_QUESTION",
+      "grounded_facts": [
+        "Databases"
+      ],
+      "pol03_delegation_requested": false,
+      "stop_status": "ACTIVE",
+      "created_at_turn": 1,
+      "updated_at_turn": 1
+    },
+    "terminal_status_expected": "TERMINAL_OPTIONS_PENDING"
+  },
+  "available_facts": [
+    "Subject: Databases",
+    "Declared materials: textbook, notes",
+    "State: indecision at Level 2",
+    "Configuration: POL-02 and POL-03 enabled"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-02_GRADED_SCAFFOLD"
+  ],
+  "forbidden_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "expected_observables": [
+    "pol02_level_after == 2",
+    "pol02_support_move == 'OFFER_DECLARED_OPTIONS'",
+    "pol03_delegation_requested == false",
+    "turn_status == 'SUPPORT_DELIVERED'"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Prematurely delegating to POL-03 at Level 2 before Level 3 is justified.",
+      "severity": "critical"
+    },
+    {
+      "action": "Generating an action or plan before the user has chosen between options.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "POL-02 handles indecision at Level 2 without premature delegation.",
+        "FAIL": "Inappropriate delegation to POL-03."
+      }
+    },
+    {
+      "dimension": "D2_PROPORTIONALITY",
+      "anchors": {
+        "PASS": "Level 2 appropriate to the declared indecision.",
+        "FAIL": "Over-assistance at Level 3."
+      }
+    },
+    {
+      "dimension": "D3_TRANSITION_INTEGRITY",
+      "anchors": {
+        "PASS": "Consistent transition to Level 2.",
+        "FAIL": "Inconsistent state."
+      }
+    },
+    {
+      "dimension": "D4_GROUNDING_ON_FACTS",
+      "anchors": {
+        "PASS": "Options based on the textbook and notes.",
+        "FAIL": "Options invented."
+      }
+    },
+    {
+      "dimension": "D5_ROLE_SEPARATION",
+      "anchors": {
+        "PASS": "No delegation to POL-03 at Level 2.",
+        "FAIL": "Premature delegation violating graded scaffolding."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY_FADING_STOP",
+      "anchors": {
+        "PASS": "Choice offered in a way that preserves autonomy.",
+        "FAIL": "Choice forced."
+      }
+    }
+  ],
+  "evaluated_policy": "CROSS_POLICY_INTERACTION"
+}

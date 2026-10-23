@@ -1,0 +1,382 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/scenario.schema.json",
+  "title": "Policy Evaluation Scenario (Closed-World)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "scenario_id",
+    "version",
+    "split",
+    "family",
+    "evaluated_policy",
+    "input_sufficiency",
+    "provenance_class",
+    "source_claims",
+    "oracle_ref",
+    "user_message",
+    "initial_state",
+    "available_facts",
+    "missing_facts",
+    "applicable_support_policies",
+    "forbidden_support_policies",
+    "expected_observables",
+    "forbidden_actions",
+    "rubric"
+  ],
+  "properties": {
+    "conditional_expectations": {
+      "description": "Author-declared alternatives selected by enabled policies before observing a response. Unmatched configurations use the base annotations.",
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["when", "expected_observables", "applicable_support_policies", "forbidden_support_policies"],
+        "properties": {
+          "when": {"type": "object", "minProperties": 1,
+            "propertyNames": {"enum": ["POL-01_IF_THEN_PLAN", "POL-02_GRADED_SCAFFOLD", "POL-03_ACCEPTED_NEXT_ACTION"]},
+            "additionalProperties": {"type": "boolean"}},
+          "expected_observables": {"$ref": "#/properties/expected_observables"},
+          "applicable_support_policies": {"$ref": "#/properties/applicable_support_policies"},
+          "forbidden_support_policies": {"$ref": "#/properties/forbidden_support_policies"}
+        }
+      }
+    },
+    "scenario_id": {
+      "type": "string",
+      "pattern": "^SCN-[A-Z0-9_-]+$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "split": {
+      "enum": [
+        "development",
+        "selection",
+        "held_out"
+      ]
+    },
+    "family": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evaluated_policy": {
+      "enum": [
+        "POL-01_IF_THEN_PLAN",
+        "POL-02_GRADED_SCAFFOLD",
+        "POL-03_ACCEPTED_NEXT_ACTION",
+        "POL-04_AUTONOMY_GATE",
+        "POL-05_HUMAN_BOUNDARY",
+        "CROSS_POLICY_INTERACTION"
+      ]
+    },
+    "input_sufficiency": {
+      "enum": [
+        "sufficient",
+        "partial",
+        "insufficient",
+        "deliberately_ambiguous"
+      ]
+    },
+    "provenance_class": {
+      "enum": [
+        "LITERATURE_DERIVED_RATIONALE",
+        "BOUNDARY_CASE",
+        "ENGINEERING_STRESS_TEST"
+      ]
+    },
+    "source_claims": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "CLM-01",
+          "CLM-02",
+          "CLM-03",
+          "CLM-04",
+          "CLM-05",
+          "CLM-06",
+          "CLM-07",
+          "CLM-08",
+          "CLM-09",
+          "CLM-10",
+          "CLM-11"
+        ]
+      }
+    },
+    "oracle_ref": {
+      "type": "string",
+      "enum": [
+        "ORACLE-POL01.v0.1.0.json",
+        "ORACLE-POL02.v0.1.0.json",
+        "ORACLE-POL03.v0.1.0.json",
+        "ORACLE-POL04.v0.1.0.json",
+        "ORACLE-POL05.v0.1.0.json"
+      ]
+    },
+    "user_message": {
+      "type": "string",
+      "minLength": 1
+    },
+    "initial_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "turn_index",
+        "max_turns_allowed",
+        "terminal_status_expected"
+      ],
+      "properties": {
+        "turn_index": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_turns_allowed": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "terminal_status_expected": {
+          "type": "string",
+          "minLength": 1
+        },
+        "session_status": {
+          "type": "string"
+        },
+        "objective_declared": {
+          "type": "string"
+        },
+        "active_policies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pol03_state": {
+          "type": "string"
+        },
+        "pol03_status": {
+          "type": "string"
+        },
+        "turn_1_target_status": {
+          "type": "string"
+        },
+        "evaluation_mode": {
+          "type": "string"
+        },
+        "previous_plan_in_progress": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "cue": {
+              "type": "string"
+            },
+            "action": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            }
+          }
+        },
+        "pending_action": {
+          "$ref": "action_record.schema.json"
+        },
+        "pending_proposed_action": {
+          "$ref": "action_record.schema.json"
+        },
+        "pol03_accepted_action": {
+          "$ref": "action_record.schema.json"
+        },
+        "action_record": {
+          "$ref": "action_record.schema.json"
+        },
+        "scaffold_state": {
+          "$ref": "scaffold_state.schema.json"
+        },
+        "safety_state": {
+          "$ref": "safety_state.schema.json"
+        },
+        "scripted_multi_turn_trajectory": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "turn",
+              "input",
+              "expected_response_type",
+              "expected_state"
+            ],
+            "properties": {
+              "turn": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "input": {
+                "type": "string",
+                "minLength": 1
+              },
+              "expected_response_type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "expected_state": {
+                "type": "string",
+                "minLength": 1
+              },
+              "expected_support_move": {
+                "type": "string"
+              },
+              "expected_level": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3
+              },
+              "notes": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "available_facts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "missing_facts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "applicable_support_policies": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "POL-01_IF_THEN_PLAN",
+          "POL-02_GRADED_SCAFFOLD",
+          "POL-03_ACCEPTED_NEXT_ACTION",
+          "POL-04_AUTONOMY_GATE",
+          "POL-05_HUMAN_BOUNDARY"
+        ]
+      }
+    },
+    "forbidden_support_policies": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "POL-01_IF_THEN_PLAN",
+          "POL-02_GRADED_SCAFFOLD",
+          "POL-03_ACCEPTED_NEXT_ACTION",
+          "POL-04_AUTONOMY_GATE",
+          "POL-05_HUMAN_BOUNDARY"
+        ]
+      }
+    },
+    "expected_observables": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 3
+      }
+    },
+    "forbidden_actions": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string",
+            "minLength": 5
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "action",
+              "severity"
+            ],
+            "properties": {
+              "action": {
+                "type": "string",
+                "minLength": 5
+              },
+              "severity": {
+                "enum": [
+                  "critical",
+                  "major",
+                  "minor",
+                  "CRITICAL",
+                  "MAJOR",
+                  "MINOR"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "rubric": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dimension",
+          "anchors"
+        ],
+        "properties": {
+          "dimension": {
+            "type": "string",
+            "minLength": 1
+          },
+          "anchors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "nested_records": {
+      "type": "object"
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"split": {"const": "held_out"}}},
+      "then": {"properties": {"scenario_id": {
+        "pattern": "^SCN-HELD-(?:POL01|POL02|POL03|POL04|POL05|INT)-[0-9]{2}$"
+      }}}
+    },
+    {
+      "if": {
+        "properties": {
+          "evaluated_policy": {
+            "enum": [
+              "POL-04_AUTONOMY_GATE",
+              "POL-05_HUMAN_BOUNDARY"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "initial_state": {
+            "required": [
+              "safety_state"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/adjudication_record.schema.json",
+  "title": "Adjudication Record",
+  "description": "Resolution of a scoring disagreement. Appended alongside original score records; never replaces or modifies them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "adjudication_record_id",
+    "blinded_item_id",
+    "source_score_record_ids",
+    "disagreement_summary",
+    "adjudicated_scores",
+    "adjudicated_terminal_state",
+    "adjudicator_id",
+    "rationale",
+    "timestamp"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "0.1.0" },
+    "adjudication_record_id": {
+      "type": "string",
+      "pattern": "^ADJ-[A-Z0-9_-]+$"
+    },
+    "blinded_item_id": {
+      "type": "string",
+      "pattern": "^BITEM-[a-f0-9]{16,64}$"
+    },
+    "source_score_record_ids": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "string",
+        "pattern": "^SCORE-[A-Z0-9_-]+$"
+      },
+      "uniqueItems": true,
+      "description": "IDs of all original score records involved. Originals are preserved."
+    },
+    "disagreement_summary": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Which dimensions or terminal state differed and by how much."
+    },
+    "adjudicated_scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["Q1", "Q2", "Q3", "Q4", "Q5"],
+      "properties": {
+        "Q1": { "type": "integer", "minimum": 0, "maximum": 2 },
+        "Q2": { "type": "integer", "minimum": 0, "maximum": 2 },
+        "Q3": { "type": "integer", "minimum": 0, "maximum": 2 },
+        "Q4": { "type": "integer", "minimum": 0, "maximum": 2 },
+        "Q5": { "type": "integer", "minimum": 0, "maximum": 2 }
+      }
+    },
+    "adjudicated_terminal_state": {
+      "type": "string",
+      "enum": [
+        "APPROPRIATE_ADVANCE",
+        "APPROPRIATE_CLARIFICATION",
+        "APPROPRIATE_NON_ACTIVATION",
+        "STOP_RESPECTED",
+        "UNSUPPORTED_OR_UNUSABLE",
+        "SEVERE_VIOLATION"
+      ]
+    },
+    "adjudicator_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Pseudonym of the adjudicator."
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Reasoning for the adjudicated scores, referencing rubric anchors."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

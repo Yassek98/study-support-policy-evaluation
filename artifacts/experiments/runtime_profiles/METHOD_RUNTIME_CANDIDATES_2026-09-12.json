@@ -1,0 +1,63 @@
+{
+  "record_type": "PUBLIC_ENDPOINT_METHOD_SNAPSHOT",
+  "status": "DESIGN_CANDIDATES_NOT_EXECUTABLE_OR_FROZEN",
+  "observed_date": "2026-09-12",
+  "credential_accessed": false,
+  "live_inference_performed": false,
+  "producer": {
+    "model": "openai/gpt-5.6-luna",
+    "source": "https://openrouter.ai/api/v1/models/openai/gpt-5.6-luna/endpoints",
+    "endpoint_tag": "openai",
+    "provider_name": "OpenAI",
+    "input_usd_per_million": "0.20",
+    "output_usd_per_million": "1.20",
+    "supported_parameters": ["reasoning", "include_reasoning", "seed", "max_tokens", "response_format", "structured_outputs", "tools", "tool_choice", "reasoning_effort"],
+    "selected_request": {
+      "max_tokens": 4096,
+      "reasoning": {"enabled": true, "effort": "low"},
+      "replica_seeds": [42, 43],
+      "temperature": "OMITTED",
+      "top_p": "OMITTED",
+      "timeout_seconds": 30,
+      "structured_output": "json_schema_strict"
+    }
+  },
+  "judge": {
+    "model": "google/gemini-3.7-flash",
+    "source": "https://openrouter.ai/api/v1/models/google/gemini-3.7-flash/endpoints",
+    "endpoint_tag": "google-ai-studio",
+    "provider_name": "Google AI Studio",
+    "input_usd_per_million": "0.75",
+    "output_usd_per_million": "3.75",
+    "supported_parameters": ["reasoning", "include_reasoning", "max_tokens", "temperature", "top_p", "seed", "response_format", "structured_outputs", "tool_choice", "tools", "reasoning_effort"],
+    "selected_request": {
+      "max_tokens": 2048,
+      "reasoning": {"enabled": true, "effort": "low"},
+      "seed": 42,
+      "temperature": 0,
+      "top_p": "OMITTED",
+      "timeout_seconds": 30,
+      "structured_output": "DEDICATED_JUDGE_SCHEMA_PENDING"
+    }
+  },
+  "common_rules": {
+    "allow_fallbacks": false,
+    "require_parameters": true,
+    "data_collection": "deny",
+    "stream": false,
+    "tools": "OMITTED",
+    "plugins": "OMITTED",
+    "max_attempts_per_invocation": 1,
+    "service_tier": "NO_TIER_OPT_IN",
+    "token_estimate_is_invoice": false,
+    "catalog_is_account_access": false,
+    "seed_guarantees_independence_or_determinism": false
+  },
+  "pricing_limits": [
+    "Uncached ordinary input/output rates only; no discount assumed.",
+    "Long-context overrides, cache writes, platform fees and currency conversion need separate checks.",
+    "Reasoning billing must be reconciled with the actual receipt, not charged twice or omitted.",
+    "Base provider slugs can match non-tier variants; refresh the endpoint inventory before dispatch.",
+    "No guarantee that these model aliases are immutable snapshots."
+  ]
+}

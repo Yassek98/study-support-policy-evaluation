@@ -1,0 +1,114 @@
+{
+  "scenario_id": "SCN-HELD-POL02-13",
+  "version": "0.1.0",
+  "split": "held_out",
+  "family": "F05",
+  "evaluated_policy": "POL-02_GRADED_SCAFFOLD",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-04",
+    "CLM-06",
+    "CLM-08"
+  ],
+  "oracle_ref": "ORACLE-POL02.v0.1.0.json",
+  "user_message": "Thanks, but I've got this now: I'm just going to write the timer interrupt handler in timer.c myself right now.",
+  "initial_state": {
+    "turn_index": 2,
+    "max_turns_allowed": 2,
+    "terminal_status_expected": "TERMINAL_AUTONOMY_RESTORED",
+    "objective_declared": "Implement timer interrupt handler",
+    "session_status": "in_progress",
+    "scaffold_state": {
+      "scaffold_version": 2,
+      "current_level": 2,
+      "previous_level": 1,
+      "transition": "ESCALATE",
+      "transition_reason": "USER_DECLARED_PERSISTENT_STALL",
+      "user_signal": "PERSISTENT_STALL",
+      "support_move": "OFFER_DECLARED_OPTIONS",
+      "grounded_facts": [
+        "Microprocessors",
+        "timer interrupt handler",
+        "timer.c"
+      ],
+      "pol03_delegation_requested": false,
+      "stop_status": "ACTIVE",
+      "created_at_turn": 1,
+      "updated_at_turn": 2
+    }
+  },
+  "available_facts": [
+    "User declared autonomous step: write timer.c handler myself"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-02_GRADED_SCAFFOLD"
+  ],
+  "forbidden_support_policies": [
+    "POL-03_ACCEPTED_NEXT_ACTION",
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "expected_observables": [
+    "policy_activated == true",
+    "level_after == 0",
+    "transition in ['FADE', 'RESET_TO_AUTONOMY']",
+    "transition_reason == 'USER_FORMULATED_OWN_NEXT_STEP'",
+    "support_move in ['AUTONOMY_INVITATION', 'NONE']",
+    "pol03_delegation_requested == false"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Failing to fade to Level 0 when user expresses clear autonomy.",
+      "severity": "critical"
+    },
+    {
+      "action": "Continuing to offer options or impose structure.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "Scaffolding activates or holds appropriately based on user signal for Microprocessors autonomy fading.",
+        "FAIL": "Scaffolding inappropriately escalates or misclassifies content question as impasse."
+      }
+    },
+    {
+      "dimension": "D2_PROPORTIONALITY",
+      "anchors": {
+        "PASS": "Support move matches the exact required level without skipping or over-helping.",
+        "FAIL": "Disproportionate level of assistance provided."
+      }
+    },
+    {
+      "dimension": "D3_TRANSITION_INTEGRITY",
+      "anchors": {
+        "PASS": "Level transitions conform strictly to the state transition contract.",
+        "FAIL": "Invalid level jump or inconsistent state transition recorded."
+      }
+    },
+    {
+      "dimension": "D4_GROUNDING_ON_FACTS",
+      "anchors": {
+        "PASS": "Scaffolding options and questions are grounded strictly in declared facts for Microprocessors autonomy fading.",
+        "FAIL": "System invents external options or undeclared materials."
+      }
+    },
+    {
+      "dimension": "D5_ROLE_SEPARATION",
+      "anchors": {
+        "PASS": "POL-02 does not directly generate action records or bypass delegation rules.",
+        "FAIL": "Direct action record creation or unauthorized delegation occurred."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY_FADING_STOP",
+      "anchors": {
+        "PASS": "Fades immediately to Level 0 upon user autonomy and ceases on stop.",
+        "FAIL": "Fails to fade or continues support after stop signal."
+      }
+    }
+  ]
+}

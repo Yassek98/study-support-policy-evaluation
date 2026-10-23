@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "0.1.0",
+  "description": "Stati iniziali congelati e neutrali per safety_state e scaffold_state quando non esplicitati dallo scenario.",
+  "safety_state": {
+    "safety_version": 1,
+    "stop_status": "ACTIVE",
+    "autonomy_status": "AVAILABLE",
+    "boundary_status": "IN_SCOPE",
+    "last_user_signal": "NONE",
+    "support_allowed": true,
+    "resume_authorized": false,
+    "revoked_target": null,
+    "created_at_turn": 1,
+    "updated_at_turn": 1
+  },
+  "scaffold_state": {
+    "scaffold_version": 1,
+    "current_level": 0,
+    "previous_level": 0,
+    "transition": "NOT_APPLICABLE",
+    "transition_reason": "NO_TRANSITION_INITIAL",
+    "user_signal": "NO_PRIOR_SIGNAL",
+    "support_move": "NONE",
+    "grounded_facts": [],
+    "pol03_delegation_requested": false,
+    "stop_status": "ACTIVE",
+    "created_at_turn": 1,
+    "updated_at_turn": 1
+  }
+}

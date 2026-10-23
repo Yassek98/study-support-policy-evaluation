@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "blind_batch_id": "BATCH-DEV-001",
+  "batch_created_at": "2026-08-31T10:00:00Z",
+  "entries": [
+    {
+      "blinded_item_id": "BITEM-aaaaaaaaaaaaaaaa",
+      "source_run_id": "RUN-B0-SIMPLE-001",
+      "source_run_record_path": "RUN-B0-SIMPLE-001/record.json",
+      "source_result_record_path": "RUN-B0-SIMPLE-001/result.json",
+      "scenario_id": "SCN-START-001",
+      "configuration_id": "B0_SIMPLE",
+      "replication_index": 1,
+      "source_record_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "source_result_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "blinded_item_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    }
+  ]
+}

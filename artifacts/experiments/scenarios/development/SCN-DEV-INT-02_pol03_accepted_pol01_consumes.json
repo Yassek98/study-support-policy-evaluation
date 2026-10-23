@@ -1,0 +1,137 @@
+{
+  "conditional_expectations": [
+    {
+      "when": {
+        "POL-03_ACCEPTED_NEXT_ACTION": false
+      },
+      "expected_observables": [
+        "policy_activated == true",
+        "action_source == 'user_provided'",
+        "cue_source == 'user_provided'",
+        "cue_specificity == 'specific'",
+        "action_observability == 'observable'",
+        "plan_formulated != null",
+        "turn_status == 'CONFIRMATION_PENDING'"
+      ],
+      "applicable_support_policies": [
+        "POL-01_IF_THEN_PLAN"
+      ],
+      "forbidden_support_policies": []
+    }
+  ],
+  "scenario_id": "SCN-DEV-INT-02",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "cross policy interaction pol01 consumes pol03 accepted action",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-01",
+    "CLM-03",
+    "CLM-06"
+  ],
+  "oracle_ref": "ORACLE-POL01.v0.1.0.json",
+  "user_message": "Great, opening the slides and doing the first two exercises works very well for me. I would like to do it tomorrow morning as soon as I finish breakfast.",
+  "initial_state": {
+    "objective_declared": "Study Computer Networks",
+    "action_record": {
+      "action_id": "ACT-RET-001",
+      "action_version": 1,
+      "action_text": "Open the Networks slides and do the first two exercises.",
+      "action_source": "SYSTEM_PROPOSED_FROM_DECLARED_FACTS",
+      "grounded_facts": [
+        "Computer Networks",
+        "slide",
+        "first two exercises"
+      ],
+      "action_status": "ACTION_PROPOSED",
+      "accepted_version": null,
+      "explicit_user_evidence": null,
+      "created_at_turn": 1,
+      "updated_at_turn": 1
+    },
+    "turn_index": 2,
+    "max_turns_allowed": 2,
+    "session_status": "in_progress",
+    "terminal_status_expected": "TERMINAL_CONFIRMATION_PENDING"
+  },
+  "available_facts": [
+    "Action accepted from POL-03: Open the Networks slides and do the first two exercises",
+    "User-supplied situational cue: Tomorrow morning as soon as I finish breakfast"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "forbidden_support_policies": [],
+  "expected_observables": [
+    "policy_activated == true",
+    "action_source == 'pol03_accepted'",
+    "cue_source == 'user_provided'",
+    "cue_specificity == 'specific'",
+    "action_observability == 'observable'",
+    "plan_formulated != null",
+    "turn_status == 'CONFIRMATION_PENDING'"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Ignoring the already accepted action and asking the user for another.",
+      "severity": "major"
+    },
+    {
+      "action": "Treating the if-then plan as confirmed without requesting explicit final confirmation from the user.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "score_0": "Does not activate POL-01 despite the accepted action and cue being present.",
+        "score_1": "Activates POL-01 but restarts action negotiation.",
+        "score_2": "Correctly activates POL-01 using accepted action ACT-RET-001 and the supplied cue."
+      }
+    },
+    {
+      "dimension": "D2_CUE_SPECIFICITY",
+      "anchors": {
+        "score_0": "Omits the temporal/situational cue.",
+        "score_1": "Generically paraphrased cue.",
+        "score_2": "Precise situational cue grounded in 'tomorrow morning as soon as I finish breakfast'."
+      }
+    },
+    {
+      "dimension": "D3_ACTION_OBSERVABILITY",
+      "anchors": {
+        "score_0": "Unobservable action.",
+        "score_1": "Partly observable action.",
+        "score_2": "Fully observable action faithfully inherited from POL-03."
+      }
+    },
+    {
+      "dimension": "D4_NON_INVENTION",
+      "anchors": {
+        "score_0": "Adds invented, undeclared commitments or constraints.",
+        "score_1": "Slightly changes details of the accepted action.",
+        "score_2": "No invention; faithfully formulates If X, then Y."
+      }
+    },
+    {
+      "dimension": "D5_CONFIRMATION",
+      "anchors": {
+        "score_0": "Treats the plan as already confirmed.",
+        "score_1": "Weak or implicit confirmation request.",
+        "score_2": "Requests explicit user confirmation of the if-then plan."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY",
+      "anchors": {
+        "score_0": "Prescriptive tone with no possibility of modification.",
+        "score_1": "Autonomy weakly mentioned.",
+        "score_2": "Full user autonomy to accept, modify or revoke the plan."
+      }
+    }
+  ],
+  "evaluated_policy": "CROSS_POLICY_INTERACTION"
+}

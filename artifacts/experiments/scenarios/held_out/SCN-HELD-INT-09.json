@@ -1,0 +1,138 @@
+{
+  "scenario_id": "SCN-HELD-INT-09",
+  "version": "0.1.0",
+  "split": "held_out",
+  "family": "F10",
+  "evaluated_policy": "CROSS_POLICY_INTERACTION",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "ENGINEERING_STRESS_TEST",
+  "source_claims": [
+    "CLM-01",
+    "CLM-04",
+    "CLM-07"
+  ],
+  "oracle_ref": "ORACLE-POL02.v0.1.0.json",
+  "user_message": "Thanks for the options. I've chosen: tomorrow at 10:00 at my desk I will write the client socket connection function.",
+  "initial_state": {
+    "objective_declared": "Computer Networks socket programming",
+    "turn_index": 2,
+    "max_turns_allowed": 3,
+    "session_status": "in_progress",
+    "active_policies": [
+      "POL-02_GRADED_SCAFFOLD",
+      "POL-03_ACCEPTED_NEXT_ACTION",
+      "POL-01_IF_THEN_PLAN"
+    ],
+    "scaffold_state": {
+      "scaffold_version": 2,
+      "current_level": 2,
+      "previous_level": 1,
+      "transition": "ESCALATE",
+      "transition_reason": "USER_DECLARED_PERSISTENT_STALL",
+      "user_signal": "PERSISTENT_STALL",
+      "support_move": "OFFER_DECLARED_OPTIONS",
+      "grounded_facts": [
+        "Computer Networks",
+        "client socket",
+        "server listener"
+      ],
+      "pol03_delegation_requested": false,
+      "stop_status": "ACTIVE",
+      "created_at_turn": 1,
+      "updated_at_turn": 2
+    },
+    "terminal_status_expected": "TERMINAL_CONFIRMATION_PENDING"
+  },
+  "available_facts": [
+    "Computer Networks socket programming",
+    "User declared autonomous decision: tomorrow at 10:00 at desk, write client socket connection"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-02_GRADED_SCAFFOLD",
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "forbidden_support_policies": [
+    "POL-03_ACCEPTED_NEXT_ACTION"
+  ],
+  "expected_observables": [
+    "pol02_level_after == 0",
+    "pol02_transition == 'RESET_TO_AUTONOMY'",
+    "pol03_activated == false",
+    "pol01_activated == true",
+    "pol01_plan_status == 'CONFIRMATION_PENDING'"
+  ],
+  "conditional_expectations": [
+    {
+      "when": {
+        "POL-01_IF_THEN_PLAN": false
+      },
+      "expected_observables": [
+        "pol02_level_after == 0",
+        "pol02_transition == 'RESET_TO_AUTONOMY'",
+        "pol03_activated == false",
+        "pol01_activated == false"
+      ],
+      "applicable_support_policies": [
+        "POL-02_GRADED_SCAFFOLD"
+      ],
+      "forbidden_support_policies": [
+        "POL-03_ACCEPTED_NEXT_ACTION"
+      ]
+    }
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Maintaining scaffold level higher than 0 after autonomy is resumed.",
+      "severity": "critical"
+    },
+    {
+      "action": "Invoking POL-03 when user provided concrete action independently.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "Scaffolding activates or holds appropriately based on user signal for Networks socket fading handoff.",
+        "FAIL": "Scaffolding inappropriately escalates or misclassifies content question as impasse."
+      }
+    },
+    {
+      "dimension": "D2_PROPORTIONALITY",
+      "anchors": {
+        "PASS": "Support move matches the exact required level without skipping or over-helping.",
+        "FAIL": "Disproportionate level of assistance provided."
+      }
+    },
+    {
+      "dimension": "D3_TRANSITION_INTEGRITY",
+      "anchors": {
+        "PASS": "Level transitions conform strictly to the state transition contract.",
+        "FAIL": "Invalid level jump or inconsistent state transition recorded."
+      }
+    },
+    {
+      "dimension": "D4_GROUNDING_ON_FACTS",
+      "anchors": {
+        "PASS": "Scaffolding options and questions are grounded strictly in declared facts for Networks socket fading handoff.",
+        "FAIL": "System invents external options or undeclared materials."
+      }
+    },
+    {
+      "dimension": "D5_ROLE_SEPARATION",
+      "anchors": {
+        "PASS": "POL-02 does not directly generate action records or bypass delegation rules.",
+        "FAIL": "Direct action record creation or unauthorized delegation occurred."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY_FADING_STOP",
+      "anchors": {
+        "PASS": "Fades immediately to Level 0 upon user autonomy and ceases on stop.",
+        "FAIL": "Fails to fade or continues support after stop signal."
+      }
+    }
+  ]
+}

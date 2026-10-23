@@ -1,0 +1,34 @@
+{
+  "scenario_id": "SCN-DEV-POL01-01",
+  "policy_id": "POL-01_IF_THEN_PLAN",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-25T16:55:00Z",
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "cue": {
+    "identified": "Domani dopo pranzo, quando mi siedo alla scrivania",
+    "source": "user_provided",
+    "specificity": "specific"
+  },
+  "action": {
+    "identified": "Aprire Analisi 2 e fare i primi tre esercizi sulle serie",
+    "source": "user_provided",
+    "observability": "observable"
+  },
+  "missing_elements": [],
+  "clarification_requested": false,
+  "plan": {
+    "formulated": null,
+    "confirmation_status": "not_reached",
+    "user_response": null
+  },
+  "system_response": "Ho tutti gli elementi, ma non formulo il piano.",
+  "violations": [],
+  "decision_trace": [
+    {
+      "source": "POL-01",
+      "event": "STEP_6_REACHED",
+      "details": "Cue e azione sono completi ma il piano non viene formulato."
+    }
+  ]
+}

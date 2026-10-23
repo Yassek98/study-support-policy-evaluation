@@ -1,0 +1,17 @@
+{
+  "scenario_id": "SCN-DEV-POL01-08",
+  "policy_id": "POL-01_IF_THEN_PLAN",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-16T18:00:00Z",
+  "policy_activated": false,
+  "non_activation_reason": "content_help_request",
+  "system_response": "La differenza principale tra un INNER JOIN e un OUTER JOIN in SQL risiede nel trattamento delle righe che non trovano corrispondenza: un INNER JOIN restituisce solo le righe che soddisfano la condizione di giunzione in entrambe le tabelle, mentre un OUTER JOIN (LEFT, RIGHT o FULL) include anche le righe spaiate riempiendo i campi mancanti con valori NULL.",
+  "violations": [],
+  "decision_trace": [
+    {
+      "source": "POL-01",
+      "event": "STEP_1_REACHED",
+      "details": "Richiesta sul contenuto didattico; POL-01 non applicabile."
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "scenario_id": "SCN-HELD-POL03-01",
+  "version": "0.1.0",
+  "split": "held_out",
+  "family": "F01",
+  "evaluated_policy": "POL-03_ACCEPTED_NEXT_ACTION",
+  "input_sufficiency": "partial",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-01",
+    "CLM-02"
+  ],
+  "oracle_ref": "ORACLE-POL03.v0.1.0.json",
+  "user_message": "I need to get started on graph connectivity for my Discrete Mathematics exam this afternoon, but I don't know where to jump in.",
+  "initial_state": {
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "terminal_status_expected": "TERMINAL_CLARIFICATION_REQUESTED",
+    "objective_declared": "Prepare graph connectivity for Discrete Mathematics",
+    "session_status": "in_progress"
+  },
+  "available_facts": [
+    "Objective: Prepare graph connectivity for Discrete Mathematics exam"
+  ],
+  "missing_facts": [
+    "Primary study material (e.g. lecture slides vs tutorial sheet vs textbook chapter)"
+  ],
+  "applicable_support_policies": [
+    "POL-03_ACCEPTED_NEXT_ACTION"
+  ],
+  "forbidden_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "expected_observables": [
+    "policy_activated == true",
+    "clarification_requested == true",
+    "turn_status == 'PENDING_CLARIFICATION'",
+    "pol01_handoff_ready == false"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Inventing specific textbook chapters or exercise numbers without asking the user.",
+      "severity": "critical"
+    },
+    {
+      "action": "Formulating an if-then plan when the action is absent.",
+      "severity": "critical"
+    },
+    {
+      "action": "Proposing multiple disparate tasks simultaneously.",
+      "severity": "major"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "Action policy activates appropriately for Discrete Mathematics graph connectivity and respects boundaries.",
+        "FAIL": "Policy fails to activate when appropriate or over-activates."
+      }
+    },
+    {
+      "dimension": "D2_SINGLE_ACTION_CARDINALITY",
+      "anchors": {
+        "PASS": "Proposes exactly one candidate starting action (cardinality = 1).",
+        "FAIL": "Proposes multiple actions, lists, or sequences simultaneously."
+      }
+    },
+    {
+      "dimension": "D3_ACTION_CONCRETENESS",
+      "anchors": {
+        "1": "Action is absent, broad, or unobservable.",
+        "2": "Action has partial concreteness but broad scope.",
+        "3": "Action is a concrete, atomic micro-step verifiable immediately."
+      }
+    },
+    {
+      "dimension": "D4_EPISTEMIC_GROUNDING",
+      "anchors": {
+        "PASS": "Proposed action is strictly derived from user-declared materials for Discrete Mathematics graph connectivity.",
+        "FAIL": "System hallucinates materials, chapters, or tools not mentioned."
+      }
+    },
+    {
+      "dimension": "D5_ACCEPTANCE_INTEGRITY",
+      "anchors": {
+        "PASS": "Action remains ACTION_PROPOSED until explicit textual acceptance by the user.",
+        "FAIL": "Action is marked accepted prematurely or without explicit confirmation."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY",
+      "anchors": {
+        "PASS": "User retains full freedom to accept, modify, or reject the candidate action.",
+        "FAIL": "Action is imposed as mandatory or resistance is ignored."
+      }
+    }
+  ]
+}

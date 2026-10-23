@@ -1,0 +1,29 @@
+{
+  "$schema": "../schemas/runtime_profile.schema.json",
+  "profile_id": "DEV_OPENROUTER_GPT56_LUNA",
+  "version": "0.1.0",
+  "model": "openai/gpt-5.6-luna",
+  "provider": "openrouter",
+  "seed": 42,
+  "max_tokens": 4096,
+  "reasoning": {
+    "enabled": true,
+    "effort": "low"
+  },
+  "stop_sequences": [],
+  "endpoint_family": "OPENROUTER_CHAT_COMPLETIONS",
+  "timeout_seconds": 30.0,
+  "routing": {
+    "provider_order": [
+      "OpenAI"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true,
+    "data_collection": "deny"
+  },
+  "structured_output": {
+    "mode": "json_schema",
+    "schema_ref": "schemas/agent_turn_output.schema.json",
+    "strict": true
+  }
+}

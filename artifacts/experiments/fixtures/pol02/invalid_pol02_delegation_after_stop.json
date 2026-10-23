@@ -1,0 +1,43 @@
+{
+  "scenario_id": "SCN-DEV-POL02-08",
+  "policy_id": "POL-02_GRADED_SCAFFOLD",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-24T18:00:00Z",
+  "system_response": "Delega a POL-03 nonostante lo stato sia STOPPED.",
+  "decision_trace": [
+    {
+      "source": "POL-02",
+      "event": "INVALID",
+      "details": "INVALID: pol03_delegation_requested=true when stop_status=STOPPED"
+    }
+  ],
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "level_before": 2,
+  "level_after": 0,
+  "transition": "STOP",
+  "transition_reason": "USER_REFUSED_SUPPORT",
+  "user_signal": "STOP_REQUEST",
+  "support_move": "DELEGATE_TO_POL03",
+  "orientation_question": null,
+  "declared_options_used": [],
+  "process_structure": null,
+  "grounded_facts_used": [],
+  "pol03_delegation_requested": true,
+  "scaffold_state": {
+    "scaffold_version": 2,
+    "current_level": 0,
+    "previous_level": 2,
+    "transition": "STOP",
+    "transition_reason": "USER_REFUSED_SUPPORT",
+    "user_signal": "STOP_REQUEST",
+    "support_move": "DELEGATE_TO_POL03",
+    "grounded_facts": [],
+    "pol03_delegation_requested": true,
+    "stop_status": "STOPPED",
+    "created_at_turn": 1,
+    "updated_at_turn": 2
+  },
+  "turn_status": "STOPPED",
+  "safety_violations": []
+}

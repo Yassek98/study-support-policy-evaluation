@@ -1,0 +1,16 @@
+{
+  "scenario_id": "SCN-DEV-POL01-08",
+  "policy_id": "POL-01_IF_THEN_PLAN",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-16T18:00:00Z",
+  "policy_activated": false,
+  "system_response": "Risposta che non spiega il motivo della non attivazione.",
+  "violations": [],
+  "decision_trace": [
+    {
+      "source": "POL-01",
+      "event": "STEP_1_REACHED",
+      "details": "Step 1 reached (pol03_state=inactive)"
+    }
+  ]
+}

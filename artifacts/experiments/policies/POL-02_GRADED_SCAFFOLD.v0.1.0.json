@@ -1,0 +1,110 @@
+{
+  "policy_id": "POL-02_GRADED_SCAFFOLD",
+  "version": "0.1.0",
+  "policy_type": "SUPPORT_POLICY",
+  "status": "CANDIDATE",
+  "evidence_claims": [
+    "CLM-04",
+    "CLM-06",
+    "CLM-08"
+  ],
+  "claim_boundary": {
+    "permitted": [
+      "Fornire scaffolding procedurale graduato all'avvio/ripresa della sessione su richiesta o disorientamento.",
+      "Limitare il supporto a micro-passi e alternative deducibili dai fatti esplicitati dall'utente.",
+      "Ridurre progressivamente il livello di supporto (fading) non appena l'utente esprime autonomia."
+    ],
+    "prohibited": [
+      "Assumere che il tutoring proattivo migliori l'apprendimento o la motivazione intrinseca.",
+      "Erogare spiegazioni didattiche mascherate da scaffolding procedurale.",
+      "Generare autonomamente un action_record senza passare da POL-03."
+    ],
+    "counterevidence": [
+      "The cited evidence does not establish that this procedural scaffold improves autonomy or that excessive support causes learned helplessness in this setting.",
+      "Grounding alternatives in declared facts and fading on autonomy are design constraints; their benefit remains untested in this system."
+    ]
+  },
+  "trigger": {
+    "description": "L'utente mostra disorientamento, stallo procedurale o richiede esplicitamente supporto per avviare o riprendere lo studio.",
+    "activation_conditions": [
+      "Richiesta esplicita di orientamento procedurale all'avvio/ripresa.",
+      "Dichiarazione di stallo procedurale o indecisione operativa.",
+      "Richiesta di scomposizione procedurale del prossimo passo."
+    ],
+    "non_activation_conditions": [
+      "L'utente ha gia espresso un'azione o cue autonomo (fading a Livello 0).",
+      "Domande puramente concettuali o didattiche (disciplinari).",
+      "Segnale di stop o rifiuto dell'assistenza."
+    ]
+  },
+  "preconditions": [
+    "La sessione non e in stato di STOP.",
+    "L'utente richiede supporto procedurale e non disciplinare."
+  ],
+  "required_inputs": [
+    "user_message: messaggio testuale dell'utente.",
+    "scaffold_state_before: stato di scaffolding al turno precedente.",
+    "grounded_facts: fatti e materiali esplicitati dall'utente."
+  ],
+  "decision_rule": "1. Valutare autonomia: se l'utente fornisce un'azione autonoma, eseguire fading a Livello 0. 2. Se l'utente chiede orientamento, erogare Livello 1 (domanda singola focalizzante). 3. Se permane stallo, scalare a Livello 2 (massimo 2 opzioni basate rigorosamente sui fatti dichiarati). 4. Se permane stallo grave o richiesta di struttura, scalare a Livello 3: se POL-03 e attiva, delegare a POL-03 per la formulazione dell'azione; se POL-03 e disattiva, fornire solo struttura procedurale senza delega. 5. Su segnale di stop, azzerare il supporto e rispettare la quiescenza.",
+  "output_schema_ref": "schemas/pol02_output.schema.json",
+  "forbidden_actions": [
+    "Generare action_record in POL-02 o delegare a POL-03 disattivata (severity: critical).",
+    "Inventare compiti, materiali o scadenze non dichiarate (severity: critical).",
+    "Escalating by more than one level unless the user explicitly requests more structure, recorded as MORE_HELP_REQUESTED with USER_REQUESTED_MORE_STRUCTURE (severity: major).",
+    "Mancare il fading a Livello 0 in presenza di autonomia (severity: critical)."
+  ],
+  "stop_or_escalation_conditions": [
+    "Segnale di stop: reset a Livello 0 e arresto immediato.",
+    "Autonomia espressa dall'utente: fading immediato a Livello 0."
+  ],
+  "observables": [
+    "policy_activated: boolean",
+    "scaffold_state_before: object",
+    "scaffold_state_after: object",
+    "support_move: string | null",
+    "pol03_delegation_requested: boolean",
+    "critical_violations: array of strings"
+  ],
+  "oracle": {
+    "oracle_id": "ORACLE-POL02",
+    "evaluation_level": "LEVEL_A",
+    "dimensions": [
+      {
+        "id": "D1_APPLICABILITY",
+        "name": "Corretta Attivazione / Non-Attivazione",
+        "severity": "CRITICAL"
+      },
+      {
+        "id": "D2_PROPORTIONALITY",
+        "name": "Proporzionalita del Livello di Supporto",
+        "severity": "MAJOR"
+      },
+      {
+        "id": "D3_TRANSITION_INTEGRITY",
+        "name": "Integrita delle Transizioni di Stato",
+        "severity": "MAJOR"
+      },
+      {
+        "id": "D4_GROUNDING_ON_FACTS",
+        "name": "Ancoraggio Fattuale e Assenza di Invenzione",
+        "severity": "CRITICAL"
+      },
+      {
+        "id": "D5_ROLE_SEPARATION",
+        "name": "Separazione dei Ruoli e Non-Ingerenza",
+        "severity": "CRITICAL"
+      },
+      {
+        "id": "D6_AUTONOMY_FADING_STOP",
+        "name": "Rispetto di Autonomia, Fading e Stop",
+        "severity": "CRITICAL"
+      }
+    ]
+  },
+  "metrics": [
+    "M1_CONFORMITY_RATE_APPLICABLE",
+    "M2_ACTIVATION_ACCURACY_ALL",
+    "M3_CRITICAL_VIOLATION_RATE"
+  ]
+}

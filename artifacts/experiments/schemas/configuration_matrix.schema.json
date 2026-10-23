@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/configuration_matrix.schema.json",
+  "title": "Configuration Matrix Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "matrix_id",
+    "version",
+    "status",
+    "architecture",
+    "safety_envelope",
+    "factors",
+    "configurations"
+  ],
+  "properties": {
+    "matrix_id": {
+      "const": "FACTORIAL_2X3_V0_1_0"
+    },
+    "version": {
+      "const": "0.1.0"
+    },
+    "status": {
+      "const": "CANDIDATE"
+    },
+    "architecture": {
+      "const": "SINGLE_AGENT"
+    },
+    "safety_envelope": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "POL-04_AUTONOMY_GATE",
+          "POL-05_HUMAN_BOUNDARY"
+        ]
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true
+    },
+    "factors": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "P1_POL01",
+          "P2_POL02",
+          "P3_POL03"
+        ]
+      },
+      "minItems": 3,
+      "maxItems": 3,
+      "uniqueItems": true
+    },
+    "configurations": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "configuration_id",
+          "factors",
+          "manifest_ref",
+          "interpretation"
+        ],
+        "properties": {
+          "configuration_id": {
+            "enum": [
+              "B0_SIMPLE",
+              "S_P1",
+              "S_P2",
+              "S_P3",
+              "G_P1_P2",
+              "G_P1_P3",
+              "G_P2_P3",
+              "B1_FULL"
+            ]
+          },
+          "factors": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "P1_POL01",
+              "P2_POL02",
+              "P3_POL03"
+            ],
+            "properties": {
+              "P1_POL01": {
+                "type": "boolean"
+              },
+              "P2_POL02": {
+                "type": "boolean"
+              },
+              "P3_POL03": {
+                "type": "boolean"
+              }
+            }
+          },
+          "manifest_ref": {
+            "type": "string",
+            "pattern": "^configurations/[A-Za-z0-9_]+\\.v0\\.1\\.0\\.json$"
+          },
+          "interpretation": {
+            "type": "string",
+            "minLength": 5
+          }
+        }
+      }
+    }
+  }
+}

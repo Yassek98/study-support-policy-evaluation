@@ -1,0 +1,15 @@
+# WP7 verified Python environment lock (Python 3.13.2)
+# Install with: python -m pip install -r requirements-lock.txt
+attrs==26.1.0
+colorama==0.4.6
+coverage==7.15.4
+iniconfig==2.3.0
+jsonschema==4.26.0
+jsonschema-specifications==2025.9.1
+packaging==26.3
+pluggy==1.6.0
+Pygments==2.21.0
+pytest==9.1.1
+pytest-cov==7.1.0
+referencing==0.37.0
+rpds-py==2026.6.3

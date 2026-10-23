@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Safety State Schema",
+  "description": "Formal schema for the persistent state of the Safety Envelope (POL-04 Autonomy Gate and POL-05 Human Boundary).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "safety_version",
+    "stop_status",
+    "autonomy_status",
+    "boundary_status",
+    "last_user_signal",
+    "support_allowed",
+    "resume_authorized",
+    "created_at_turn",
+    "updated_at_turn"
+  ],
+  "properties": {
+    "safety_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "stop_status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "STOPPED"
+      ]
+    },
+    "autonomy_status": {
+      "type": "string",
+      "enum": [
+        "AVAILABLE",
+        "REFUSED",
+        "REVOKED",
+        "MODIFICATION_REQUESTED"
+      ]
+    },
+    "boundary_status": {
+      "type": "string",
+      "enum": [
+        "IN_SCOPE",
+        "AMBIGUOUS_MONITORED",
+        "CLARIFICATION_PENDING",
+        "OUT_OF_SCOPE_CLINICAL",
+        "OUT_OF_SCOPE_HUMAN_SUPPORT",
+        "IDENTITY_CLARIFICATION"
+      ]
+    },
+    "last_user_signal": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "STOP",
+        "REFUSAL",
+        "REVOCATION",
+        "MODIFICATION",
+        "RESUME",
+        "CLINICAL_REQUEST",
+        "HUMAN_IDENTITY_QUERY",
+        "SUBSTITUTION_REQUEST",
+        "AMBIGUOUS_DISTRESS"
+      ]
+    },
+    "support_allowed": {
+      "type": "boolean"
+    },
+    "resume_authorized": {
+      "type": "boolean"
+    },
+    "revoked_target": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "ACTION",
+        "PLAN",
+        "DELEGATION",
+        "SUPPORT",
+        null
+      ]
+    },
+    "created_at_turn": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "updated_at_turn": {
+      "type": "integer",
+      "minimum": 1
+    }
+  },
+  "$id": "https://local.thesis.invalid/schemas/safety_state.schema.json"
+}

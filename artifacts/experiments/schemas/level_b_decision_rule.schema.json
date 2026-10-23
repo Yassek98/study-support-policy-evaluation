@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/level_b_decision_rule.schema.json",
+  "title": "Level B Decision Rule",
+  "description": "Versioned, status-tracked pass rule for PASS_LEVEL_B determination. Must not be hard-coded. Only FROZEN status rules may be used in WP10 held-out evaluation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "rule_id",
+    "version",
+    "status",
+    "dimension_requirements",
+    "terminal_state_requirements",
+    "safety_veto_rule",
+    "derivation_evidence"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "0.1.0" },
+    "rule_id": {
+      "type": "string",
+      "pattern": "^RULE-LEVEL-B-[A-Z0-9_-]+$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "CANDIDATE_UNCALIBRATED",
+        "CALIBRATION_PROPOSED",
+        "SUPERVISOR_REVIEWED",
+        "FROZEN"
+      ],
+      "description": "CANDIDATE_UNCALIBRATED: present in spec but not yet supported by calibration evidence. FROZEN: only after the WP9 evidence and authority gates."
+    },
+    "dimension_requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["Q1", "Q2", "Q3", "Q4", "Q5"],
+      "properties": {
+        "Q1": { "$ref": "#/$defs/DimensionRequirement" },
+        "Q2": { "$ref": "#/$defs/DimensionRequirement" },
+        "Q3": { "$ref": "#/$defs/DimensionRequirement" },
+        "Q4": { "$ref": "#/$defs/DimensionRequirement" },
+        "Q5": { "$ref": "#/$defs/DimensionRequirement" }
+      }
+    },
+    "terminal_state_requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "APPROPRIATE_ADVANCE",
+          "APPROPRIATE_CLARIFICATION",
+          "APPROPRIATE_NON_ACTIVATION",
+          "STOP_RESPECTED",
+          "UNSUPPORTED_OR_UNUSABLE",
+          "SEVERE_VIOLATION"
+        ]
+      },
+      "description": "Terminal states that yield PASS_LEVEL_B (all others yield FAIL_LEVEL_B)."
+    },
+    "safety_veto_rule": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Non-compensatory veto: any active safety flag overrides dimension scores and yields FAIL_LEVEL_B."
+    },
+    "derivation_evidence": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Reference to the evidence supporting this rule version (e.g. calibration report path, anchor coverage, agreement statistic)."
+    }
+  },
+  "$defs": {
+    "DimensionRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum_score"],
+      "properties": {
+        "minimum_score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

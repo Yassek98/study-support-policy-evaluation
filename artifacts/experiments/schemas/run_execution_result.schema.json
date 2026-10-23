@@ -1,0 +1,421 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/run_execution_result.schema.json",
+  "title": "RunExecutionResult",
+  "description": "Schema chiuso e rigoroso per il risultato di esecuzione, il tracciamento dei tentativi e lo stato di persistenza del runner.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "configuration_ref",
+    "scenario_ref",
+    "final_outcome_code",
+    "retry_policy",
+    "attempts",
+    "protocol_version",
+    "execution_mode",
+    "replication_index",
+    "batch_id",
+    "result_persisted"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_\\.-]+$",
+      "description": "Identificativo univoco dell'esecuzione (es. UUID v4 o run-id deterministico)."
+    },
+    "configuration_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Riferimento di input alla configurazione (ID o percorso relativo)."
+    },
+    "scenario_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Riferimento di input allo scenario (ID o percorso relativo)."
+    },
+    "configuration_id": {
+      "type": "string",
+      "enum": [
+        "B0_SIMPLE",
+        "S_P1",
+        "S_P2",
+        "S_P3",
+        "G_P1_P2",
+        "G_P1_P3",
+        "G_P2_P3",
+        "B1_FULL"
+      ],
+      "description": "ID canonico della configurazione validata, se risolta con successo."
+    },
+    "scenario_id": {
+      "type": "string",
+      "pattern": "^SCN-[A-Z0-9_-]+$",
+      "description": "ID canonico dello scenario validato, se risolto con successo."
+    },
+    "protocol_version": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "execution_mode": {
+      "type": ["string", "null"],
+      "enum": ["development", "pilot", "evaluation", null]
+    },
+    "replication_index": {
+      "type": ["integer", "null"],
+      "minimum": 1
+    },
+    "batch_id": {
+      "type": ["string", "null"],
+      "pattern": "^BATCH-[A-Z0-9_-]+$"
+    },
+    "final_outcome_code": {
+      "type": "string",
+      "enum": [
+        "COMPLETED_VALID",
+        "OUTPUT_SEMANTICALLY_INVALID",
+        "OUTPUT_SCHEMA_INVALID",
+        "MALFORMED_RESPONSE",
+        "TRANSPORT_ERROR",
+        "TIMEOUT",
+        "PROVIDER_ERROR",
+        "RUN_RECORD_INVALID",
+        "INTERNAL_RUNNER_ERROR",
+        "INPUT_CONTRACT_ERROR"
+      ],
+      "description": "Codice di esito finale chiuso dell'esecuzione del runner."
+    },
+    "retry_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy_id",
+        "max_attempts"
+      ],
+      "properties": {
+        "policy_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "max_attempts": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "backoff_factor": {
+          "type": "number",
+          "minimum": 0.0
+        },
+        "transient_errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "attempts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "attempt_index",
+          "started_at",
+          "completed_at",
+          "adapter_status",
+          "latency_ms"
+        ],
+        "properties": {
+          "attempt_index": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "started_at": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-9]{2})$"
+          },
+          "completed_at": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-9]{2})$"
+          },
+          "adapter_status": {
+            "type": "string",
+            "enum": [
+              "SUCCESS",
+              "TIMEOUT",
+              "TRANSPORT_ERROR",
+              "PROVIDER_ERROR",
+              "UNKNOWN"
+            ]
+          },
+          "latency_ms": {
+            "type": "number",
+            "minimum": 0.0
+          },
+          "raw_response_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "raw_response_sha256": {
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "token_usage": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "prompt_tokens",
+              "completion_tokens",
+              "total_tokens"
+            ],
+            "properties": {
+              "prompt_tokens": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "completion_tokens": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "total_tokens": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          },
+          "error_code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "error_details": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "request_body_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "request_body_sha256": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "provider_envelope_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "provider_envelope_sha256": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "model_output_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "model_output_sha256": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "http_status_code": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "requested_model": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "returned_model": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "requested_provider_order": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "returned_provider": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "provider_response_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "raw_response_path": {
+                  "type": "string"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "raw_response_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "raw_response_sha256": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "parsed_candidate_output": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Payload JSON parsato, registrato per diagnostica forense anche se non conforme a agent_turn_output.schema.json."
+    },
+    "run_record": {
+      "oneOf": [
+        {
+          "$ref": "run_record.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "run_record_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "result_persisted": {
+      "type": "boolean"
+    },
+    "result_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "preflight_errors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "final_outcome_code": {
+            "const": "COMPLETED_VALID"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "run_record",
+          "run_record_path",
+          "parsed_candidate_output"
+        ],
+        "properties": {
+          "run_record": {
+            "type": "object"
+          },
+          "run_record_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "parsed_candidate_output": {
+            "type": "object"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "run_record": {
+            "type": "null"
+          },
+          "run_record_path": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result_persisted": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "result_path"
+        ],
+        "properties": {
+          "result_path": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "result_path": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

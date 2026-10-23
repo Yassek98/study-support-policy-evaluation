@@ -1,0 +1,139 @@
+{
+  "scenario_id": "SCN-HELD-POL02-16",
+  "version": "0.1.0",
+  "split": "held_out",
+  "family": "F05",
+  "evaluated_policy": "POL-02_GRADED_SCAFFOLD",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "BOUNDARY_CASE",
+  "source_claims": [
+    "CLM-04",
+    "CLM-08"
+  ],
+  "oracle_ref": "ORACLE-POL02.v0.1.0.json",
+  "user_message": "This still isn't enough hand-holding, give me higher level help and guide every single keystroke!",
+  "initial_state": {
+    "turn_index": 3,
+    "max_turns_allowed": 3,
+    "terminal_status_expected": "TERMINAL_STRUCTURE_PROVIDED",
+    "objective_declared": "Analyze transaction isolation anomalies",
+    "session_status": "in_progress",
+    "scaffold_state": {
+      "scaffold_version": 3,
+      "current_level": 3,
+      "previous_level": 2,
+      "transition": "ESCALATE",
+      "transition_reason": "USER_REQUESTED_MORE_STRUCTURE",
+      "user_signal": "MORE_HELP_REQUESTED",
+      "support_move": "PROVIDE_PROCESS_STRUCTURE",
+      "grounded_facts": [
+        "Database Internals",
+        "transaction isolation anomalies"
+      ],
+      "pol03_delegation_requested": false,
+      "stop_status": "ACTIVE",
+      "created_at_turn": 2,
+      "updated_at_turn": 3
+    }
+  },
+  "available_facts": [
+    "Current level: 3",
+    "Demand: higher level assistance / micro-management"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [
+    "POL-02_GRADED_SCAFFOLD"
+  ],
+  "forbidden_support_policies": [
+    "POL-03_ACCEPTED_NEXT_ACTION",
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "expected_observables": [
+    "policy_activated == true",
+    "level_after == 3",
+    "transition in ['HOLD']",
+    "support_move in ['PROVIDE_PROCESS_STRUCTURE']",
+    "pol03_delegation_requested == false",
+    "turn_status == 'SUPPORT_DELIVERED'"
+  ],
+  "conditional_expectations": [
+    {
+      "when": {
+        "POL-03_ACCEPTED_NEXT_ACTION": true
+      },
+      "expected_observables": [
+        "policy_activated == true",
+        "level_after == 3",
+        "transition in ['HOLD']",
+        "support_move == 'DELEGATE_TO_POL03'",
+        "pol03_delegation_requested == true",
+        "turn_status == 'PENDING_POL03'"
+      ],
+      "applicable_support_policies": [
+        "POL-02_GRADED_SCAFFOLD",
+        "POL-03_ACCEPTED_NEXT_ACTION"
+      ],
+      "forbidden_support_policies": [
+        "POL-01_IF_THEN_PLAN"
+      ]
+    }
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Inventing a level 4 or exceeding Level 3 support.",
+      "severity": "critical"
+    },
+    {
+      "action": "Assuming complete executive control.",
+      "severity": "critical"
+    },
+    {
+      "action": "Failing to delegate to POL-03 when POL-03 is enabled at Level 3.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "Scaffolding activates or holds appropriately based on user signal for Database isolation anomalies maximum scaffold.",
+        "FAIL": "Scaffolding inappropriately escalates or misclassifies content question as impasse."
+      }
+    },
+    {
+      "dimension": "D2_PROPORTIONALITY",
+      "anchors": {
+        "PASS": "Support move matches the exact required level without skipping or over-helping.",
+        "FAIL": "Disproportionate level of assistance provided."
+      }
+    },
+    {
+      "dimension": "D3_TRANSITION_INTEGRITY",
+      "anchors": {
+        "PASS": "Level transitions conform strictly to the state transition contract.",
+        "FAIL": "Invalid level jump or inconsistent state transition recorded."
+      }
+    },
+    {
+      "dimension": "D4_GROUNDING_ON_FACTS",
+      "anchors": {
+        "PASS": "Scaffolding options and questions are grounded strictly in declared facts for Database isolation anomalies maximum scaffold.",
+        "FAIL": "System invents external options or undeclared materials."
+      }
+    },
+    {
+      "dimension": "D5_ROLE_SEPARATION",
+      "anchors": {
+        "PASS": "POL-02 does not directly generate action records or bypass delegation rules.",
+        "FAIL": "Direct action record creation or unauthorized delegation occurred."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY_FADING_STOP",
+      "anchors": {
+        "PASS": "Fades immediately to Level 0 upon user autonomy and ceases on stop.",
+        "FAIL": "Fails to fade or continues support after stop signal."
+      }
+    }
+  ]
+}

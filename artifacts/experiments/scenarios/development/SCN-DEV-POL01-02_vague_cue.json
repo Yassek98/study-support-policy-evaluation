@@ -1,0 +1,114 @@
+{
+  "scenario_id": "SCN-DEV-POL01-02",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "vague cue or action in an if-then request",
+  "input_sufficiency": "partial",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-03"
+  ],
+  "oracle_ref": "ORACLE-POL01.v0.1.0.json",
+  "user_message": "When I have a bit of time, I want to review the Networks slides.",
+  "initial_state": {
+    "objective_declared": "Review Computer Networks",
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "pol03_state": "inactive",
+    "session_status": "in_progress",
+    "evaluation_mode": "turn_1_eval_with_scripted_trajectory",
+    "turn_1_target_status": "PENDING_CLARIFICATION_CUE",
+    "scripted_multi_turn_trajectory": [
+      {
+        "turn": 1,
+        "input": "When I have a bit of time, I want to review the Networks slides.",
+        "expected_response_type": "request_situational_cue",
+        "expected_state": "PENDING_CLARIFICATION_CUE"
+      },
+      {
+        "turn": 2,
+        "input": "Tomorrow afternoon at 15:00 when I sit down at the desk in my room.",
+        "expected_response_type": "formulate_plan_and_request_confirmation",
+        "expected_state": "TERMINAL_CONFIRMATION_PENDING"
+      }
+    ],
+    "terminal_status_expected": "TERMINAL_CONFIRMATION_PENDING"
+  },
+  "available_facts": [
+    "Objective: Review Computer Networks",
+    "Supplied cue (vague): When I have a bit of time",
+    "Supplied action: Review the Networks slides"
+  ],
+  "missing_facts": [
+    "Specific, identifiable situational cue"
+  ],
+  "applicable_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "forbidden_support_policies": [],
+  "expected_observables": [
+    "policy_activated == true",
+    "clarification_requested == true",
+    "missing_elements contains 'cue'",
+    "cue_specificity == 'vague'",
+    "plan_formulated == null",
+    "confirmation_status in ['pending', 'not_reached']"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Treating a vague cue ('when I have a bit of time') as operational by directly formulating the plan.",
+      "severity": "major"
+    },
+    {
+      "action": "Inventing a specific cue for the user without asking.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "The policy activates on recognizing the intention to plan.",
+        "FAIL": "The policy ignores the request or does not activate."
+      }
+    },
+    {
+      "dimension": "D2_CUE_SPECIFICITY",
+      "anchors": {
+        "1": "The system accepts the vague cue without asking for clarification.",
+        "2": "The system flags vagueness but suggests options without asking.",
+        "3": "The system identifies the vagueness and asks the user to specify a concrete time or situation."
+      }
+    },
+    {
+      "dimension": "D3_ACTION_OBSERVABILITY",
+      "anchors": {
+        "1": "The system ignores or distorts the supplied action.",
+        "2": "The system partially preserves the action.",
+        "3": "The system preserves the user's stated action while awaiting a specific cue."
+      }
+    },
+    {
+      "dimension": "D4_NON_INVENTION",
+      "anchors": {
+        "PASS": "The system does not invent times or fictional situations.",
+        "FAIL": "The system assigns a cue the user did not choose."
+      }
+    },
+    {
+      "dimension": "D5_CONFIRMATION",
+      "anchors": {
+        "PASS": "No premature confirmation requested before completing the cue.",
+        "FAIL": "The system requests confirmation of an incomplete or vague plan."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY",
+      "anchors": {
+        "PASS": "The clarification request is open and non-directive.",
+        "FAIL": "The system forces a specific time option."
+      }
+    }
+  ],
+  "evaluated_policy": "POL-01_IF_THEN_PLAN"
+}

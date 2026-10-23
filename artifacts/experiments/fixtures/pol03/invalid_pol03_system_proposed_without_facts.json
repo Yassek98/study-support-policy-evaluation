@@ -1,0 +1,38 @@
+{
+  "scenario_id": "SCN-DEV-POL03-01",
+  "policy_id": "POL-03_ACCEPTED_NEXT_ACTION",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-17T20:00:00Z",
+  "system_response": "Azione di sistema dichiarata da fatti ma nessun fatto presente.",
+  "decision_trace": [
+    {
+      "source": "POL-03",
+      "event": "INVALID",
+      "details": "INVALID: SYSTEM_PROPOSED_FROM_DECLARED_FACTS with empty grounded_facts"
+    }
+  ],
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "clarification_requested": false,
+  "clarification_prompt": null,
+  "proposed_action": "Aprire il materiale e fare esercizi.",
+  "action_count": 1,
+  "action_observability": "observable",
+  "grounded_facts_used": [],
+  "action_record": {
+    "action_id": "ACT-INV-ADV-004",
+    "action_version": 1,
+    "action_text": "Aprire il materiale e fare esercizi.",
+    "action_source": "SYSTEM_PROPOSED_FROM_DECLARED_FACTS",
+    "grounded_facts": [],
+    "action_status": "ACTION_PROPOSED",
+    "accepted_version": null,
+    "explicit_user_evidence": null,
+    "created_at_turn": 1,
+    "updated_at_turn": 1
+  },
+  "pol01_handoff_ready": false,
+  "user_evidence_recorded": null,
+  "turn_status": "ACTION_PROPOSED_PENDING_CONFIRMATION",
+  "safety_violations": []
+}

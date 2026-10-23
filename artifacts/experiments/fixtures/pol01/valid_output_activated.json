@@ -1,0 +1,34 @@
+{
+  "scenario_id": "SCN-DEV-POL01-01",
+  "policy_id": "POL-01_IF_THEN_PLAN",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-16T18:00:00Z",
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "cue": {
+    "identified": "Domani dopo pranzo, quando mi siedo alla scrivania",
+    "source": "user_provided",
+    "specificity": "specific"
+  },
+  "action": {
+    "identified": "Aprire il libro di Analisi 2 al capitolo sulle serie e fare i primi tre esercizi",
+    "source": "user_provided",
+    "observability": "observable"
+  },
+  "missing_elements": [],
+  "clarification_requested": false,
+  "plan": {
+    "formulated": "Quando domani dopo pranzo ti siedi alla scrivania, allora aprirai il libro di Analisi 2 al capitolo sulle serie e farai i primi tre esercizi.",
+    "confirmation_status": "pending",
+    "user_response": null
+  },
+  "system_response": "Ottimo piano. Ricapitolando: quando domani dopo pranzo ti siedi alla scrivania, allora aprirai il libro di Analisi 2 al capitolo sulle serie e farai i primi tre esercizi. Ti va bene formulato cosi o preferisci modificare qualcosa?",
+  "violations": [],
+  "decision_trace": [
+    {
+      "source": "POL-01",
+      "event": "STEP_7_REACHED",
+      "details": "Piano formulato con cue e azione forniti dall'utente; richiesta conferma esplicita."
+    }
+  ]
+}

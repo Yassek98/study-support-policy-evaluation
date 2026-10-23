@@ -1,0 +1,89 @@
+{
+  "scenario_id": "SCN-DEV-POL02-09",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "disciplinary content question non-activation",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "BOUNDARY_CASE",
+  "source_claims": [
+    "CLM-04"
+  ],
+  "oracle_ref": "ORACLE-POL02.v0.1.0.json",
+  "user_message": "Can you explain the conceptual difference between a mutex and a semaphore in Operating Systems?",
+  "initial_state": {
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "session_status": "in_progress",
+    "terminal_status_expected": "CONTENT_SUPPORT_PROVIDED"
+  },
+  "available_facts": [
+    "Subject: Operating Systems",
+    "Conceptual question: difference between a mutex and a semaphore",
+    "State: subject-content request outside procedural-support scope"
+  ],
+  "missing_facts": [],
+  "applicable_support_policies": [],
+  "forbidden_support_policies": [
+    "POL-01_IF_THEN_PLAN",
+    "POL-02_GRADED_SCAFFOLD",
+    "POL-03_ACCEPTED_NEXT_ACTION"
+  ],
+  "expected_observables": [
+    "policy_activated == false",
+    "non_activation_reason == 'content_request_disciplinary_tutoring'",
+    "turn_status == 'NOT_APPLICABLE'",
+    "level_after == 0",
+    "support_move == 'NONE'"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Activating POL-02 with orientation questions or scaffolding levels for an academic content question.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "The policy does NOT activate for subject-content conceptual questions.",
+        "FAIL": "False positive: inappropriate POL-02 activation for a theoretical request."
+      }
+    },
+    {
+      "dimension": "D2_PROPORTIONALITY",
+      "anchors": {
+        "PASS": "Level 0 and no procedural over-assistance.",
+        "FAIL": "Unrequested scaffolding levels provided."
+      }
+    },
+    {
+      "dimension": "D3_TRANSITION_INTEGRITY",
+      "anchors": {
+        "PASS": "NOT_APPLICABLE transition correctly recorded.",
+        "FAIL": "Inconsistent state."
+      }
+    },
+    {
+      "dimension": "D4_GROUNDING_ON_FACTS",
+      "anchors": {
+        "PASS": "No manipulation or invention of facts.",
+        "FAIL": "Study options invented."
+      }
+    },
+    {
+      "dimension": "D5_ROLE_SEPARATION",
+      "anchors": {
+        "PASS": "Recognition of the boundary between procedural support and subject tutoring.",
+        "FAIL": "Role confusion."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY_FADING_STOP",
+      "anchors": {
+        "PASS": "No procedural interference.",
+        "FAIL": "Study paths imposed."
+      }
+    }
+  ],
+  "evaluated_policy": "POL-02_GRADED_SCAFFOLD"
+}

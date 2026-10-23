@@ -1,0 +1,46 @@
+{
+  "configuration_id": "S_P1",
+  "version": "0.1.0",
+  "status": "CANDIDATE",
+  "architecture": {
+    "type": "SINGLE_AGENT",
+    "agent_count": 1
+  },
+  "experimental_factors": {
+    "P1_POL01": true,
+    "P2_POL02": false,
+    "P3_POL03": false
+  },
+  "support_policy_refs": [
+    "policies/POL-01_IF_THEN_PLAN.v0.1.0.json"
+  ],
+  "safety_policy_refs": [
+    "policies/POL-04_AUTONOMY_GATE.v0.1.0.json",
+    "policies/POL-05_HUMAN_BOUNDARY.v0.1.0.json"
+  ],
+  "prompt_modules": {
+    "base": "prompts/modules/BASE_AGENT.v0.1.0.md",
+    "support": [
+      "prompts/modules/POL-01_IF_THEN_PLAN.v0.1.0.md"
+    ],
+    "safety": [
+      "prompts/modules/POL-04_AUTONOMY_GATE.v0.1.0.md",
+      "prompts/modules/POL-05_HUMAN_BOUNDARY.v0.1.0.md"
+    ],
+    "output_contract": "prompts/modules/OUTPUT_AND_TRACE_CONTRACT.v0.1.0.md"
+  },
+  "state_schema_refs": [
+    "schemas/safety_state.schema.json"
+  ],
+  "output_schema_refs": [
+    "schemas/pol01_output.schema.json",
+    "schemas/safety_envelope_output.schema.json"
+  ],
+  "oracle_refs": [
+    "oracle/ORACLE-POL01.v0.1.0.json",
+    "oracle/ORACLE-POL04.v0.1.0.json",
+    "oracle/ORACLE-POL05.v0.1.0.json"
+  ],
+  "freeze_status": "NOT_FROZEN",
+  "initial_state_defaults_ref": "configurations/DEFAULT_INITIAL_STATES.v0.1.0.json"
+}

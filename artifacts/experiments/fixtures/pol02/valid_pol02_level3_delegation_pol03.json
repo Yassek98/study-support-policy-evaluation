@@ -1,0 +1,82 @@
+{
+  "scenario_id": "SCN-DEV-POL02-05",
+  "configuration_context": {
+    "pol03_enabled": true
+  },
+  "policy_id": "POL-02_GRADED_SCAFFOLD",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-24T18:20:00Z",
+  "system_response": "Per sbloccare la situazione procedurale, possiamo definire un primo passo concreto immediato basato sulle slide del capitolo 2.",
+  "decision_trace": [
+    {
+      "source": "POL-02",
+      "event": "CHECK_APPLICABILITY",
+      "details": "CHECK_APPLICABILITY: User requested maximum process structure while POL-03 is ON"
+    },
+    {
+      "source": "POL-02",
+      "event": "ASSESS_SIGNAL",
+      "details": "ASSESS_SIGNAL: MORE_HELP_REQUESTED"
+    },
+    {
+      "source": "POL-02",
+      "event": "SELECT_LEVEL",
+      "details": "SELECT_LEVEL: Level 3 (Maximum Process Structure with Delegation)"
+    },
+    {
+      "source": "POL-02",
+      "event": "TRANSITION",
+      "details": "TRANSITION: ESCALATE from 2 to 3"
+    },
+    {
+      "source": "POL-02",
+      "event": "DELEGATION_CHECK",
+      "details": "DELEGATION_CHECK: POL-03 is active -> Request single action proposal from POL-03"
+    },
+    {
+      "source": "POL-02",
+      "event": "APPLY_MOVE",
+      "details": "APPLY_MOVE: DELEGATE_TO_POL03 without generating action_record in POL-02"
+    },
+    {
+      "source": "POL-02",
+      "event": "RECORD_STATE",
+      "details": "RECORD_STATE: scaffold_level=3, pol03_delegation_requested=true, stop_status=ACTIVE"
+    }
+  ],
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "level_before": 2,
+  "level_after": 3,
+  "transition": "ESCALATE",
+  "transition_reason": "USER_REQUESTED_MORE_STRUCTURE",
+  "user_signal": "MORE_HELP_REQUESTED",
+  "support_move": "DELEGATE_TO_POL03",
+  "orientation_question": null,
+  "declared_options_used": [],
+  "process_structure": "Delega a POL-03 per la formulazione di un micro-passo operativo sui fatti dichiarati.",
+  "grounded_facts_used": [
+    "capitolo 2",
+    "slide di Algoritmi"
+  ],
+  "pol03_delegation_requested": true,
+  "scaffold_state": {
+    "scaffold_version": 3,
+    "current_level": 3,
+    "previous_level": 2,
+    "transition": "ESCALATE",
+    "transition_reason": "USER_REQUESTED_MORE_STRUCTURE",
+    "user_signal": "MORE_HELP_REQUESTED",
+    "support_move": "DELEGATE_TO_POL03",
+    "grounded_facts": [
+      "capitolo 2",
+      "slide di Algoritmi"
+    ],
+    "pol03_delegation_requested": true,
+    "stop_status": "ACTIVE",
+    "created_at_turn": 1,
+    "updated_at_turn": 3
+  },
+  "turn_status": "PENDING_POL03",
+  "safety_violations": []
+}

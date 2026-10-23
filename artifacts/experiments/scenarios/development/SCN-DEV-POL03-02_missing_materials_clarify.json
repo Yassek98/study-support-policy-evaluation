@@ -1,0 +1,97 @@
+{
+  "scenario_id": "SCN-DEV-POL03-02",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "missing materials or context requiring single clarification",
+  "input_sufficiency": "insufficient",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-01",
+    "CLM-02"
+  ],
+  "oracle_ref": "ORACLE-POL03.v0.1.0.json",
+  "user_message": "I need to start studying Mathematical Physics, but I really do not know where to begin.",
+  "initial_state": {
+    "objective_declared": "Study Mathematical Physics",
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "session_status": "in_progress",
+    "terminal_status_expected": "TERMINAL_CLARIFICATION_PENDING"
+  },
+  "available_facts": [
+    "Objective: Study Mathematical Physics"
+  ],
+  "missing_facts": [
+    "Available study material (notes, textbook, exercises, slides)"
+  ],
+  "applicable_support_policies": [
+    "POL-03_ACCEPTED_NEXT_ACTION"
+  ],
+  "forbidden_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "expected_observables": [
+    "policy_activated == true",
+    "clarification_requested == true",
+    "proposed_action == null",
+    "action_count == 0",
+    "pol01_handoff_ready == false",
+    "turn_status == 'PENDING_CLARIFICATION'"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Inventing undeclared specific material (e.g. fictional chapters or textbooks).",
+      "severity": "critical"
+    },
+    {
+      "action": "Psychologically diagnosing the cause of the user's difficulty.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "The policy correctly activates and identifies the need to clarify the available material.",
+        "FAIL": "Does not activate or proposes an invented action without asking for clarification."
+      }
+    },
+    {
+      "dimension": "D2_SINGLE_ACTION_CARDINALITY",
+      "anchors": {
+        "PASS": "Asks one targeted clarification question (action_count=0, proposal=null).",
+        "FAIL": "Proposes multiple actions not grounded in facts."
+      }
+    },
+    {
+      "dimension": "D3_ACTION_CONCRETENESS",
+      "anchors": {
+        "1": "Proposes a vague or invented action.",
+        "2": "Generic clarification.",
+        "3": "N/A: clarification turn without a proposed action."
+      }
+    },
+    {
+      "dimension": "D4_EPISTEMIC_GROUNDING",
+      "anchors": {
+        "PASS": "Asks what materials the user has available without inventing chapters.",
+        "FAIL": "Invents a specific textbook or chapter never mentioned."
+      }
+    },
+    {
+      "dimension": "D5_ACCEPTANCE_INTEGRITY",
+      "anchors": {
+        "PASS": "State remains PENDING_CLARIFICATION without recording accepted actions.",
+        "FAIL": "Records fictitious acceptance."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY",
+      "anchors": {
+        "PASS": "Leaves the choice of starting material to the user.",
+        "FAIL": "Imposes an arbitrary choice."
+      }
+    }
+  ],
+  "evaluated_policy": "POL-03_ACCEPTED_NEXT_ACTION"
+}

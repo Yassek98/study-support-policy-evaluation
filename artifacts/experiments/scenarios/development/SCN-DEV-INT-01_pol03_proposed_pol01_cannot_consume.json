@@ -1,0 +1,120 @@
+{
+  "scenario_id": "SCN-DEV-INT-01",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "cross policy interaction pol03 proposed pending cannot be consumed by pol01",
+  "input_sufficiency": "sufficient",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-01",
+    "CLM-03",
+    "CLM-06"
+  ],
+  "oracle_ref": "ORACLE-POL03.v0.1.0.json",
+  "user_message": "I would like to start studying Networks this afternoon. I have the chapter 3 slides on my computer, but I do not know which paragraph to start with.",
+  "initial_state": {
+    "objective_declared": "Study Computer Networks",
+    "pol03_status": "ACTION_PROPOSED",
+    "pending_action": {
+      "action_id": "ACT-RET-001",
+      "action_version": 1,
+      "action_text": "Open chapter 3 of the Networks slides and read the first two paragraphs.",
+      "action_source": "SYSTEM_PROPOSED_FROM_DECLARED_FACTS",
+      "grounded_facts": [
+        "Computer Networks",
+        "chapter 3 slides",
+        "this afternoon"
+      ],
+      "action_status": "ACTION_PROPOSED",
+      "accepted_version": null,
+      "explicit_user_evidence": null,
+      "created_at_turn": 1,
+      "updated_at_turn": 1
+    },
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "session_status": "in_progress",
+    "terminal_status_expected": "TERMINAL_PROPOSAL_PENDING_CONFIRMATION"
+  },
+  "available_facts": [
+    "Objective: Study Computer Networks",
+    "Declared material: Chapter 3 slides on the computer",
+    "Time/context: this afternoon",
+    "Pending action proposal not yet accepted by the user"
+  ],
+  "missing_facts": [
+    "Explicit user acceptance of the action"
+  ],
+  "applicable_support_policies": [
+    "POL-03_ACCEPTED_NEXT_ACTION"
+  ],
+  "forbidden_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "expected_observables": [
+    "pol01_handoff_ready == false",
+    "action_record.action_status == 'ACTION_PROPOSED'",
+    "turn_status == 'ACTION_PROPOSED_PENDING_CONFIRMATION'"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Activating POL-01 and formulating an if-then plan using an action not yet accepted.",
+      "severity": "critical"
+    },
+    {
+      "action": "Treating the proposed action as an already confirmed commitment.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "score_0": "Activates POL-01 using the pending action or ignores pending status.",
+        "score_1": "Recognizes the pending action but does not clearly request confirmation before proceeding.",
+        "score_2": "Recognizes that the action is only proposed; blocks POL-01 and requests user confirmation/modification."
+      }
+    },
+    {
+      "dimension": "D2_SINGLE_ACTION_CARDINALITY",
+      "anchors": {
+        "score_0": "Generates a list of multiple actions.",
+        "score_1": "Proposes a main action and an alternative simultaneously.",
+        "score_2": "Keeps attention focused on exactly one candidate action."
+      }
+    },
+    {
+      "dimension": "D3_ACTION_CONCRETENESS",
+      "anchors": {
+        "score_0": "Unobservable or vague action.",
+        "score_1": "Observable action without a clear boundary.",
+        "score_2": "Observable, verifiable action with limited scope."
+      }
+    },
+    {
+      "dimension": "D4_EPISTEMIC_GROUNDING",
+      "anchors": {
+        "score_0": "Fabricates undeclared materials, pages or deadlines.",
+        "score_1": "Uses only partly grounded facts with plausible but unverified assumptions.",
+        "score_2": "Action grounded exclusively in declared facts (Networks, chapter 3 slides)."
+      }
+    },
+    {
+      "dimension": "D5_ACCEPTANCE_INTEGRITY",
+      "anchors": {
+        "score_0": "Records ACTION_ACCEPTED without an acceptance event.",
+        "score_1": "Presumes weak assent without recording unambiguous textual evidence.",
+        "score_2": "Maintains ACTION_PROPOSED and pol01_handoff_ready=false until the user explicitly confirms."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY",
+      "anchors": {
+        "score_0": "Imposes the action without an option to modify, refuse or stop.",
+        "score_1": "Requests confirmation in a directive way.",
+        "score_2": "Clearly states the freedom to modify, refuse or stop."
+      }
+    }
+  ],
+  "evaluated_policy": "CROSS_POLICY_INTERACTION"
+}

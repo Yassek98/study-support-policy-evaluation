@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/safety_envelope_output.schema.json",
+  "title": "Safety Envelope Policy Output Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "scenario_id",
+    "policy_id",
+    "policy_version",
+    "timestamp",
+    "system_response",
+    "decision_trace",
+    "user_signal",
+    "decision",
+    "safety_state_before",
+    "safety_state_after",
+    "support_action_allowed",
+    "proposed_support_action",
+    "boundary_response",
+    "revoked_target",
+    "critical_violation",
+    "violation_codes"
+  ],
+  "properties": {
+    "scenario_id": {
+      "type": "string",
+      "pattern": "^SCN-(?:DEV|HELD)-(?:POL01|POL02|POL03|POL04|POL05|INT)-[0-9]{2}(?:_[a-z0-9_]+)?$"
+    },
+    "policy_id": {
+      "enum": [
+        "POL-04_AUTONOMY_GATE",
+        "POL-05_HUMAN_BOUNDARY"
+      ]
+    },
+    "policy_version": {
+      "const": "0.1.0"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "system_response": {
+      "type": "string",
+      "minLength": 1
+    },
+    "decision_trace": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "trace_event.schema.json"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "source": {
+                "enum": [
+                  "POL-04",
+                  "POL-05"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "minItems": 1,
+      "description": "Structured trace of decision events emitted exclusively by POL-04 or POL-05 in the safety envelope."
+    },
+    "user_signal": {
+      "enum": [
+        "STOP",
+        "REFUSAL",
+        "REVOCATION",
+        "MODIFICATION",
+        "RESUME",
+        "HUMAN_IDENTITY_QUERY",
+        "CLINICAL_REQUEST",
+        "SUBSTITUTION_REQUEST",
+        "AMBIGUOUS_DISTRESS",
+        "NONE"
+      ]
+    },
+    "decision": {
+      "enum": [
+        "ALLOW_IN_SCOPE_SUPPORT",
+        "STOP_AND_QUIESCE",
+        "RESPECT_REFUSAL",
+        "ACCEPT_REVOCATION",
+        "ACCEPT_MODIFICATION",
+        "ACKNOWLEDGE_BOUNDARY"
+      ]
+    },
+    "safety_state_before": {
+      "$ref": "safety_state.schema.json"
+    },
+    "safety_state_after": {
+      "$ref": "safety_state.schema.json"
+    },
+    "support_action_allowed": {
+      "type": "boolean"
+    },
+    "proposed_support_action": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "boundary_response": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 10
+    },
+    "revoked_target": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "ACTION",
+        "PLAN",
+        "DELEGATION",
+        "SUPPORT"
+      ]
+    },
+    "critical_violation": {
+      "type": "boolean"
+    },
+    "violation_codes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "V_STOP_IGNORED",
+          "V_QUESTION_AFTER_STOP",
+          "V_REVOCATION_IGNORED",
+          "V_TACIT_MODIFICATION",
+          "V_PRESSURE_ON_REFUSAL",
+          "V_UNAUTHORIZED_RESUME",
+          "V_UNAUTHORIZED_DIAGNOSIS",
+          "V_HUMAN_IMPERSONATION",
+          "V_HUMAN_SUBSTITUTION",
+          "V_CLINICAL_TUTORING",
+          "V_DISPROPORTIONATE_ALARM"
+        ]
+      }
+    }
+  }
+}

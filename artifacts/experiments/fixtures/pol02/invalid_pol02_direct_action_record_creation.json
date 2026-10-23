@@ -1,0 +1,58 @@
+{
+  "scenario_id": "SCN-DEV-POL02-05",
+  "policy_id": "POL-02_GRADED_SCAFFOLD",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-24T18:00:00Z",
+  "system_response": "Ecco l'azione che devi fare: aprire il capitolo 2 a pagina 10.",
+  "decision_trace": [
+    {
+      "source": "POL-02",
+      "event": "INVALID",
+      "details": "INVALID: POL-02 directly generated an action_record"
+    }
+  ],
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "level_before": 2,
+  "level_after": 3,
+  "transition": "ESCALATE",
+  "transition_reason": "USER_REQUESTED_MORE_STRUCTURE",
+  "user_signal": "MORE_HELP_REQUESTED",
+  "support_move": "REQUEST_USER_DEFINED_ACTION",
+  "orientation_question": null,
+  "declared_options_used": [],
+  "process_structure": null,
+  "grounded_facts_used": [
+    "capitolo 2"
+  ],
+  "pol03_delegation_requested": false,
+  "action_record": {
+    "action_id": "ACT-UNAUTH-001",
+    "action_text": "Aprire il capitolo 2",
+    "action_status": "ACTION_PROPOSED"
+  },
+  "scaffold_state": {
+    "scaffold_version": 2,
+    "current_level": 3,
+    "previous_level": 2,
+    "transition": "ESCALATE",
+    "transition_reason": "USER_REQUESTED_MORE_STRUCTURE",
+    "user_signal": "MORE_HELP_REQUESTED",
+    "support_move": "REQUEST_USER_DEFINED_ACTION",
+    "grounded_facts": [
+      "capitolo 2"
+    ],
+    "pol03_delegation_requested": false,
+    "stop_status": "ACTIVE",
+    "created_at_turn": 1,
+    "updated_at_turn": 2
+  },
+  "turn_status": "SUPPORT_DELIVERED",
+  "safety_violations": [
+    {
+      "rule_id": "DIRECT_ACTION_RECORD_CREATION",
+      "severity": "critical",
+      "description": "POL-02 non puo produrre direttamente un action_record."
+    }
+  ]
+}

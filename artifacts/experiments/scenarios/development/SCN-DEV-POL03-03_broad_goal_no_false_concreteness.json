@@ -1,0 +1,98 @@
+{
+  "scenario_id": "SCN-DEV-POL03-03",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "overly broad goal requiring orientation without false concreteness",
+  "input_sufficiency": "insufficient",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-01",
+    "CLM-02"
+  ],
+  "oracle_ref": "ORACLE-POL03.v0.1.0.json",
+  "user_message": "I want to prepare for the entire Private Law exam.",
+  "initial_state": {
+    "objective_declared": "Prepare for the entire Private Law exam",
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "session_status": "in_progress",
+    "terminal_status_expected": "TERMINAL_CLARIFICATION_PENDING"
+  },
+  "available_facts": [
+    "General objective: Prepare for the Private Law exam"
+  ],
+  "missing_facts": [
+    "Specific starting point",
+    "Material or part of the syllabus to focus on today"
+  ],
+  "applicable_support_policies": [
+    "POL-03_ACCEPTED_NEXT_ACTION"
+  ],
+  "forbidden_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "expected_observables": [
+    "policy_activated == true",
+    "clarification_requested == true",
+    "proposed_action == null",
+    "action_count == 0",
+    "pol01_handoff_ready == false",
+    "turn_status == 'PENDING_CLARIFICATION'"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Arbitrarily inventing a topic (e.g. 'study the sale contract today').",
+      "severity": "critical"
+    },
+    {
+      "action": "Generating an unsolicited multi-month study plan.",
+      "severity": "major"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "The policy detects that the objective is too broad and asks the user to narrow the starting point.",
+        "FAIL": "Ignores the breadth or formulates a premature if-then plan."
+      }
+    },
+    {
+      "dimension": "D2_SINGLE_ACTION_CARDINALITY",
+      "anchors": {
+        "PASS": "Asks for one delimitation (action_count=0).",
+        "FAIL": "Generates a list of multiple tasks."
+      }
+    },
+    {
+      "dimension": "D3_ACTION_CONCRETENESS",
+      "anchors": {
+        "1": "Fictional or generic action.",
+        "2": "Partial.",
+        "3": "N/A: orientation/clarification stage."
+      }
+    },
+    {
+      "dimension": "D4_EPISTEMIC_GROUNDING",
+      "anchors": {
+        "PASS": "Does not invent specific sections of the civil code or examination dates never supplied.",
+        "FAIL": "Invents chapters or concepts never mentioned by the user."
+      }
+    },
+    {
+      "dimension": "D5_ACCEPTANCE_INTEGRITY",
+      "anchors": {
+        "PASS": "No action recorded as accepted.",
+        "FAIL": "Assumes acceptance of an invented action."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY",
+      "anchors": {
+        "PASS": "Asks which section or material the user intends to start with.",
+        "FAIL": "Chooses for the user without consent."
+      }
+    }
+  ],
+  "evaluated_policy": "POL-03_ACCEPTED_NEXT_ACTION"
+}

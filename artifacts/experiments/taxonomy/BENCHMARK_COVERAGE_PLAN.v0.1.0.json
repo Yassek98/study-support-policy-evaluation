@@ -1,0 +1,47 @@
+{
+  "version": "0.1.0",
+  "status": "METHOD_FROZEN_FOR_WP10_CONSTRUCTION",
+  "purpose": "Behavioural obligations only; this file contains no held-out scenario text or answer keys.",
+  "authority": "Candidate delegated method decisions on 2026-09-11; protocol D04/D05.",
+  "realizations_per_obligation": 2,
+  "realization_rule": "Two independently authored situations per obligation, differing in substantive context or required evidence, not merely wording. Independent semantic review before sealing.",
+  "generation_draws_per_cell": 2,
+  "support_policy_factors": 3,
+  "family_weighting": "equal_family",
+  "scenario_allocation": {
+    "F01": 6,
+    "F02": 8,
+    "F03": 6,
+    "F04": 6,
+    "F05": 10,
+    "F06": 10,
+    "F07": 6,
+    "F08": 4,
+    "F09": 6,
+    "F10": 12
+  },
+  "judge_verification": {
+    "criteria": 5,
+    "ordinal_categories": 3,
+    "training_examples_per_criterion_category": 1,
+    "natural_items_per_family_configuration": 1,
+    "challenge_examples_per_criterion_category": 2,
+    "minimum_ordinal_alpha_per_criterion": 0.8,
+    "maximum_extreme_judge_reference_errors": 0,
+    "maximum_challenge_target_mismatches": 0,
+    "maximum_instrument_corrections_before_redesign": 1,
+    "status": "DESIGN_ONLY_NO_HUMAN_OR_JUDGE_VERIFICATION"
+  },
+  "families": [
+    {"id": "F01", "obligations": ["declared_goal_missing_material", "declared_material_missing_action", "broad_goal_requires_bounded_clarification"]},
+    {"id": "F02", "obligations": ["vague_situational_cue", "unobservable_action", "both_cue_and_action_missing", "concrete_cue_and_action_do_not_need_reclarification"]},
+    {"id": "F03", "obligations": ["explicit_next_action_request", "explicit_if_then_request_with_user_action", "explicit_acceptance_of_prior_proposal"]},
+    {"id": "F04", "obligations": ["minimal_orientation_request", "choice_among_user_declared_options", "guidance_request_with_insufficient_options"]},
+    {"id": "F05", "obligations": ["first_procedural_impasse", "repeated_impasse_from_declared_state", "explicit_request_for_more_structure", "autonomy_requires_fading", "maximum_scaffold_boundary"]},
+    {"id": "F06", "obligations": ["immediate_stop", "refusal_without_stop", "modification_not_tacit_acceptance", "revocation_of_accepted_commitment", "explicit_resume_after_stop"]},
+    {"id": "F07", "obligations": ["software_identity_question", "clinical_request_boundary", "human_relationship_substitution_request"]},
+    {"id": "F08", "obligations": ["ordinary_frustration_without_diagnosis", "ambiguous_distress_requires_proportionate_boundary"]},
+    {"id": "F09", "obligations": ["disciplinary_content_question", "autonomous_next_action_already_supplied", "confirmed_plan_without_requested_change"]},
+    {"id": "F10", "obligations": ["unaccepted_action_cannot_feed_plan", "accepted_action_can_feed_plan", "delegation_depends_on_enabled_policy", "no_delegation_before_scaffold_threshold", "fading_and_user_action_handoff", "stop_overrides_cross_policy_progress"]}
+  ]
+}

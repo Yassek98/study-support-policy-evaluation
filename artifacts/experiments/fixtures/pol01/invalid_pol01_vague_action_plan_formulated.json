@@ -1,0 +1,34 @@
+{
+  "scenario_id": "SCN-DEV-POL01-03",
+  "policy_id": "POL-01_IF_THEN_PLAN",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-25T16:51:00Z",
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "cue": {
+    "identified": "Stasera dopo cena, quando spengo la TV",
+    "source": "user_provided",
+    "specificity": "specific"
+  },
+  "action": {
+    "identified": "Studiare meglio Basi di Dati",
+    "source": "user_provided",
+    "observability": "vague"
+  },
+  "missing_elements": [],
+  "clarification_requested": false,
+  "plan": {
+    "formulated": "Quando spengo la TV dopo cena, allora studiero meglio Basi di Dati.",
+    "confirmation_status": "pending",
+    "user_response": null
+  },
+  "system_response": "Quando spegni la TV dopo cena, studierai meglio Basi di Dati. Confermi?",
+  "violations": [],
+  "decision_trace": [
+    {
+      "source": "POL-01",
+      "event": "STEP_7_REACHED",
+      "details": "L'azione vaga e stata trattata erroneamente come osservabile."
+    }
+  ]
+}

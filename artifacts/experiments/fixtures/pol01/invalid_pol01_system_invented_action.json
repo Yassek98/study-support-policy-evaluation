@@ -1,0 +1,34 @@
+{
+  "scenario_id": "SCN-DEV-POL01-03",
+  "policy_id": "POL-01_IF_THEN_PLAN",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-25T16:52:00Z",
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "cue": {
+    "identified": "Stasera dopo cena, quando spengo la TV",
+    "source": "user_provided",
+    "specificity": "specific"
+  },
+  "action": {
+    "identified": "Fare dieci esercizi SQL del capitolo 4",
+    "source": "system_invented",
+    "observability": "observable"
+  },
+  "missing_elements": [],
+  "clarification_requested": false,
+  "plan": {
+    "formulated": "Quando spegni la TV dopo cena, allora farai dieci esercizi SQL del capitolo 4.",
+    "confirmation_status": "pending",
+    "user_response": null
+  },
+  "system_response": "Ho deciso il passo: farai dieci esercizi SQL del capitolo 4. Confermi?",
+  "violations": [],
+  "decision_trace": [
+    {
+      "source": "POL-01",
+      "event": "STEP_7_REACHED",
+      "details": "Il sistema ha inventato autonomamente l'azione."
+    }
+  ]
+}

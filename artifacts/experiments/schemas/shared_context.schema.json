@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Shared initial conversational context",
+  "description": "Identical scenario-authored initial information across treatments. Not a reconstructed transcript or model-authored final state.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["context_version", "objective", "prior_facts", "prior_action", "prior_plan"],
+  "properties": {
+    "context_version": {"const": "1.0.0"},
+    "objective": {"type": ["string", "null"]},
+    "prior_facts": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "prior_action": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "object", "additionalProperties": false,
+         "required": ["text", "status", "acceptance_evidence"],
+         "properties": {
+           "text": {"type": "string", "minLength": 1},
+           "status": {"enum": ["ACTION_PROPOSED", "ACTION_ACCEPTED", "ACTION_REJECTED", "CLARIFICATION_PENDING", "UNKNOWN"]},
+           "acceptance_evidence": {"type": ["string", "null"]}
+         }}
+      ]
+    },
+    "prior_plan": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "object", "additionalProperties": false,
+         "required": ["cue", "action", "status"],
+         "properties": {
+           "cue": {"type": ["string", "null"]},
+           "action": {"type": ["string", "null"]},
+           "status": {"type": ["string", "null"]}
+         }}
+      ]
+    }
+  }
+}

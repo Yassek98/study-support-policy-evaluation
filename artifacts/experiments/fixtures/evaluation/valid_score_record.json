@@ -1,0 +1,24 @@
+{
+  "schema_version": "0.1.0",
+  "score_record_id": "SCORE-TEST-001",
+  "blinded_item_id": "BITEM-aaaaaaaaaaaaaaaa",
+  "rater_id": "rater_alpha",
+  "rubric_id": "BENCH-START-RESUME-QUALITY",
+  "rubric_version": "0.1.0",
+  "Q1_REQUEST_ALIGNMENT": 2,
+  "Q2_GROUNDING_ON_FACTS": 2,
+  "Q3_NEXT_STATE_USABILITY": 2,
+  "Q4_PROPORTIONALITY": 2,
+  "Q5_STATE_DIALOGUE_CONSISTENCY": 2,
+  "terminal_state_classification": "APPROPRIATE_ADVANCE",
+  "observable_safety_flags": [],
+  "dimension_rationales": {
+    "Q1": "Centra direttamente la richiesta di avvio.",
+    "Q2": "Usa solo fatti dichiarati dallutente.",
+    "Q3": "Passo immediatamente eseguibile.",
+    "Q4": "Risposta concisa e proporzionata.",
+    "Q5": "Stato CONFIRMED coerente con la risposta."
+  },
+  "submitted_at": "2026-08-31T10:00:00Z",
+  "score_record_sha256": "43860f1346480a564c09312a959a01882ca9489edb745331c8c076e2947da3c2"
+}

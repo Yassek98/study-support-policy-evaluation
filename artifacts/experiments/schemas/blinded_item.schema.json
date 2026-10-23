@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/blinded_item.schema.json",
+  "title": "Blinded Evaluation Item",
+  "description": "A single item presented to the rater. Contains no configuration, policy, runtime, oracle, or terminal-state metadata. Fail if any forbidden field is present.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "blind_batch_id",
+    "blinded_item_id",
+    "turn_context",
+    "system_response",
+    "normalized_state_after",
+    "item_content_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["0.1.0", "0.2.0", "0.3.0"]
+    },
+    "blind_batch_id": {
+      "type": "string",
+      "pattern": "^BATCH-[A-Z0-9_-]+$",
+      "description": "Opaque batch identifier. Never encodes scenario or configuration information."
+    },
+    "blinded_item_id": {
+      "type": "string",
+      "pattern": "^BITEM-[a-f0-9]{16,64}$",
+      "description": "HMAC-derived opaque identifier. Stable within the same key+batch; different across batches."
+    },
+    "turn_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["user_message"],
+      "properties": {
+        "objective": {"type": ["string", "null"]},
+        "prior_plan": {"$ref": "shared_context.schema.json#/properties/prior_plan"},
+        "user_message": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The user message that triggered the evaluated response."
+        },
+        "prior_user_declared_facts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Scenario-authored prior statements supplied in the model input, not facts inferred from its response or independently verified user history."
+        },
+        "prior_action": {
+          "description": "Prior input action text and commitment status, not a fact inferred from the evaluated response.",
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object", "additionalProperties": false,
+              "required": ["text", "status", "acceptance_evidence"],
+              "properties": {
+                "text": {"type": "string", "minLength": 1},
+                "status": {"enum": ["ACTION_PROPOSED", "ACTION_ACCEPTED", "ACTION_REJECTED", "CLARIFICATION_PENDING", "UNKNOWN"]},
+                "acceptance_evidence": {"type": ["string", "null"]}
+              }
+            }
+          ]
+        },
+        "normalized_state_before": {
+          "$ref": "#/$defs/NormalizedState",
+          "description": "Policy-agnostic session state before the agent response."
+        }
+      }
+    },
+    "system_response": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The verbatim agent response text. Never censored or paraphrased."
+    },
+    "normalized_state_after": {
+      "$ref": "#/$defs/NormalizedState",
+      "description": "Policy-agnostic session state after the agent response. Used for Q5."
+    },
+    "item_content_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 of the canonical JSON serialization of this item (excluding this field)."
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"schema_version": {"enum": ["0.2.0", "0.3.0"]}}},
+      "then": {
+        "properties": {
+          "turn_context": {
+            "required": ["prior_user_declared_facts", "prior_action", "normalized_state_before"],
+            "properties": {"normalized_state_before": {"$ref": "#/$defs/CommonRaterState"}}
+          },
+          "normalized_state_after": {"$ref": "#/$defs/CommonRaterState"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"schema_version": {"const": "0.3.0"}}},
+      "then": {"properties": {"turn_context": {"required": ["objective", "prior_plan"]}}}
+    }
+  ],
+  "$defs": {
+    "CommonRaterState": {
+      "properties": {
+        "plan_commitment": {"const": "NOT_OBSERVED"},
+        "action_commitment": {"const": "NOT_OBSERVED"},
+        "clarification_status": {"const": "NOT_OBSERVED"}
+      }
+    },
+    "NormalizedState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "session_control",
+        "plan_commitment",
+        "action_commitment",
+        "clarification_status",
+        "support_permission"
+      ],
+      "description": "Policy-agnostic projection of session state. All fields always present. Identical structure for B0 through B1.",
+      "properties": {
+        "session_control": {
+          "type": "string",
+          "enum": ["ACTIVE", "STOPPED", "REFUSED", "REVOKED", "MODIFICATION_REQUESTED"]
+        },
+        "plan_commitment": {
+          "type": "string",
+          "enum": ["NONE", "PENDING", "CONFIRMED", "NOT_OBSERVED"]
+        },
+        "action_commitment": {
+          "type": "string",
+          "enum": ["NONE", "PROPOSED", "ACCEPTED", "REJECTED", "NOT_OBSERVED"]
+        },
+        "clarification_status": {
+          "type": "string",
+          "enum": ["NONE", "REQUESTED", "NOT_OBSERVED"]
+        },
+        "support_permission": {
+          "type": "string",
+          "enum": ["ALLOWED", "BLOCKED"]
+        }
+      }
+    }
+  }
+}

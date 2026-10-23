@@ -1,0 +1,43 @@
+{
+  "scenario_id": "SCN-DEV-POL03-08",
+  "policy_id": "POL-03_ACCEPTED_NEXT_ACTION",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-17T20:10:00Z",
+  "system_response": "Ecco la spiegazione del concetto richiesto...",
+  "decision_trace": [
+    {
+      "source": "POL-03",
+      "event": "CHECK_TRIGGER",
+      "details": "CHECK_TRIGGER: User asked a direct conceptual disciplinary question"
+    },
+    {
+      "source": "POL-03",
+      "event": "ROUTING_DECISION",
+      "details": "ROUTING_DECISION: Non-activation of POL-03 (action proposal), delegate to content response"
+    }
+  ],
+  "policy_activated": false,
+  "non_activation_reason": "content_request",
+  "clarification_requested": false,
+  "clarification_prompt": null,
+  "proposed_action": null,
+  "action_count": 0,
+  "action_observability": "missing",
+  "grounded_facts_used": [],
+  "action_record": {
+    "action_id": "ACT-NA-000",
+    "action_version": 1,
+    "action_text": null,
+    "action_source": "MISSING",
+    "grounded_facts": [],
+    "action_status": "NOT_APPLICABLE",
+    "accepted_version": null,
+    "explicit_user_evidence": null,
+    "created_at_turn": 1,
+    "updated_at_turn": 1
+  },
+  "pol01_handoff_ready": false,
+  "user_evidence_recorded": null,
+  "turn_status": "NOT_APPLICABLE",
+  "safety_violations": []
+}

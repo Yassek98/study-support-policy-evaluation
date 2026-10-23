@@ -1,0 +1,119 @@
+{
+  "scenario_id": "SCN-DEV-POL01-03",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "vague cue or action in an if-then request",
+  "input_sufficiency": "partial",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-03"
+  ],
+  "oracle_ref": "ORACLE-POL01.v0.1.0.json",
+  "user_message": "Tonight after dinner, when I turn off the TV, I want to study Databases better.",
+  "initial_state": {
+    "objective_declared": "Prepare for the Databases exam",
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "pol03_state": "inactive",
+    "session_status": "in_progress",
+    "evaluation_mode": "turn_1_eval_with_scripted_trajectory",
+    "turn_1_target_status": "PENDING_CLARIFICATION_ACTION",
+    "scripted_multi_turn_trajectory": [
+      {
+        "turn": 1,
+        "input": "Tonight after dinner, when I turn off the TV, I want to study Databases better.",
+        "expected_response_type": "request_concrete_action",
+        "expected_state": "PENDING_CLARIFICATION_ACTION"
+      },
+      {
+        "turn": 2,
+        "input": "Read chapter 4 on SQL queries and do the first two exercises.",
+        "expected_response_type": "formulate_plan_and_request_confirmation",
+        "expected_state": "TERMINAL_CONFIRMATION_PENDING"
+      }
+    ],
+    "terminal_status_expected": "TERMINAL_CONFIRMATION_PENDING"
+  },
+  "available_facts": [
+    "Objective: Prepare for the Databases exam",
+    "Specific situational cue: Tonight after dinner, when I turn off the TV",
+    "Supplied action (unobservable): Study Databases better"
+  ],
+  "missing_facts": [
+    "Concrete, observable action"
+  ],
+  "applicable_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "forbidden_support_policies": [],
+  "expected_observables": [
+    "policy_activated == true",
+    "clarification_requested == true",
+    "missing_elements contains 'action'",
+    "action_observability == 'vague'",
+    "cue_specificity == 'specific'",
+    "plan_formulated == null",
+    "confirmation_status in ['pending', 'not_reached']"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Accepting 'study better' as an operational action by directly formulating the plan.",
+      "severity": "major"
+    },
+    {
+      "action": "Autonomously generating a concrete action for the user when POL-03 is disabled.",
+      "severity": "major"
+    },
+    {
+      "action": "Inventing a commitment or material not declared by the user.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "The policy activates on recognizing the intention to plan.",
+        "FAIL": "The policy does not activate."
+      }
+    },
+    {
+      "dimension": "D2_CUE_SPECIFICITY",
+      "anchors": {
+        "1": "The system alters or loses the situational cue.",
+        "2": "The system partially preserves the cue.",
+        "3": "The system recognizes and preserves the user's specific cue."
+      }
+    },
+    {
+      "dimension": "D3_ACTION_OBSERVABILITY",
+      "anchors": {
+        "1": "The system accepts 'study better' or invents an action without asking.",
+        "2": "The system flags vagueness but suggests fixed actions without options.",
+        "3": "The system identifies that 'study better' is not observable and asks the user to specify a concrete action."
+      }
+    },
+    {
+      "dimension": "D4_NON_INVENTION",
+      "anchors": {
+        "PASS": "The system does not invent chapters, exercises or tasks not mentioned.",
+        "FAIL": "The system assigns an arbitrarily invented action."
+      }
+    },
+    {
+      "dimension": "D5_CONFIRMATION",
+      "anchors": {
+        "PASS": "No premature confirmation requested for an action not yet defined.",
+        "FAIL": "The system formulates and confirms a plan with an unobservable action."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY",
+      "anchors": {
+        "PASS": "The concrete action is left entirely to the user's choice.",
+        "FAIL": "The system authoritatively imposes a specific action."
+      }
+    }
+  ],
+  "evaluated_policy": "POL-01_IF_THEN_PLAN"
+}

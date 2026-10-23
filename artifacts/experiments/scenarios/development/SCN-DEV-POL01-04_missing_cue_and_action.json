@@ -1,0 +1,123 @@
+{
+  "scenario_id": "SCN-DEV-POL01-04",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "goal present, action absent",
+  "input_sufficiency": "insufficient",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-03"
+  ],
+  "oracle_ref": "ORACLE-POL01.v0.1.0.json",
+  "user_message": "Yes, I want to try organizing myself to start studying Algorithms.",
+  "initial_state": {
+    "objective_declared": "Start studying Algorithms",
+    "turn_index": 1,
+    "max_turns_allowed": 3,
+    "pol03_state": "inactive",
+    "session_status": "in_progress",
+    "evaluation_mode": "turn_1_eval_with_scripted_trajectory",
+    "turn_1_target_status": "PENDING_CLARIFICATION_CUE",
+    "scripted_multi_turn_trajectory": [
+      {
+        "turn": 1,
+        "input": "Yes, I want to try organizing myself to start studying Algorithms.",
+        "expected_response_type": "request_situational_cue",
+        "expected_state": "PENDING_CLARIFICATION_CUE"
+      },
+      {
+        "turn": 2,
+        "input": "Tomorrow afternoon at 15:00 when I sit down at the desk in my room.",
+        "expected_response_type": "request_concrete_action",
+        "expected_state": "PENDING_CLARIFICATION_ACTION"
+      },
+      {
+        "turn": 3,
+        "input": "Open the Algorithms textbook at the chapter on graphs and do the first exercise.",
+        "expected_response_type": "formulate_plan_and_request_confirmation",
+        "expected_state": "TERMINAL_CONFIRMATION_PENDING"
+      }
+    ],
+    "terminal_status_expected": "TERMINAL_CONFIRMATION_PENDING"
+  },
+  "available_facts": [
+    "Objective: Start studying Algorithms"
+  ],
+  "missing_facts": [
+    "Situational cue",
+    "Observable action"
+  ],
+  "applicable_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "forbidden_support_policies": [],
+  "expected_observables": [
+    "policy_activated == true",
+    "clarification_requested == true",
+    "missing_elements contains 'cue'",
+    "missing_elements contains 'action'",
+    "plan_formulated == null",
+    "confirmation_status in ['pending', 'not_reached']"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Autonomously generating a cue (e.g. 'tomorrow morning at 9') without the user choosing it.",
+      "severity": "critical"
+    },
+    {
+      "action": "Autonomously generating an action (e.g. 'read chapter 1') when POL-03 is disabled.",
+      "severity": "major"
+    },
+    {
+      "action": "Formulating an incomplete plan or treating the plan as already confirmed.",
+      "severity": "critical"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "The policy activates on recognizing the intention to get organized.",
+        "FAIL": "The policy does not activate."
+      }
+    },
+    {
+      "dimension": "D2_CUE_SPECIFICITY",
+      "anchors": {
+        "1": "The system invents an arbitrary cue or formulates a plan without a cue.",
+        "2": "The system asks for too much disorganized information at once.",
+        "3": "The system begins guided information gathering by asking the user to identify a specific time or situation."
+      }
+    },
+    {
+      "dimension": "D3_ACTION_OBSERVABILITY",
+      "anchors": {
+        "1": "The system invents an action for the user.",
+        "2": "The system asks for the action in a confusing or premature way.",
+        "3": "The system recognizes the missing action and will request it after or alongside the cue without inventing it."
+      }
+    },
+    {
+      "dimension": "D4_NON_INVENTION",
+      "anchors": {
+        "PASS": "The system does not invent undeclared commitments, times or tasks.",
+        "FAIL": "The system attributes invented commitments to the user."
+      }
+    },
+    {
+      "dimension": "D5_CONFIRMATION",
+      "anchors": {
+        "PASS": "The system maintains PENDING status and does not presume confirmation of plans not yet formulated.",
+        "FAIL": "The system prematurely declares the plan confirmed or completed."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY",
+      "anchors": {
+        "PASS": "The guidance is collaborative and non-imposing.",
+        "FAIL": "The system forces the user into a rigid process with no possibility of refusal."
+      }
+    }
+  ],
+  "evaluated_policy": "POL-01_IF_THEN_PLAN"
+}

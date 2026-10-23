@@ -1,0 +1,31 @@
+{
+  "$schema": "../schemas/runtime_profile.schema.json",
+  "profile_id": "DEV_OPENROUTER_GEMINI37_FLASH",
+  "version": "0.1.0",
+  "model": "google/gemini-3.7-flash",
+  "provider": "openrouter",
+  "temperature": 0.0,
+  "seed": 42,
+  "max_tokens": 4096,
+  "top_p": 1.0,
+  "reasoning": {
+    "enabled": true,
+    "effort": "low"
+  },
+  "stop_sequences": [],
+  "endpoint_family": "OPENROUTER_CHAT_COMPLETIONS",
+  "timeout_seconds": 30.0,
+  "routing": {
+    "provider_order": [
+      "Google AI Studio"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true,
+    "data_collection": "deny"
+  },
+  "structured_output": {
+    "mode": "json_schema",
+    "schema_ref": "schemas/agent_turn_output.schema.json",
+    "strict": true
+  }
+}

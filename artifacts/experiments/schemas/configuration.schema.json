@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/configuration.schema.json",
+  "title": "Experiment Configuration Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "configuration_id",
+    "version",
+    "status",
+    "architecture",
+    "experimental_factors",
+    "support_policy_refs",
+    "safety_policy_refs",
+    "prompt_modules",
+    "state_schema_refs",
+    "output_schema_refs",
+    "oracle_refs",
+    "initial_state_defaults_ref",
+    "freeze_status"
+  ],
+  "properties": {
+    "configuration_id": {
+      "enum": [
+        "B0_SIMPLE",
+        "S_P1",
+        "S_P2",
+        "S_P3",
+        "G_P1_P2",
+        "G_P1_P3",
+        "G_P2_P3",
+        "B1_FULL"
+      ]
+    },
+    "version": {
+      "const": "0.1.0"
+    },
+    "status": {
+      "const": "CANDIDATE"
+    },
+    "architecture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "agent_count"
+      ],
+      "properties": {
+        "type": {
+          "const": "SINGLE_AGENT"
+        },
+        "agent_count": {
+          "const": 1
+        }
+      }
+    },
+    "experimental_factors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "P1_POL01",
+        "P2_POL02",
+        "P3_POL03"
+      ],
+      "properties": {
+        "P1_POL01": {
+          "type": "boolean"
+        },
+        "P2_POL02": {
+          "type": "boolean"
+        },
+        "P3_POL03": {
+          "type": "boolean"
+        }
+      }
+    },
+    "support_policy_refs": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "policies/POL-01_IF_THEN_PLAN.v0.1.0.json",
+          "policies/POL-02_GRADED_SCAFFOLD.v0.1.0.json",
+          "policies/POL-03_ACCEPTED_NEXT_ACTION.v0.1.0.json"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "safety_policy_refs": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "policies/POL-04_AUTONOMY_GATE.v0.1.0.json",
+          "policies/POL-05_HUMAN_BOUNDARY.v0.1.0.json"
+        ]
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true
+    },
+    "prompt_modules": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base",
+        "support",
+        "safety",
+        "output_contract"
+      ],
+      "properties": {
+        "base": {
+          "const": "prompts/modules/BASE_AGENT.v0.1.0.md"
+        },
+        "safety": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "prompts/modules/POL-04_AUTONOMY_GATE.v0.1.0.md",
+              "prompts/modules/POL-05_HUMAN_BOUNDARY.v0.1.0.md"
+            ]
+          },
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true
+        },
+        "support": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "prompts/modules/POL-01_IF_THEN_PLAN.v0.1.0.md",
+              "prompts/modules/POL-02_GRADED_SCAFFOLD.v0.1.0.md",
+              "prompts/modules/POL-03_ACCEPTED_NEXT_ACTION.v0.1.0.md"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "output_contract": {
+          "const": "prompts/modules/OUTPUT_AND_TRACE_CONTRACT.v0.1.0.md"
+        }
+      }
+    },
+    "state_schema_refs": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "schemas/action_record.schema.json",
+          "schemas/scaffold_state.schema.json",
+          "schemas/safety_state.schema.json"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "output_schema_refs": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "schemas/pol01_output.schema.json",
+          "schemas/pol02_output.schema.json",
+          "schemas/pol03_output.schema.json",
+          "schemas/safety_envelope_output.schema.json"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "oracle_refs": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "oracle/ORACLE-POL01.v0.1.0.json",
+          "oracle/ORACLE-POL02.v0.1.0.json",
+          "oracle/ORACLE-POL03.v0.1.0.json",
+          "oracle/ORACLE-POL04.v0.1.0.json",
+          "oracle/ORACLE-POL05.v0.1.0.json"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "initial_state_defaults_ref": {
+      "type": "string",
+      "pattern": "^configurations/[A-Za-z0-9_\\-\\.]+\\.json$",
+      "description": "Riferimento all'artefatto versionato contenente gli stati iniziali di default congelati."
+    },
+    "freeze_status": {
+      "const": "NOT_FROZEN"
+    }
+  }
+}

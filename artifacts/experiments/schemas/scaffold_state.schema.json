@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.thesis.invalid/schemas/scaffold_state.schema.json",
+  "title": "POL-02 Graded Scaffold State Interface",
+  "description": "Formal schema for the persistent graded scaffolding state (POL-02) across session turns.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "scaffold_version",
+    "current_level",
+    "previous_level",
+    "transition",
+    "transition_reason",
+    "user_signal",
+    "support_move",
+    "grounded_facts",
+    "pol03_delegation_requested",
+    "stop_status",
+    "created_at_turn",
+    "updated_at_turn"
+  ],
+  "properties": {
+    "scaffold_version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Progressive version of the scaffolding state."
+    },
+    "current_level": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "Current procedural assistance level: 0 (autonomy), 1 (orientation question), 2 (criterion/options), 3 (structure/delegation)."
+    },
+    "previous_level": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 3,
+      "description": "Procedural assistance level of the previous turn (null for initial turn)."
+    },
+    "transition": {
+      "type": "string",
+      "enum": [
+        "HOLD",
+        "ESCALATE",
+        "FADE",
+        "RESET_TO_AUTONOMY",
+        "STOP",
+        "NOT_APPLICABLE"
+      ],
+      "description": "Type of level transition applied."
+    },
+    "transition_reason": {
+      "type": "string",
+      "enum": [
+        "INITIAL_MINIMUM_SUPPORT",
+        "USER_REQUESTED_ORIENTATION",
+        "USER_DECLARED_PERSISTENT_STALL",
+        "USER_REQUESTED_MORE_STRUCTURE",
+        "USER_FORMULATED_OWN_NEXT_STEP",
+        "USER_REQUESTED_INDEPENDENCE",
+        "USER_ALREADY_AUTONOMOUS_PLAN",
+        "USER_REFUSED_SUPPORT",
+        "CONTENT_REQUEST_OUT_OF_SCOPE",
+        "MISSING_OBSERVABLE_SIGNAL",
+        "NO_TRANSITION_INITIAL"
+      ],
+      "description": "Explicit observable rationale for the transition."
+    },
+    "user_signal": {
+      "type": "string",
+      "enum": [
+        "NO_ASSISTANCE_REQUESTED",
+        "NO_PRIOR_SIGNAL",
+        "ORIENTATION_REQUEST",
+        "PERSISTENT_STALL",
+        "MORE_HELP_REQUESTED",
+        "AUTONOMY_RESUMED",
+        "EXPLICIT_SELF_DIRECTION",
+        "REFUSAL",
+        "STOP_REQUEST",
+        "CONTENT_QUESTION",
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "description": "Observable dialogue signal expressed by the user in the turn."
+    },
+    "support_move": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "AUTONOMY_INVITATION",
+        "ASK_ORIENTATION_QUESTION",
+        "OFFER_SELECTION_CRITERION",
+        "OFFER_DECLARED_OPTIONS",
+        "PROVIDE_PROCESS_STRUCTURE",
+        "REQUEST_USER_DEFINED_ACTION",
+        "DELEGATE_TO_POL03",
+        "STOP_AND_ACKNOWLEDGE"
+      ],
+      "description": "Support move delivered by the system in the turn."
+    },
+    "grounded_facts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Facts and materials declared by the user used to calibrate scaffolding."
+    },
+    "pol03_delegation_requested": {
+      "type": "boolean",
+      "description": "True if and only if POL-02 requests POL-03 to propose a single candidate action (allowed only at Level 3 with POL-03 ON)."
+    },
+    "stop_status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "STOPPED"
+      ],
+      "description": "General activation status of POL-02: ACTIVE or STOPPED."
+    },
+    "created_at_turn": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Turn index in which the scaffolding state was initialized."
+    },
+    "updated_at_turn": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Turn index of the last update to the scaffolding state."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "stop_status": {
+            "const": "STOPPED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "current_level": {
+            "const": 0
+          },
+          "pol03_delegation_requested": {
+            "const": false
+          },
+          "transition": {
+            "const": "STOP"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "pol03_delegation_requested": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "current_level": {
+            "const": 3
+          },
+          "stop_status": {
+            "const": "ACTIVE"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "transition": {
+            "const": "ESCALATE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "previous_level": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  ]
+}

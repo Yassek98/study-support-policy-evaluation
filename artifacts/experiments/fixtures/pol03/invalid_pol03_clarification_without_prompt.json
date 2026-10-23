@@ -1,0 +1,38 @@
+{
+  "scenario_id": "SCN-DEV-POL03-02",
+  "policy_id": "POL-03_ACCEPTED_NEXT_ACTION",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-17T20:00:00Z",
+  "system_response": "Chiarimento richiesto impostato a true ma clarification_prompt nullo.",
+  "decision_trace": [
+    {
+      "source": "POL-03",
+      "event": "INVALID",
+      "details": "INVALID: clarification_requested=true with clarification_prompt=null"
+    }
+  ],
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "clarification_requested": true,
+  "clarification_prompt": null,
+  "proposed_action": null,
+  "action_count": 0,
+  "action_observability": "missing",
+  "grounded_facts_used": [],
+  "action_record": {
+    "action_id": "ACT-INV-ADV-006",
+    "action_version": 1,
+    "action_text": null,
+    "action_source": "MISSING",
+    "grounded_facts": [],
+    "action_status": "CLARIFICATION_PENDING",
+    "accepted_version": null,
+    "explicit_user_evidence": null,
+    "created_at_turn": 1,
+    "updated_at_turn": 1
+  },
+  "pol01_handoff_ready": false,
+  "user_evidence_recorded": null,
+  "turn_status": "PENDING_CLARIFICATION",
+  "safety_violations": []
+}

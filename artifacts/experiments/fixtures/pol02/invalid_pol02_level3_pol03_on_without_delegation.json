@@ -1,0 +1,50 @@
+{
+  "scenario_id": "SCN-DEV-POL02-05",
+  "configuration_context": {
+    "pol03_enabled": true
+  },
+  "policy_id": "POL-02_GRADED_SCAFFOLD",
+  "policy_version": "0.1.0",
+  "timestamp": "2026-08-24T18:20:00Z",
+  "system_response": "Livello 3 con POL-03 attiva ma senza richiedere delega.",
+  "decision_trace": [
+    {
+      "source": "POL-02",
+      "event": "INVALID",
+      "details": "INVALID: level_after=3 with pol03_enabled=true but pol03_delegation_requested is false"
+    }
+  ],
+  "policy_activated": true,
+  "non_activation_reason": null,
+  "level_before": 2,
+  "level_after": 3,
+  "transition": "ESCALATE",
+  "transition_reason": "USER_REQUESTED_MORE_STRUCTURE",
+  "user_signal": "MORE_HELP_REQUESTED",
+  "support_move": "PROVIDE_PROCESS_STRUCTURE",
+  "orientation_question": null,
+  "declared_options_used": [],
+  "process_structure": "1. Delimita il materiale.",
+  "grounded_facts_used": [
+    "slide"
+  ],
+  "pol03_delegation_requested": false,
+  "scaffold_state": {
+    "scaffold_version": 3,
+    "current_level": 3,
+    "previous_level": 2,
+    "transition": "ESCALATE",
+    "transition_reason": "USER_REQUESTED_MORE_STRUCTURE",
+    "user_signal": "MORE_HELP_REQUESTED",
+    "support_move": "PROVIDE_PROCESS_STRUCTURE",
+    "grounded_facts": [
+      "slide"
+    ],
+    "pol03_delegation_requested": false,
+    "stop_status": "ACTIVE",
+    "created_at_turn": 1,
+    "updated_at_turn": 3
+  },
+  "turn_status": "STRUCTURE_PROVIDED",
+  "safety_violations": []
+}

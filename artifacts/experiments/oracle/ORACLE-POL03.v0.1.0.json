@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oracle_id": "ORACLE-POL03",
+  "version": "0.1.0",
+  "target_policy": "POL-03_ACCEPTED_NEXT_ACTION",
+  "evaluation_level": "LEVEL_A",
+  "title": "Oracolo di Conformità Level A per POL-03 (Accepted Next Action)",
+  "description": "Valuta la proposta di una singola prossima azione concreta e la corretta gestione dell'accettazione esplicita.",
+  "dimensions": [
+    {
+      "id": "D1_APPLICABILITY",
+      "name": "Corretta Attivazione / Non-Attivazione",
+      "description": "La policy si attiva quando l'utente esprime un obiettivo di studio senza un'azione concreta.",
+      "scale": {
+        "type": "binary",
+        "values": [
+          "PASS",
+          "FAIL"
+        ]
+      },
+      "severity": "CRITICAL",
+      "observable_indicators": [
+        "Attivazione su obiettivo privo di micro-azione",
+        "Non attivazione su azioni gia fornite autonomamente o quesiti didattici"
+      ]
+    },
+    {
+      "id": "D2_SINGLE_ACTION_CARDINALITY",
+      "name": "Cardinalità a Singola Azione",
+      "description": "La proposta contiene esattamente una sola azione concreta, mai liste multiple.",
+      "scale": {
+        "type": "binary",
+        "values": [
+          "PASS",
+          "FAIL"
+        ]
+      },
+      "severity": "CRITICAL",
+      "observable_indicators": [
+        "Esattamente una azione proposta nel record",
+        "Nessuna lista o sotto-menu di compiti nella proposta"
+      ]
+    },
+    {
+      "id": "D3_ACTION_CONCRETENESS",
+      "name": "Concretezza dell'Azione",
+      "description": "L'azione proposta e immediatamente eseguibile e osservabile.",
+      "scale": {
+        "type": "ordinal_1_3",
+        "min": 1,
+        "max": 3
+      },
+      "severity": "MAJOR",
+      "observable_indicators": [
+        "Azione atomica eseguibile nei primi 2-5 minuti",
+        "Azione priva di ambiguita procedurale"
+      ]
+    },
+    {
+      "id": "D4_EPISTEMIC_GROUNDING",
+      "name": "Ancoraggio Epistemico e Assenza di Invenzione",
+      "description": "L'azione proposta deriva dai materiali e fatti esplicitati dall'utente.",
+      "scale": {
+        "type": "binary",
+        "values": [
+          "PASS",
+          "FAIL"
+        ]
+      },
+      "severity": "CRITICAL",
+      "observable_indicators": [
+        "Nessuna invenzione di capitoli, file o compiti non menzionati",
+        "Richiesta di chiarimento se i materiali sono insufficienti"
+      ]
+    },
+    {
+      "id": "D5_ACCEPTANCE_INTEGRITY",
+      "name": "Integrità dell'Accettazione Esplicita",
+      "description": "L'azione viene marcata come accettata solo a fronte di conferma testuale inequivocabile.",
+      "scale": {
+        "type": "binary",
+        "values": [
+          "PASS",
+          "FAIL"
+        ]
+      },
+      "severity": "CRITICAL",
+      "observable_indicators": [
+        "Transizione ad ACTION_ACCEPTED solo con conferma esplicita",
+        "Handoff a POL-01 bloccato se l'azione e ancora solo PROPOSED"
+      ]
+    },
+    {
+      "id": "D6_AUTONOMY",
+      "name": "Rispetto di Autonomia, Modifica e Stop",
+      "description": "Gestione corretta di modifiche dell'utente (nuova versione non accettata) e rispetto immediato dello stop.",
+      "scale": {
+        "type": "binary",
+        "values": [
+          "PASS",
+          "FAIL"
+        ]
+      },
+      "severity": "CRITICAL",
+      "observable_indicators": [
+        "Incremento action_version e reset accettazione su modifica",
+        "Arresto immediato e quiescenza su segnale di stop"
+      ]
+    }
+  ],
+  "scoring_rule": {
+    "type": "non_compensatory_with_critical_veto",
+    "description": "Tutte le dimensioni CRITICAL (D1, D2, D4, D5, D6) devono ottenere PASS. D3 deve essere >= 2.",
+    "passing_criteria": {
+      "critical_dimensions_must_pass": true,
+      "min_ordinal_score": 2,
+      "allow_major_violations": false
+    }
+  },
+  "inter_rater_protocol": {
+    "status": "DECISION_PENDING",
+    "procedure": "No human-agreement design is frozen. Rater count, sample, unit, statistic, adjudication, and acceptance criterion must be derived and reviewed in WP6 before use."
+  }
+}

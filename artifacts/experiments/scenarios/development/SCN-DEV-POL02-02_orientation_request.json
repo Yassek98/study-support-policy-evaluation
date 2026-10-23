@@ -1,0 +1,103 @@
+{
+  "scenario_id": "SCN-DEV-POL02-02",
+  "version": "0.2.0",
+  "split": "development",
+  "family": "orientation request at start",
+  "input_sufficiency": "partial",
+  "provenance_class": "LITERATURE_DERIVED_RATIONALE",
+  "source_claims": [
+    "CLM-04",
+    "CLM-06"
+  ],
+  "oracle_ref": "ORACLE-POL02.v0.1.0.json",
+  "user_message": "I want to study Algorithms today, but I do not know which topic to start looking at.",
+  "initial_state": {
+    "objective_declared": "Study Algorithms",
+    "turn_index": 1,
+    "max_turns_allowed": 2,
+    "session_status": "in_progress",
+    "terminal_status_expected": "TERMINAL_ORIENTATION_PENDING"
+  },
+  "available_facts": [
+    "Subject: Algorithms",
+    "State: the user requests initial orientation"
+  ],
+  "missing_facts": [
+    "Specific available materials",
+    "Preferred topics or current chapters"
+  ],
+  "applicable_support_policies": [
+    "POL-02_GRADED_SCAFFOLD"
+  ],
+  "forbidden_support_policies": [
+    "POL-01_IF_THEN_PLAN"
+  ],
+  "expected_observables": [
+    "policy_activated == true",
+    "level_after == 1",
+    "transition == 'ESCALATE'",
+    "support_move == 'ASK_ORIENTATION_QUESTION'",
+    "orientation_question != null",
+    "pol03_delegation_requested == false",
+    "turn_status == 'SUPPORT_DELIVERED'"
+  ],
+  "forbidden_actions": [
+    {
+      "action": "Asking more than one orientation question at a time.",
+      "severity": "minor"
+    },
+    {
+      "action": "Offering solutions or deciding the topic for the user.",
+      "severity": "critical"
+    },
+    {
+      "action": "Jumping directly to Level 3 without a persistent-stall signal.",
+      "severity": "major"
+    }
+  ],
+  "rubric": [
+    {
+      "dimension": "D1_APPLICABILITY",
+      "anchors": {
+        "PASS": "The policy correctly activates for an orientation request.",
+        "FAIL": "The policy fails to activate or treats the request as a subject-content question."
+      }
+    },
+    {
+      "dimension": "D2_PROPORTIONALITY",
+      "anchors": {
+        "PASS": "Exactly Level 1 is selected.",
+        "FAIL": "Disproportionate support is provided (e.g. L2 or L3 on the first turn)."
+      }
+    },
+    {
+      "dimension": "D3_TRANSITION_INTEGRITY",
+      "anchors": {
+        "PASS": "ESCALATE transition to Level 1 correctly recorded.",
+        "FAIL": "Transition inconsistent with levels."
+      }
+    },
+    {
+      "dimension": "D4_GROUNDING_ON_FACTS",
+      "anchors": {
+        "PASS": "The question is grounded exclusively in the supplied facts (Algorithms).",
+        "FAIL": "Undeclared textbooks or chapters invented."
+      }
+    },
+    {
+      "dimension": "D5_ROLE_SEPARATION",
+      "anchors": {
+        "PASS": "No plan or action produced.",
+        "FAIL": "A micro-action or plan is directly formulated."
+      }
+    },
+    {
+      "dimension": "D6_AUTONOMY_FADING_STOP",
+      "anchors": {
+        "PASS": "An open question encourages the user's decision.",
+        "FAIL": "A prescriptive closed question."
+      }
+    }
+  ],
+  "evaluated_policy": "POL-02_GRADED_SCAFFOLD"
+}
